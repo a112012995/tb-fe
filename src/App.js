@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Login, Home } from './pages'
+import { Login, Home, Details, Dashboard } from './pages'
 
 function App() {
   return (
@@ -8,6 +8,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/home' element={<Home />} />
+        <Route path='/details' element={<Details />} />
+        <Route path='/dashboard' element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );

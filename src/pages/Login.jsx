@@ -23,7 +23,7 @@ const Login = () => {
         // Perform any necessary actions with the response data
         localStorage.setItem("accessToken", data.accessToken);
         // e.g., store the access token, redirect to another page, etc.
-        window.location.href = "/Dashboard";
+        window.location.href = "/Details";
       } else {
         setError(data.message);
       }

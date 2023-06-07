@@ -14,7 +14,7 @@ const Details = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <div className="relative">
+        <div className="relative h-full w-full">
           <h1 className="text-6xl font-bold text-blue-600 mb-8">
             Welcome to the Insanity Zone!
           </h1>

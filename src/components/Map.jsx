@@ -26,6 +26,7 @@ const Map = () => {
 
         L.geoJSON(boundaryGeoJSON).addTo(map);
       });
+    // TODO: Fix and make it work
 
     return () => {
       map.remove();

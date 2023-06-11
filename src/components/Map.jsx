@@ -10,7 +10,9 @@ const Map = () => {
   const mapRef = useRef(null);
 
   useEffect(() => {
-    const map = L.map(mapRef.current).setView(point, zoom);
+    const map = L.map(mapRef.current, {
+      zoomControl: false,
+    }).setView(point, zoom);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: "",

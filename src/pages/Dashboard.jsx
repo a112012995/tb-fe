@@ -48,6 +48,9 @@ const Dashboard = () => {
 					</div>
 				</div>
 				<div className="mt-24 text-black">ddddd</div>
+				<div className="mt-24 text-black">ddddd</div>
+				<div className="mt-24 text-black">ddddd</div>
+				<div className="mt-24 text-black">ddddd</div>
 			</div>
 		</div>
 	);

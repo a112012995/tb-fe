@@ -38,7 +38,7 @@ const Login = () => {
       <div className="min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0 dark:bg-white">
         <div className="bg-white max-w-lg mx-auto p-8 md:p-12 my-8 rounded-lg shadow-xl">
           <h3 className="text-center font-bold text-2xl text-gray-800">
-            SEMAR BETUL
+            SEMAR BETUL BANGET
           </h3>
           <div className="mt-8">
             <form

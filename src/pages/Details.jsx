@@ -10,6 +10,7 @@ const Details = () => {
       <div className="bg-white m-auto items-center justify-center w-screen h-screen">
         <Navbar />
         <Header />
+        <Map />
       </div>
     </>
   );

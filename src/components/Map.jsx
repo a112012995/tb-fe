@@ -1,44 +1,65 @@
-import React, { useEffect, useRef } from "react";
-import L from "leaflet";
+import React from "react";
+import { MapContainer, Polygon, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { GeoJSON } from "react-leaflet";
-
-const point = [-7.023, 110.391];
-const zoom = 11;
+import { statesData } from "../geojson/data";
 
 const Map = () => {
-  const mapRef = useRef(null);
-
-  useEffect(() => {
-    const map = L.map(mapRef.current, {
-      zoomControl: false,
-    }).setView(point, zoom);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "",
-    }).addTo(map);
-
-    // Fetch boundary data from an API endpoint
-    fetch(
-      "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%3B%0Aarea%5Bname%3D%22Semarang%22%5D-%3E.a%3B%0Arelation%28area.a%29%5Badmin_level%3D9%5D%3B%0Aout%20geom%3B%0A"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const boundaryGeoJSON = data.elements[0].geometry; // Extract the GeoJSON from the API response
-
-        L.geoJSON(boundaryGeoJSON).addTo(map);
-      });
-    // TODO: Fix and make it work
-
-    return () => {
-      map.remove();
-    };
-  }, []);
+  const center = [-7.040168, 110.394304];
 
   return (
-    <div className="h-96 bg-gray-200 rounded-lg overflow-hidden shadow-md">
-      <div ref={mapRef} className="h-full" />
-    </div>
+    <MapContainer
+      center={center}
+      zoom={12}
+      style={{ width: "100vw", height: "100vh", position: "center" }}
+    >
+      <TileLayer
+        url="https://api.maptiler.com/maps/openstreetmap/256/{z}/{x}/{y}.jpg?key=sO17qhXSqu9o3tn00q0L"
+        attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+      />
+      {statesData.features.map((state) => {
+        const coordinate = state.geometry.coordinates[0].map((item) => [
+          item[1],
+          item[0],
+        ]);
+
+        return (
+          <Polygon
+            pathOptions={{
+              fillColor: "#FD8D3C",
+              fillOpacity: 0.7,
+              weight: 2,
+              opacity: 1,
+              dashArray: 3,
+              color: "white",
+            }}
+            positions={coordinate}
+            eventHandlers={{
+              mouseover: (e) => {
+                const layer = e.target;
+                layer.setStyle({
+                  fillOpacity: 1,
+                  weight: 5,
+                  dashArray: "",
+                  color: "black",
+                  fillColor: "#D45962",
+                });
+              },
+              mouseout: (e) => {
+                const layer = e.target;
+                layer.setStyle({
+                  fillOpacity: 0.7,
+                  weight: 2,
+                  dashArray: "3",
+                  color: "white",
+                  fillColor: "#FD8D3C",
+                });
+              },
+              click: (e) => {},
+            }}
+          />
+        );
+      })}
+    </MapContainer>
   );
 };
 

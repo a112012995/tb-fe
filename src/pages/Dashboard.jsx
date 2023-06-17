@@ -1,10 +1,10 @@
-import Peta from '../components/Peta';
-import Tabel from '../components/Tabel';
 import Navbar from '../components/navbar';
-import bgHero from '../assets/bg-hero.png';
-import iconTb from '../assets/icon-tb.png';
 import Stats from '../components/Stats';
 import Map from '../components/Map';
+import bgHero from '../assets/bg-hero.png';
+import iconTb from '../assets/icon-tb.png';
+import iconInfo from '../assets/icon-info.png';
+import Footer from '../components/Footer';
 
 const Dashboard = () => {
 	return (
@@ -34,7 +34,7 @@ const Dashboard = () => {
 					</div>
 				</div>
 			</div>
-			<div className="px-20 mt-32 text-black ">
+			<div className="px-20 mt-36 text-black ">
 				<div className="flex justify-center items-center gap-5 px-20">
 					<img src={iconTb} alt="icon tb" className="w-[500px] " />
 					<p className="text-justify text-lg">
@@ -43,10 +43,23 @@ const Dashboard = () => {
 						antibiotik untuk membasmi bakteri penyebabnya.
 					</p>
 				</div>
-				<div className="w-full mt-32">
+				<div className="w-full mt-36">
 					<Map />
 				</div>
-				<div className="mt-8 bg-[#E3F2FD] rounded-lg py-4 pl-4 border border-[#1565C0]">sssssssssssssss</div>
+				<div className="mt-8 bg-[#E3F2FD] rounded-lg py-4 pl-4 border border-[#1565C0]">
+					<div className="flex gap-2 items-center">
+						<img src={iconInfo} alt="icon info" className="h-[20px] w-[20px]" />
+						<h1>Disclaimer:</h1>
+					</div>
+					<p className="text-base px-11 text-justify">
+						Peta di atas merupakan Peta Sebaran Kasus Tuberkulosis di Jawa Tengah dan bukan merupakan Peta Level Kewaspadaan Covid-19 Jawa Barat.
+						<br />
+						Tidak seluruh data kasus memiliki kelengkapan alamat Kota/Kab, Kecamatan dan Kelurahan/Desa (butuh proses verifikasi) sehingga tidak seluruhnya dapat divisualisasikan.
+						<br />
+						Data kasus diatas diupdate setiap hari, dan silahkan cek kembali secara reguler untuk mendapatkan informasi terbaru.
+					</p>
+				</div>
+				<Footer />
 			</div>
 		</div>
 	);

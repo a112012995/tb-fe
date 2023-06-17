@@ -1,7 +1,12 @@
 import axios from "axios";
+// import store from "../store";
 
 const API = axios.create({
-  baseURL: process.env(BE_URL),
+  baseURL: "http://localhost:3001",
+//   headers: {
+//     Accept: "application/json",
+//     Authorization: `Bearer ${localStorage.getItem("accessToken") || ""}`,
+//   },
 });
 
 API.interceptors.response.use(

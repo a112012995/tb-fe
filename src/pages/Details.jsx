@@ -49,12 +49,26 @@ const Details = () => {
                   <div className="stat">
                     <div className="flex">
                       <div className="flex-col text-center pt-2">
-                        <div className="stat-value text-black text-5xl">969.000</div>
-                        <div className="stat-title text-black text-lg">Orang dengan TBC</div>
+                        <div className="stat-value text-black text-5xl">
+                          969.000
+                        </div>
+                        <div className="stat-title text-black text-lg">
+                          Orang dengan TBC
+                        </div>
                       </div>
                       <div className="text-warning">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          className="inline-block w-8 h-8 stroke-current"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
                         </svg>
                       </div>
                     </div>
@@ -63,12 +77,26 @@ const Details = () => {
                   <div className="stat">
                     <div className="flex">
                       <div className="flex-col text-center pt-2">
-                        <div className="stat-value text-black text-5xl">28.000</div>
-                        <div className="stat-title text-black text-lg">Orang dengan TBC Resistan Obat</div>
+                        <div className="stat-value text-black text-5xl">
+                          28.000
+                        </div>
+                        <div className="stat-title text-black text-lg">
+                          Orang dengan TBC Resistan Obat
+                        </div>
                       </div>
                       <div className="text-warning">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          className="inline-block w-8 h-8 stroke-current"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
                         </svg>
                       </div>
                     </div>
@@ -77,12 +105,26 @@ const Details = () => {
                   <div className="stat">
                     <div className="flex">
                       <div className="flex-col text-center pt-2">
-                        <div className="stat-value text-black text-5xl">144.000</div>
-                        <div className="stat-title text-black text-lg">Kematian Akibat TBC</div>
+                        <div className="stat-value text-black text-5xl">
+                          144.000
+                        </div>
+                        <div className="stat-title text-black text-lg">
+                          Kematian Akibat TBC
+                        </div>
                       </div>
                       <div className="text-warning">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          className="inline-block w-8 h-8 stroke-current"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
                         </svg>
                       </div>
                     </div>
@@ -92,11 +134,23 @@ const Details = () => {
                     <div className="flex">
                       <div className="flex-col text-center pt-2">
                         <div className="stat-value text-black text-5xl">86</div>
-                        <div className="stat-title text-black text-lg">% Keberhasilan Pengobatan</div>
+                        <div className="stat-title text-black text-lg">
+                          % Keberhasilan Pengobatan
+                        </div>
                       </div>
                       <div className="text-warning">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          className="inline-block w-8 h-8 stroke-current"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
                         </svg>
                       </div>
                     </div>
@@ -106,47 +160,9 @@ const Details = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center bg-[#ffffff] p-16">
           <div className="flex-1">
             <LineGraph />
-          </div>
-          <div className="flex">
-            <button
-              id="dropdownDefaultButton"
-              data-dropdown-toggle="dropdown"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              type="button"
-            >
-              Dropdown button{" "}
-              <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-
-            <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-              <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                    Dashboard
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                    Settings
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                    Earnings
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                    Sign out
-                  </a>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const DropdownMenu = ({ title, options }) => {
+const DropdownMenu1 = ({ title, options }) => {
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleOptionChange = (event) => {
@@ -13,7 +13,7 @@ const DropdownMenu = ({ title, options }) => {
         htmlFor="dropdown"
         className="block text-l font-medium text-black"
       >
-        Jenis Kelamin
+       Status Pasien
       </label>
       <select
         id="dropdown"
@@ -22,8 +22,10 @@ const DropdownMenu = ({ title, options }) => {
         className="mt-1 block w-full border-2 bg-[#D7DBDD] border-black rounded-md shadow-sm text-stone-950"
       >
         <option value=""></option>
-        <option value="men">Laki - Laki</option>
-        <option value="women">Perempuan</option>
+        <option value="Lberobat">Lengkap Berobat</option>
+        <option value="Pberobat">Putus Berobat</option>
+        <option value="sembuh">Sembuh</option>
+        <option value="dead">Meninggal</option>
       </select>
       {selectedOption && (
         <p className="mt-2 text-sm text-stone-950">filter by {selectedOption}</p>
@@ -32,4 +34,4 @@ const DropdownMenu = ({ title, options }) => {
   );
 };
 
-export default DropdownMenu;
+export default DropdownMenu1;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import bgHero from "../assets/bg-hero.png";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -35,7 +36,60 @@ const Login = () => {
 
   return (
     <>
-      <div className="min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0 dark:bg-white">
+      <div className="flex h-screen">
+        <div className="w-1/2 flex items-center justify-center">
+          {/* Konten form login */}
+          <div className="w-96 p-8 bg-white shadow-lg rounded-lg">
+            <h2 className="text-2xl font-semibold mb-6">Selamat Datang!</h2>
+            <form className="flex flex-col" method="POST" onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label htmlFor="username" className="block font-regular mb-2">
+                  Username
+                </label>
+                <input
+                  type="username"
+                  id="username"
+                  placeholder="John Doe"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                  autoComplete="off"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="password" className="block font-regular mb-2">
+                  Password
+                </label>
+                <input
+                  aria-hidden
+                  type="password"
+                  id="password"
+                  placeholder="6+ Karakter"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  autoComplete="off"
+                  required
+                />
+              </div>
+              {error && <p className="text-red-500 mb-4">{error}</p>}
+              <button type="submit" className="w-full bg-[#213555] text-white font-semibold py-2 px-4 rounded-md">
+                Sign In
+              </button>
+            </form>
+          </div>
+        </div>
+        <div className="w-1/2 relative">
+          <img src={bgHero} alt="Background Image" className="absolute top-0 left-0 w-full h-full object-cover" />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-3/4 text-white text-center">
+            <div className="text-5xl font-bold leading-120 text-justify mb-4">Sistem Distribusi Kerentanan Penyakit Tuberkulosis</div>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0 dark:bg-white">
         <div className="bg-white max-w-lg mx-auto p-8 md:p-12 my-8 rounded-lg shadow-xl">
           <h3 className="text-center font-bold text-2xl text-gray-800">
             SEMAR BETUL BANGET
@@ -91,7 +145,7 @@ const Login = () => {
             </form>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

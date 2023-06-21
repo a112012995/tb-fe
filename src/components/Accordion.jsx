@@ -7,7 +7,7 @@ const OrderTerms = () => {
         };
             return(
         <div className="flex justify-center text-black">
-            <div className="card card-large w-1/2 bg-[#F6F6F6] shadow-xl ">
+            <div className="card card-large w-1/2 bg-[#F6F6F6] shadow-xl " style={{ width: "1000px" }}>
                 <div className="text-2xl font-medium">
                     Kebijakan
                 </div>

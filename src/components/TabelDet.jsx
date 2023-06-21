@@ -1,17 +1,96 @@
 import React, { useState } from 'react';
 
 const data = [
-  { id: 1, jumlahKasus: 25, kesembuhan: 8, kematian: 20, detail: 'Detail Pasien 1' },
-  { id: 2, jumlahKasus: 15, kesembuhan: 10, kematian: 1, detail: 'Detail Pasien 2' },
-  { id: 3, jumlahKasus: 5, kesembuhan: 2, kematian: 2, detail: 'Detail Pasien 3' },
-  { id: 5, jumlahKasus: 3, kesembuhan: 2, kematian: 4, detail: 'Detail Pasien 5' },
-  { id: 6, jumlahKasus: 6, kesembuhan: 5, kematian: 5, detail: 'Detail Pasien 6' },
-  { id: 7, jumlahKasus: 12, kesembuhan: 5, kematian: 3, detail: 'Detail Pasien 7' },
-  { id: 8, jumlahKasus: 13, kesembuhan: 5, kematian: 1, detail: 'Detail Pasien 8' },
-  { id: 9, jumlahKasus: 9, kesembuhan: 7, kematian: 4, detail: 'Detail Pasien 9' },
-  { id: 10, jumlahKasus: 11, kesembuhan: 8, kematian: 6, detail: 'Detail Pasien 10' },
-  { id: 11, jumlahKasus: 1, kesembuhan: 9, kematian: 7, detail: 'Detail Pasien 11' },
-  // ...tambahkan data pasien lainnya di sini
+  {
+    no: 1,
+    kodePasien: 'P001',
+    umur: 25,
+    jenisKelamin: 'Laki-laki',
+    alamat: 'Jl. Contoh No. 123',
+    pengobatanTerakhir: '2023-06-15',
+    detail: 'Detail',
+  },
+  {
+    no: 2,
+    kodePasien: 'P002',
+    umur: 30,
+    jenisKelamin: 'Perempuan',
+    alamat: 'Jl. Contoh No. 456',
+    pengobatanTerakhir: '2023-06-10',
+    detail: 'Detail',
+  },
+  {
+    no: 3,
+    kodePasien: 'P003',
+    umur: 40,
+    jenisKelamin: 'Laki-laki',
+    alamat: 'Jl. Contoh No. 789',
+    pengobatanTerakhir: '2023-06-05',
+    detail: 'Detail',
+  },
+  {
+    no: 4,
+    kodePasien: 'P004',
+    umur: 35,
+    jenisKelamin: 'Perempuan',
+    alamat: 'Jl. Contoh No. 111',
+    pengobatanTerakhir: '2023-06-20',
+    detail: 'Detail',
+  },
+  {
+    no: 5,
+    kodePasien: 'P005',
+    umur: 50,
+    jenisKelamin: 'Laki-laki',
+    alamat: 'Jl. Contoh No. 222',
+    pengobatanTerakhir: '2023-06-18',
+    detail: 'Detail',
+  },
+  {
+    no: 6,
+    kodePasien: 'P006',
+    umur: 45,
+    jenisKelamin: 'Perempuan',
+    alamat: 'Jl. Contoh No. 333',
+    pengobatanTerakhir: '2023-06-11',
+    detail: 'Detail',
+  },
+  {
+    no: 7,
+    kodePasien: 'P007',
+    umur: 28,
+    jenisKelamin: 'Laki-laki',
+    alamat: 'Jl. Contoh No. 444',
+    pengobatanTerakhir: '2023-06-13',
+    detail: 'Detail',
+  },
+  {
+    no: 8,
+    kodePasien: 'P008',
+    umur: 32,
+    jenisKelamin: 'Perempuan',
+    alamat: 'Jl. Contoh No. 555',
+    pengobatanTerakhir: '2023-06-08',
+    detail: 'Detail',
+  },
+  {
+    no: 9,
+    kodePasien: 'P009',
+    umur: 37,
+    jenisKelamin: 'Laki-laki',
+    alamat: 'Jl. Contoh No. 666',
+    pengobatanTerakhir: '2023-06-16',
+    detail: 'Detail',
+  },
+  {
+    no: 10,
+    kodePasien: 'P010',
+    umur: 48,
+    jenisKelamin: 'Perempuan',
+    alamat: 'Jl. Contoh No. 777',
+    pengobatanTerakhir: '2023-06-12',
+    detail: 'Detail',
+  },
 ];
 
 const itemsPerPage = 5;
@@ -23,47 +102,67 @@ const TableDet = () => {
     setCurrentPage(pageNumber);
   };
 
+  const handleDetailClick = (itemId) => {
+    // Logika atau tindakan yang ingin Anda lakukan saat tombol detail diklik
+    console.log(`Detail button clicked for item with id ${itemId}`);
+  };
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentData = data.slice(startIndex, endIndex);
 
   return (
-    <div>
+    <div className='relative'>
         <div className='flex justify-center mt-20 mb-5'>
             <table style={{ borderCollapse: 'collapse', width: '1000px' }}>
                 <thead>
                 <tr className='text-white' style={{ backgroundColor: '#030C5A' }}>
-                    <th style={tableHeaderStyle}>Jumlah Kasus</th>
-                    <th style={tableHeaderStyle}>Angka Kesembuhan</th>
-                    <th style={tableHeaderStyle}>Angka Kematian</th>
+                    <th style={tableHeaderStyle}>No</th>
+                    <th style={tableHeaderStyle}>Kode Pasien</th>
+                    <th style={tableHeaderStyle}>Umur</th>
+                    <th style={tableHeaderStyle}>Jenis Kelamin</th>
+                    <th style={tableHeaderStyle}>Alamat </th>
+                    <th style={tableHeaderStyle}>Pengobatan Terakhir</th>
                     <th style={tableHeaderStyle}>Detail Pasien</th>
                 </tr>
                 </thead>
                 <tbody className='text-black'>
                 {currentData.map((item) => (
-                    <tr key={item.id} style={{ backgroundColor: '#ffffff' }}>
-                    <td style={tableDataStyle}>{item.jumlahKasus}</td>
-                    <td style={tableDataStyle}>{item.kesembuhan}</td>
-                    <td style={tableDataStyle}>{item.kematian}</td>
-                    <td style={tableDataStyle}>{item.detail}</td>
+                    <tr key={item.no} style={{ backgroundColor: '#ffffff' }}>
+                      <td style={tableDataStyle}>{item.no}</td>
+                      <td style={tableDataStyle}>{item.kodePasien}</td>
+                      <td style={tableDataStyle}>{item.umur}</td>
+                      <td style={tableDataStyle}>{item.jenisKelamin}</td>
+                      <td style={tableDataStyle}>{item.alamat}</td>
+                      <td style={tableDataStyle}>{item.pengobatanTerakhir}</td>
+                      <td style={tableDataStyle}>
+                        <button className='bg-[#35B438] text-white' onClick={() => handleDetailClick(item.id)} style={{ width: '80px', height: '35px', fontSize: '13px', borderRadius: '10px' }}>Lihat Detail</button>
+                      </td>
                     </tr>
                 ))}
                 </tbody>
             </table>
         </div>
       
+      <div>
+        
+      </div>
       <div className='text-black mb-10' style={paginationStyle}>
-        {Array(Math.ceil(data.length / itemsPerPage))
-          .fill()
-          .map((_, index) => (
-            <button
-              key={index + 1}
-              onClick={() => handlePageChange(index + 1)}
-              style={currentPage === index + 1 ? activeButtonStyle : buttonStyle}
-            >
-              {index + 1}
-            </button>
-          ))}
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          style={buttonStyle}
+        >
+          &lt;
+        </button>
+        
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === Math.ceil(data.length / itemsPerPage)}
+          style={buttonStyle}
+        >
+          &gt;
+        </button>
       </div>
     </div>
   );
@@ -85,23 +184,19 @@ const tableDataStyle = {
 // Gaya untuk kontainer pagination
 const paginationStyle = {
   display: 'flex',
-  justifyContent: 'center',
+  justifyContent: 'flex-end',
   marginTop: '10px',
+  marginRight: '260px',
 };
 
 // Gaya untuk tombol pagination
 const buttonStyle = {
-  padding: '5px 10px',
+  padding: '2px 10px',
   margin: '0 2px',
   border: '1px solid black',
-  backgroundColor: '#f2f2f2',
+  backgroundColor: 'white',
+  color:'blue',
   cursor: 'pointer',
 };
-const activeButtonStyle = {
-    padding: '5px 10px',
-    margin: '0 2px',
-    border: 'none',
-    backgroundColor: '#ccc',
-    cursor: 'pointer',
-};
+
 export default TableDet;

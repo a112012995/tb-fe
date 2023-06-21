@@ -11,22 +11,22 @@ const DropdownMenu = ({ title, options }) => {
     <div className="pt-2 w-64">
       <label
         htmlFor="dropdown"
-        className="block text-sm font-medium text-black"
+        className="block text-l font-medium text-black"
       >
-        _filter
+        Jenis Kelamin
       </label>
       <select
         id="dropdown"
         value={selectedOption}
         onChange={handleOptionChange}
-        className="mt-1 block w-full border-2 bg-white border-black rounded-md shadow-sm"
+        className="mt-1 block w-full border-2 bg-[#D7DBDD] border-black rounded-md shadow-sm text-stone-950"
       >
         <option value=""></option>
-        <option value="option1">option 1</option>
-        <option value="option2">option 2</option>
+        <option value="men">Laki - Laki</option>
+        <option value="women">Perempuan</option>
       </select>
       {selectedOption && (
-        <p className="mt-2 text-sm text-gray-500">filter by {selectedOption}</p>
+        <p className="mt-2 text-sm text-stone-950">filter by {selectedOption}</p>
       )}
     </div>
   );

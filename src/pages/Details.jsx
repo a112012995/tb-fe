@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import LineGraph from "../components/LineGraph";
-import DropdownMenu from "../components/DropdownMenu";
+import OrderTerms from "../components/Accordion";
+import Footer from "../components/Footer";
+import TableDet from "../components/TabelDet";
 
 const Details = () => {
   return (
@@ -162,23 +163,17 @@ const Details = () => {
         </div>
       </div>
 
-      {/* Chart */}
-      <div className="flex space-x-8 justify-center items-center flex-col">
-        <div className="flex my-12">
-          {/* Chart */}
-          <div className="flex-2">
-            <LineGraph />
-          </div>
-          {/* Filter */}
-          <div className="flex-1">
-            <DropdownMenu />
-            <DropdownMenu />
-          </div>
-        </div>
+      
+      <div>
+        <TableDet />
       </div>
-
+      <div >
+        <OrderTerms />
+      </div>
+      <Footer />
       {/* Intervensi */}
     </div>
+    
   );
 };
 

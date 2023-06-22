@@ -1,59 +1,99 @@
-import React from "react";
-import bgHero from '../assets/Rectangle-86.png';
+import React, { useState, useEffect } from "react";
+import logo from "../assets/main-logo.png";
+import Banner from "../components/Banner";
+import Service from "../components/Service";
+import HowTo from "../components/HowTo";
+import Artikel from "../components/Artikel";
+import Footer from "../components/Footer";
+// import { logout } from "../../store/actions/auth";
 
 const BeforeLogin = () => {
-   return (
-        <div className="bg-white">
-            <div className="flex flex-col min-h-screen text-white bg-center bg-cover bg-blend-overlay bg-fixed bg-black/30"
-            style={{
-                backgroundImage: `url(${bgHero})`,
-            }}>
-                <div className="px-20 pt-12 pb-9 bg-none text-white">
-                    <div className="navbar ">
-                        <div className="navbar-start">
-                            <a href="/dashboard">
-                                <div className="flex items-center">
-                                    <div>
-                                        <img src="/logo_dkk.png" alt="logo" className="w-28 h-24" />
-                                    </div>
-                                    <div className="flex-col">
-                                        <div className="font-semibold text-2xl">SDKPT</div>
-                                        <div className="font-semibold text-2xl">Kota Semarang</div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="navbar-end gap-12">
-                            <a href="#" className="text-2xl font-semibold scroll-smooth">
-                                Tentang
-                            </a>
-                            <a href="#" className="text-2xl font-semibold scroll-smooth">
-                                Peta
-                            </a>
-                            <div className="dropdown dropdown-end">
-                            <button tabIndex={0} className="btn btn-square bg-[#35B438] text-white" style={{ width: '80px', height: '25px'}}>
-                                <span className="login-text">Login</span> 
-                                <span className="arrow-down">&#9660;</span>
-                            </button>
-                            
-                            <div className="dropdown-content mt-3 p-2 shadow bg-[#F5EFE7] rounded-md w-52 text-black border border-black">
-                                <button style={{ borderBottom: "1px solid black", width:"100%"}}>SDKTP</button>
-                                <button style={{ borderTop: "1px solid black", width:"100%"}}>Semar Betul</button>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="pt-16 px-40">
-						<div>
-							<div className="text-4xl font-bold text-[#FFB800]">Selamat Datang,</div>
-							<div className="text-6xl font-bold">Sistem Distribusi Kerentanan Penyakit Tuberkulosis</div>
-						</div>
-					</div>
-                </div>
-            </div>
+  // console.log(window.location)
+  const pathName = window.location.pathname;
+  const [color, setColor] = useState(false);
+  const [colorNav, setColorNav] = useState("text-white");
+  const changeColor = () => {
+    if (window.scrollY >= 90) {
+      setColor(true);
+    } else {
+      setColor(false);
+    }
+  };
+  window.addEventListener("scroll", changeColor);
+  const scroll = window.scrollY >= 90;
+  useEffect(() => {
+    if (pathName === "/") {
+      if (scroll) {
+        return setColorNav("text-black");
+      }
+      setColorNav("text-white");
+    } else {
+      setColorNav("text-black");
+    }
+  }, [pathName, scroll]);
+  return (
+    <>
+      <div
+        className={
+          color
+            ? `navbar fixed top-0 bg-white z-50 shadow-md`
+            : `navbar fixed top-0 z-50`
+        }
+      >
+        <div className="navbar-start">
+          <div className="dropdown">
+            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </label>
+          </div>
+          <a
+            href="/#"
+            className={`text-2xl font-bold font-Montserrat ${colorNav} ml-24 mt-4 mb-4`}
+          >
+            <img src={logo} alt="" />
+          </a>
         </div>
-        
-   );
+        <div className="navbar-end mt-4 mb-4">
+          <ul className="menu-horizontal space-x-[46px] mr-[67px]">
+            <li>
+              <a href="/#" className="font-bold text-lg">
+                Tentang
+              </a>
+            </li>
+            <li tabIndex={0}>
+              <a href="/#" className="font-bold text-lg">
+                Artikel
+              </a>
+            </li>
+          </ul>
+          <a
+            href="/login"
+            className="btn border-[#5CB85F] hover:text-white bg-[#5CB85F] text-white mr-24"
+          >
+            Login
+          </a>
+        </div>
+      </div>
+      <Banner />
+      <Service />
+      <HowTo />
+      <Artikel />
+      <Footer />
+    </>
+  );
 };
 
 export default BeforeLogin;

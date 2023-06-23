@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import bgHero from "../assets/bg-hero.png";
+import bgHero from "../assets/bg-login.png";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -82,70 +82,14 @@ const Login = () => {
           </div>
         </div>
         <div className="w-1/2 relative">
-          <img src={bgHero} alt="Background Image" className="absolute top-0 left-0 w-full h-full object-cover" />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-3/4 text-white text-center">
-            <div className="text-5xl font-bold leading-120 text-justify mb-4">Sistem Distribusi Kerentanan Penyakit Tuberkulosis</div>
+          <img src={bgHero} alt="" className="absolute top-0 left-0 w-full h-full object-cover" />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-3/4 text-white">
+            <div className="text-[56px] w-[577px] font-bold leading-none" style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}>
+              Sistem Distribusi Kerentanan Penyakit Tuberkulosis
+            </div>
           </div>
         </div>
       </div>
-
-      {/* <div className="min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0 dark:bg-white">
-        <div className="bg-white max-w-lg mx-auto p-8 md:p-12 my-8 rounded-lg shadow-xl">
-          <h3 className="text-center font-bold text-2xl text-gray-800">
-            SEMAR BETUL BANGET
-          </h3>
-          <div className="mt-8">
-            <form
-              className="flex flex-col"
-              method="POST"
-              onSubmit={handleSubmit}
-            >
-              <div className="mb-6 pt-2 rounded bg-gray-100">
-                <label
-                  className="block text-gray-800 text-sm font-bold mb-2 ml-3"
-                  htmlFor="email"
-                >
-                  Username
-                </label>
-                <input
-                  type="username"
-                  id="username"
-                  className="bg-gray-100 rounded-b w-full text-gray-800 focus:outline-none border-b-4 border-green-600 focus:border-green-700 transition duration-500 px-3 pb-2"
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)}
-                  autoComplete="off"
-                  required
-                />
-              </div>
-              <div className="mb-6 pt-2 rounded bg-gray-100">
-                <label
-                  className="block text-gray-800 text-sm font-bold mb-2 ml-3"
-                  htmlFor="password"
-                >
-                  Password
-                </label>
-                <input
-                  aria-hidden
-                  type="password"
-                  id="password"
-                  className="bg-gray-100 rounded-b w-full text-gray-800 focus:outline-none border-b-4 border-green-600 focus:border-green-700 transition duration-500 px-3 pb-2"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  autoComplete="off"
-                  required
-                />
-              </div>
-              {error && <p className="text-red-500 mb-4">{error}</p>}
-              <button
-                className="bg-green-600 hover:bg-green-700 text-white py-2 rounded shadow-lg hover:shadow-xl transition duration-100"
-                type="submit"
-              >
-                Login
-              </button>
-            </form>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 };

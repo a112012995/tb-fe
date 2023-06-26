@@ -6,7 +6,7 @@ const Service = () => {
   return (
     <div className="mt-[101px] flex flex-row space-x-[103px] px-[210px]">
       <div>
-        <img src={serviceImg} alt="" />
+        <img src={serviceImg} alt="" className="drop-shadow-lg" />
       </div>
       <div>
         <h4 className="font-bold text-[24px] my-8">

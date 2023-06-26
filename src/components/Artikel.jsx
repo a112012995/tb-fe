@@ -16,7 +16,7 @@ const Artikel = () => {
         </h6>
       </div>
       <div className="flex flex-row space-x-[75px] mt-6 mb-5">
-        <div className="card w-[353px] h-[260px] rounded-2xl bg-base-100 shadow-md">
+        <div className="card w-[353px] h-[260px] rounded-2xl bg-white shadow-md">
           <img src={img1} className="h-[141px] rounded-t-2xl" alt="" />
           <div className=" mt-5 border-b-2">
             <p className="ml-[30px] w-[228px] mb-2 text-sm font-semibold">
@@ -25,7 +25,7 @@ const Artikel = () => {
           </div>
           <p className="ml-[30px] my-4 text-sm font-extralight ">26 Mei 2023</p>
         </div>
-        <div className="card w-[353px] h-[260px] rounded-2xl bg-base-100 shadow-md">
+        <div className="card w-[353px] h-[260px] rounded-2xl bg-white shadow-md">
           <img src={img2} className="h-[141px] rounded-t-2xl" alt="" />
           <div className=" mt-5 border-b-2">
             <p className="ml-[30px] w-[228px] mb-7 text-sm font-semibold">
@@ -34,7 +34,7 @@ const Artikel = () => {
           </div>
           <p className="ml-[30px] my-4 text-sm font-extralight ">26 Mei 2023</p>
         </div>
-        <div className="card w-[353px] h-[260px] rounded-2xl bg-base-100 shadow-md">
+        <div className="card w-[353px] h-[260px] rounded-2xl bg-white shadow-md">
           <img src={img3} className="h-[141px] rounded-t-2xl" alt="" />
           <div className=" mt-5 border-b-2">
             <p className="ml-[30px] w-[228px] mb-2 text-sm font-semibold">

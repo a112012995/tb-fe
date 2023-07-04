@@ -37,7 +37,7 @@ const Login = () => {
   return (
     <>
       <div className="flex h-screen">
-        <div className="w-1/2 flex items-center justify-center">
+        <div className="w-1/2 flex items-center justify-center bg-white">
           {/* Konten form login */}
           <div className="w-96 p-8 bg-white shadow-lg rounded-lg">
             <h2 className="text-2xl font-semibold mb-6">Selamat Datang!</h2>
@@ -50,7 +50,7 @@ const Login = () => {
                   type="username"
                   id="username"
                   placeholder="John Doe"
-                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white"
                   style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
                   value={username}
                   onChange={(event) => setUsername(event.target.value)}
@@ -67,7 +67,7 @@ const Login = () => {
                   type="password"
                   id="password"
                   placeholder="6+ Karakter"
-                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   autoComplete="off"

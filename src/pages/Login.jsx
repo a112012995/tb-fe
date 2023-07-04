@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import bgHero from "../assets/bg-hero.png";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login } from "../store/actions/auth";
 
 const Login = () => {
   const [username, setUsername] = useState("");

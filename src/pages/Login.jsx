@@ -40,7 +40,7 @@ const Login = () => {
         <div className="w-1/2 flex items-center justify-center">
           {/* Konten form login */}
           <div className="w-96 p-8 bg-white shadow-lg rounded-lg">
-            <h2 className="text-2xl font-semibold mb-6">Selamat Datang Admin!</h2>
+            <h2 className="text-2xl font-semibold mb-6">Selamat Datang!</h2>
             <form className="flex flex-col" method="POST" onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label htmlFor="username" className="block font-regular mb-2">

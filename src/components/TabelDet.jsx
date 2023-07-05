@@ -144,9 +144,6 @@ const TableDet = () => {
             </table>
         </div>
       
-      <div>
-        
-      </div>
       <div className='text-black mb-10' style={paginationStyle}>
         <button
           onClick={() => handlePageChange(currentPage - 1)}

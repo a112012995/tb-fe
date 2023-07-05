@@ -1,38 +1,48 @@
 import React, { useState } from "react";
-import bgHero from "../assets/bg-login.png";
+import bgHero from "../assets/bg-hero.png";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login } from "../store/actions/auth";
 
 const Login = () => {
+  const dispatch = useDispatch()
+  const history = useNavigate()
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  // const {accessToken} = useSelector((state) => state.authReducers)
+  // console.log(accessToken)
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await fetch("http://localhost:3001/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
+  const usernameHandler = (e) => {
+    setUsername(e.target.value)
+  }
+  const passwordHandler = (e) => {
+    setPassword(e.target.value)
+  }
 
-      const data = await response.json();
-      console.log("Login response:", data);
+  const loginForm = async (e) => {
+    e.preventDefault()
 
-      if (response.ok) {
-        // Perform any necessary actions with the response data
-        localStorage.setItem("accessToken", data.data.accessToken);
-        // e.g., store the access token, redirect to another page, etc.
-        window.location.href = "/details";
-      } else {
-        setError(data.message);
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      setError("An error occurred during login.");
+    const data = {
+      username,
+      password
     }
-  };
+    const res = await dispatch(login(data, history)) 
+    .then((response) => ({response}))
+    .catch((error) => ({error}))
+
+    console.log(res)
+
+    if (res.error) {
+      setError(res.error.response.data.message);
+      // setErrorMessage(res.error.response.data.message);
+    } 
+    // if (res){
+    //   console.log(res)
+    //   navigate("/dashboard")
+    // }
+  }
+  
 
   return (
     <>
@@ -41,7 +51,7 @@ const Login = () => {
           {/* Konten form login */}
           <div className="w-96 p-8 bg-white shadow-lg rounded-lg">
             <h2 className="text-2xl font-semibold mb-6">Selamat Datang!</h2>
-            <form className="flex flex-col" method="POST" onSubmit={handleSubmit}>
+            <form className="flex flex-col" method="POST" onSubmit={loginForm}>
               <div className="mb-4">
                 <label htmlFor="username" className="block font-regular mb-2">
                   Username
@@ -53,7 +63,7 @@ const Login = () => {
                   className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white"
                   style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
                   value={username}
-                  onChange={(event) => setUsername(event.target.value)}
+                  onChange={usernameHandler}
                   autoComplete="off"
                   required
                 />
@@ -69,7 +79,7 @@ const Login = () => {
                   placeholder="6+ Karakter"
                   className="w-full border border-gray-300 rounded-md px-3 py-2 bg-white"
                   value={password}
-                  onChange={(event) => setPassword(event.target.value)}
+                  onChange={passwordHandler}
                   autoComplete="off"
                   required
                 />

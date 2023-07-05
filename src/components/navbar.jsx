@@ -29,7 +29,15 @@ const Navbar = () => {
           <a href="#map" className="text-2xl font-semibold scroll-smooth">
             Peta
           </a>
-          <div className="dropdown dropdown-end">
+          <button>
+            <div
+              onClick={() => dispatch(logout(history))}
+              className="text-2xl font-semibold scroll-smooth"
+            >
+              Logout
+            </div>
+          </button>
+          {/* <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img
@@ -45,8 +53,8 @@ const Navbar = () => {
               <li>
                 <div onClick={() => dispatch(logout(history))}>Logout</div>
               </li>
-            </ul>
-          </div>
+            </ul> */}
+          {/* </div> */}
         </div>
       </div>
     </div>

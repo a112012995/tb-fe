@@ -14,6 +14,10 @@ const AuthService = {
       throw err;
     }
   },
+  logout: () => {
+    API.defaults.headers["Authorization"] = "";
+    localStorage.removeItem("accessToken");
+  },
 };
 
 const setHeadersAndStorage = ({ name, accessToken, roleId, email }) => {

@@ -7,7 +7,7 @@ import arrow from "../assets/arrow.svg"
 
 const Artikel = () => {
   return (
-    <div className="mt-[105px] px-[150px]">
+    <div className="mt-[105px] px-[150px]" id="artikel">
       <div className="flex flex-row">
         <img src={icon} alt="" />
         <h4 className="ml-4 text-[28px] font-medium">Artikel</h4>

@@ -2,8 +2,20 @@ import React, { useEffect } from "react";
 import OrderTerms from "../components/Accordion";
 import Footer from "../components/Footer";
 import TableDet from "../components/TabelDet";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getLocationById } from "../store/actions/location";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../store/actions/auth";
 
 const Details = () => {
+  const { state } = useLocation();
+  const dispatch = useDispatch();
+  const history = useNavigate();
+  useEffect(() => {
+    dispatch(getLocationById(state.areaId));
+  }, [dispatch, state]);
+  const { dataById } = useSelector((state) => state.locationReducers);
+  // console.log(dataById);
   return (
     <div className="bg-[#F6F6F6] m-auto items-center justify-center max-w-screen min-h-screen">
       {/* Navbar */}
@@ -21,12 +33,20 @@ const Details = () => {
             </div>
           </div>
           <div className="navbar-end gap-12">
-            <a href="#" className="text-2xl font-semibold scroll-smooth">
-              Tentang
+            <a
+              href="/dashboard"
+              className="text-2xl font-semibold scroll-smooth"
+            >
+              Home
             </a>
-            <a href="#" className="text-2xl font-semibold scroll-smooth">
-              Peta
-            </a>
+            <button>
+              <div
+                className="text-2xl font-semibold scroll-smooth"
+                onClick={() => dispatch(logout(history))}
+              >
+                Logout
+              </div>
+            </button>
           </div>
         </div>
       </div>
@@ -35,7 +55,7 @@ const Details = () => {
       <div className="py-12 px-40">
         <div>
           <div className="text-4xl font-bold text-black">
-            Detail Daerah {"Ngaliyan"}
+            Detail Daerah {dataById.kelurahan}
           </div>
         </div>
       </div>
@@ -163,17 +183,11 @@ const Details = () => {
         </div>
       </div>
 
-      
-      <div>
-        <TableDet />
-      </div>
-      <div >
-        <OrderTerms />
-      </div>
+      <TableDet />
+      <OrderTerms />
       <Footer />
       {/* Intervensi */}
     </div>
-    
   );
 };
 

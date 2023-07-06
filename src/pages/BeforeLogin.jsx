@@ -7,10 +7,12 @@ import Artikel from "../components/Artikel";
 import Footer from "../components/Footer";
 import { logout } from "../store/actions/auth";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const BeforeLogin = () => {
   const accessToken = localStorage.getItem("accessToken");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const history = useNavigate();
   // console.log(window.location)
   const pathName = window.location.pathname;
   const [color, setColor] = useState(false);
@@ -67,7 +69,7 @@ const BeforeLogin = () => {
                 tabIndex={0}
                 className="btn m-1 border-[#5CB85F] bg-[#5CB85F] text-white hover:bg-[#5CB85F] hover:border-[#5CB85F]"
               >
-                <div onClick={() => dispatch(logout())}>Logout</div>
+                <div onClick={() => dispatch(logout(history))}>Logout</div>
               </label>
             ) : (
               <>

@@ -101,7 +101,7 @@ const Map = () => {
         style={{ width: "screen", height: "80vh" }}
       >
         <div className="flex flex-row-reverse pt-20 pr-7">
-          <div className="card bg-base-100 w-60 shadow-xl z-[999]">
+          <div className="card bg-white w-60 shadow-xl z-[999]">
             <div className="px-5 py-4">
               {onSelect ? (
                 <>

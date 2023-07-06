@@ -6,7 +6,6 @@ import bgHero from '../assets/bg-hero.png';
 import iconInfo from '../assets/icon-info.png';
 import Footer from '../components/Footer';
 import LineGraph from '../components/LineGraph';
-import DropdownMenu from '../components/DropdownMenu';
 
 const Dashboard = () => {
 	return (
@@ -37,14 +36,6 @@ const Dashboard = () => {
 				</div>
 			</div>
 			<div className="px-20 mt-36 text-black ">
-				{/* <div className="flex justify-center items-center gap-5 px-20">
-					<img src={iconTb} alt="icon tb" className="w-[500px] " />
-					<p className="text-justify text-lg">
-						Tuberkulosis (TB) adalah penyakit infeksi yang disebabkan oleh bakteri Mycobacterium tuberculosis. Penyakit ini umumnya menyerang paru-paru, tetapi juga dapat menyerang organ lain seperti ginjal, tulang, dan otak. Gejala utama
-						TB paru meliputi batuk kronis, demam, kelelahan, dan penurunan berat badan. Penularan TB terjadi melalui udara saat seseorang yang terinfeksi batuk atau bersin. Penanganan TB melibatkan pengobatan jangka panjang dengan
-						antibiotik untuk membasmi bakteri penyebabnya.
-					</p>
-				</div> */}
 				<div className="mt-36">
 					<LineGraph />
 				</div>

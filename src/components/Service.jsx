@@ -4,7 +4,7 @@ import serviceVec from "../assets/serviceVec.svg";
 
 const Service = () => {
   return (
-    <div className="mt-[101px] flex flex-row space-x-[103px] px-[210px]">
+    <div className="mt-[101px] flex flex-row space-x-[103px] px-[210px]" id="service">
       <div>
         <img src={serviceImg} alt="" className="drop-shadow-lg" />
       </div>

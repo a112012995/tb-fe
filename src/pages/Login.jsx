@@ -46,7 +46,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="flex h-screen">
+      <div className="flex h-screen text-black">
         <div className="w-1/2 flex items-center justify-center bg-white">
           {/* Konten form login */}
           <div className="w-96 p-8 bg-white shadow-lg rounded-lg">

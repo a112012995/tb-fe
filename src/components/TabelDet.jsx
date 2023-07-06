@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const data = [
   {
@@ -97,6 +99,7 @@ const itemsPerPage = 5;
 
 const TableDet = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -113,6 +116,7 @@ const TableDet = () => {
 
   return (
     <div className='relative'>
+       
         <div className='flex justify-center mt-20 mb-5'>
             <table style={{ borderCollapse: 'collapse', width: '1000px' }}>
                 <thead>
@@ -144,7 +148,7 @@ const TableDet = () => {
             </table>
         </div>
       
-      <div className='text-black mb-10' style={paginationStyle}>
+      <div className='flex justify-center text-black mb-10' style={paginationStyle}>
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
@@ -161,6 +165,15 @@ const TableDet = () => {
           &gt;
         </button>
       </div>
+      <div className='flex justify-center mt-10 mb-10'>
+          <button
+            className='bg-[#35B438] text-white mb-2'
+            onClick={() => navigate('/dashboard')}
+            style={{ width: '150px', height: '35px', fontSize: '13px', borderRadius: '5px' }}
+          >
+            Kembali ke Dashboard
+          </button>
+        </div>
     </div>
   );
 };
@@ -181,9 +194,8 @@ const tableDataStyle = {
 // Gaya untuk kontainer pagination
 const paginationStyle = {
   display: 'flex',
-  justifyContent: 'flex-end',
-  marginTop: '10px',
-  marginRight: '260px',
+  
+
 };
 
 // Gaya untuk tombol pagination

@@ -1,7 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Login, BeforeLogin, Details, Dashboard, AdminPage } from "./pages";
+import { Login, BeforeLogin, Details, Dashboard, AdminPage, AddAccount} from "./pages";
 import ProtectedUser from "./protectedUser/protectedUser";
+
+
 
 function App() {
   return (
@@ -9,7 +11,8 @@ function App() {
       <Routes>
         <Route path="/" element={<BeforeLogin />} />
         <Route path="/login" element={<Login />} />
-         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/addacc" element={<AddAccount />} />
         <Route element={<ProtectedUser />}>
           <Route path="/details" element={<Details />} />
           <Route path="/dashboard" element={<Dashboard />} />

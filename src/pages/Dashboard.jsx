@@ -48,11 +48,11 @@ const Dashboard = () => {
 						<h1>Disclaimer:</h1>
 					</div>
 					<p className="text-base px-11 text-justify">
-						Peta di atas merupakan Peta Sebaran Kasus Tuberkulosis di Jawa Tengah dan bukan merupakan Peta Level Kewaspadaan Covid-19 Jawa Barat.
+						Peta di atas merupakan Peta Sebaran Kasus Tuberkulosis di Kota Semarang dan bukan merupakan Peta Level Kewaspadaan Covid-19.
 						<br />
 						Tidak seluruh data kasus memiliki kelengkapan alamat Kota/Kab, Kecamatan dan Kelurahan/Desa (butuh proses verifikasi) sehingga tidak seluruhnya dapat divisualisasikan.
 						<br />
-						Data kasus diatas diupdate setiap hari, dan silahkan cek kembali secara reguler untuk mendapatkan informasi terbaru.
+						Data kasus diatas diupdate setiap 6 bulan sekali, dan silahkan cek kembali secara reguler untuk mendapatkan informasi terbaru.
 					</p>
 				</div>
 				<Footer />

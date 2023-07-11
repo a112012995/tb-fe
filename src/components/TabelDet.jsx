@@ -99,15 +99,19 @@ const itemsPerPage = 5;
 
 const TableDet = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedItem, setSelectedItem] = useState(null);
   const navigate = useNavigate();
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  const handleDetailClick = (itemId) => {
-    // Logika atau tindakan yang ingin Anda lakukan saat tombol detail diklik
-    console.log(`Detail button clicked for item with id ${itemId}`);
+  const handleDetailClick = (item) => {
+    setSelectedItem(item);
+  };
+
+  const closeModal = () => {
+    setSelectedItem(null);
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -116,38 +120,61 @@ const TableDet = () => {
 
   return (
     <div className='relative'>
-       
-        <div className='flex justify-center mt-20 mb-5'>
-            <table style={{ borderCollapse: 'collapse', width: '1000px' }}>
-                <thead>
-                <tr className='text-white' style={{ backgroundColor: '#030C5A' }}>
-                    <th style={tableHeaderStyle}>No</th>
-                    <th style={tableHeaderStyle}>Kode Pasien</th>
-                    <th style={tableHeaderStyle}>Umur</th>
-                    <th style={tableHeaderStyle}>Jenis Kelamin</th>
-                    <th style={tableHeaderStyle}>Alamat </th>
-                    <th style={tableHeaderStyle}>Pengobatan Terakhir</th>
-                    <th style={tableHeaderStyle}>Detail Pasien</th>
-                </tr>
-                </thead>
-                <tbody className='text-black'>
-                {currentData.map((item) => (
-                    <tr key={item.no} style={{ backgroundColor: '#ffffff' }}>
-                      <td style={tableDataStyle}>{item.no}</td>
-                      <td style={tableDataStyle}>{item.kodePasien}</td>
-                      <td style={tableDataStyle}>{item.umur}</td>
-                      <td style={tableDataStyle}>{item.jenisKelamin}</td>
-                      <td style={tableDataStyle}>{item.alamat}</td>
-                      <td style={tableDataStyle}>{item.pengobatanTerakhir}</td>
-                      <td style={tableDataStyle}>
-                        <button className='bg-[#35B438] text-white' onClick={() => handleDetailClick(item.id)} style={{ width: '80px', height: '35px', fontSize: '13px', borderRadius: '10px' }}>Lihat Detail</button>
-                      </td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
+      <div className='flex justify-center mt-20 mb-5'>
+        <table style={{ borderCollapse: 'collapse', width: '1000px' }}>
+          <thead>
+            <tr className='text-white' style={{ backgroundColor: '#030C5A' }}>
+              <th style={tableHeaderStyle}>No</th>
+              <th style={tableHeaderStyle}>Kode Pasien</th>
+              <th style={tableHeaderStyle}>Umur</th>
+              <th style={tableHeaderStyle}>Jenis Kelamin</th>
+              <th style={tableHeaderStyle}>Alamat </th>
+              <th style={tableHeaderStyle}>Pengobatan Terakhir</th>
+              <th style={tableHeaderStyle}>Detail Pasien</th>
+            </tr>
+          </thead>
+          <tbody className='text-black'>
+            {currentData.map((item) => (
+              <tr key={item.no} style={{ backgroundColor: '#ffffff' }}>
+                <td style={tableDataStyle}>{item.no}</td>
+                <td style={tableDataStyle}>{item.kodePasien}</td>
+                <td style={tableDataStyle}>{item.umur}</td>
+                <td style={tableDataStyle}>{item.jenisKelamin}</td>
+                <td style={tableDataStyle}>{item.alamat}</td>
+                <td style={tableDataStyle}>{item.pengobatanTerakhir}</td>
+                <td style={tableDataStyle}>
+                  <button
+                    className='bg-[#35B438] text-white'
+                    onClick={() => handleDetailClick(item)}
+                    style={{ width: '80px', height: '35px', fontSize: '13px', borderRadius: '10px' }}
+                  >
+                    Lihat Detail
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {selectedItem && (
+        <div className='fixed inset-0 flex items-center justify-center z-50'>
+          <div className='absolute inset-0 bg-black opacity-0' style={{ pointerEvents: 'none' }}></div>
+          <div className='bg-white p-6 rounded-md'>
+            <h2 className='text-xl font-bold mb-4'>Detail Pasien</h2>
+            <p>No: {selectedItem.no}</p>
+            <p>Kode Pasien: {selectedItem.kodePasien}</p>
+            <p>Umur: {selectedItem.umur}</p>
+            <p>Jenis Kelamin: {selectedItem.jenisKelamin}</p>
+            <p>Alamat: {selectedItem.alamat}</p>
+            <p>Pengobatan Terakhir: {selectedItem.pengobatanTerakhir}</p>
+            <button className='bg-[#35B438] text-white mt-4' onClick={closeModal}>
+              Tutup
+            </button>
+          </div>
         </div>
-      
+      )}
+
       <div className='flex justify-center text-black mb-10' style={paginationStyle}>
         <button
           onClick={() => handlePageChange(currentPage - 1)}
@@ -156,7 +183,7 @@ const TableDet = () => {
         >
           &lt;
         </button>
-        
+
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === Math.ceil(data.length / itemsPerPage)}
@@ -166,45 +193,39 @@ const TableDet = () => {
         </button>
       </div>
       <div className='flex justify-center mt-10 mb-10'>
-          <button
-            className='bg-[#35B438] text-white mb-2'
-            onClick={() => navigate('/dashboard')}
-            style={{ width: '150px', height: '35px', fontSize: '13px', borderRadius: '5px' }}
-          >
-            Kembali ke Dashboard
-          </button>
-        </div>
+        <button
+          className='bg-[#35B438] text-white mb-2'
+          onClick={() => navigate('/dashboard')}
+          style={{ width: '150px', height: '35px', fontSize: '13px', borderRadius: '5px' }}
+        >
+          Kembali ke Dashboard
+        </button>
+      </div>
     </div>
   );
 };
 
-// Gaya untuk header tabel
 const tableHeaderStyle = {
   padding: '10px',
   borderBottom: '1px solid #ddd',
 };
 
-// Gaya untuk sel data tabel
 const tableDataStyle = {
   padding: '10px',
   borderBottom: '1px solid #ddd',
   textAlign: 'center',
 };
 
-// Gaya untuk kontainer pagination
 const paginationStyle = {
   display: 'flex',
-  
-
 };
 
-// Gaya untuk tombol pagination
 const buttonStyle = {
   padding: '2px 10px',
   margin: '0 2px',
   border: '1px solid black',
   backgroundColor: 'white',
-  color:'blue',
+  color: 'blue',
   cursor: 'pointer',
 };
 

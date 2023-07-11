@@ -3,7 +3,7 @@ import API from "./api";
 const LocationService = {
   getLocation: async function (data) {
     try {
-      const response = await API.get("/api/location", data);
+      const response = await API.get("/api/mapping", data);
       // console.log(response)
       return response;
     } catch (error) {
@@ -14,7 +14,7 @@ const LocationService = {
 
   getLocationById: async function (id) {
     try {
-      const response = await API.get(`/api/location/${id}`);
+      const response = await API.get(`/api/mapping/${id}`);
       return response;
     } catch (err) {
       console.log("location service error", err);

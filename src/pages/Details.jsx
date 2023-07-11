@@ -55,7 +55,7 @@ const Details = () => {
       <div className="py-12 px-40">
         <div>
           <div className="text-4xl font-bold text-black">
-            Detail Daerah {dataById.kelurahan}
+            Detail Daerah {dataById.nama_kelurahan}
           </div>
         </div>
       </div>

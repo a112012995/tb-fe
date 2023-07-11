@@ -14,7 +14,8 @@ const Map = () => {
   }, [dispatch]);
 
   const [onSelect, setOnSelect] = useState(false);
-  const { data, dataById } = useSelector((state) => state.locationReducers);
+  const { data, dataById, totalPas } = useSelector((state) => state.locationReducers);
+  // console.log(totalPas)
 
   const center = [-7.019679560453046, 110.39818740013446];
 
@@ -26,7 +27,7 @@ const Map = () => {
 
   let dataCase = {};
   data.data?.forEach((item) => {
-    dataCase[item.id] = item.kasus_aktif;
+    dataCase[item.id] = item.jumlah_pasien;
   });
 
   const style = (feature) => {
@@ -34,15 +35,15 @@ const Map = () => {
     let colors;
     if (totalData > 1000) {
       colors = "#800026";
-    } else if (totalData > 40) {
+    } else if (totalData > 125) {
       colors = "#BD0026";
-    } else if (totalData > 30) {
+    } else if (totalData > 100) {
       colors = "#E31A1C";
-    } else if (totalData > 20) {
+    } else if (totalData > 75) {
       colors = "#FC4E2A";
-    } else if (totalData > 10) {
+    } else if (totalData > 50) {
       colors = "#FD8D3C";
-    } else if (totalData > 5) {
+    } else if (totalData > 25) {
       colors = "#FEB24C";
     } else if (totalData > 0) {
       colors = "#FED976";
@@ -105,9 +106,9 @@ const Map = () => {
             <div className="px-5 py-4">
               {onSelect ? (
                 <>
-                  <h2 className=" text-lg font-bold">{dataById.kelurahan}</h2>
+                  <h2 className=" text-lg font-bold">{dataById.nama_kelurahan}</h2>
                   <p className="text-sm">
-                    Jumlah Kasus: {dataById.kasus_aktif}
+                    Jumlah Kasus: {totalPas}
                   </p>
                 </>
               ) : (

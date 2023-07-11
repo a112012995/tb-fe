@@ -102,8 +102,8 @@ const Map = () => {
 						<div className="px-5 py-4">
 							{onSelect ? (
 								<>
-									<h2 className=" text-lg font-bold">{dataById.kelurahan}</h2>
-									<p className="text-sm">Jumlah Kasus: {dataById.kasus_aktif}</p>
+									<h2 className=" text-lg font-bold">{dataById.nama_kelurahan}</h2>
+									<p className="text-sm">Jumlah Kasus: {totalPas}</p>
 								</>
 							) : (
 								<>

@@ -13,8 +13,9 @@ const Map = () => {
 		dispatch(getLocation());
 	}, [dispatch]);
 
-	const [onSelect, setOnSelect] = useState(false);
-	const { data, dataById } = useSelector((state) => state.locationReducers);
+  const [onSelect, setOnSelect] = useState(false);
+  const { data, dataById, totalPas } = useSelector((state) => state.locationReducers);
+  // console.log(totalPas)
 
 	const center = [-7.019679560453046, 110.39818740013446];
 
@@ -24,40 +25,40 @@ const Map = () => {
 			.catch((error) => ({ error }));
 	};
 
-	let dataCase = {};
-	data.data?.forEach((item) => {
-		dataCase[item.id] = item.kasus_aktif;
-	});
+  let dataCase = {};
+  data.data?.forEach((item) => {
+    dataCase[item.id] = item.jumlah_pasien;
+  });
 
-	const style = (feature) => {
-		let totalData = dataCase?.[feature.properties.gid];
-		let colors;
-		if (totalData > 1000) {
-			colors = '#800026';
-		} else if (totalData > 40) {
-			colors = '#BD0026';
-		} else if (totalData > 30) {
-			colors = '#E31A1C';
-		} else if (totalData > 20) {
-			colors = '#FC4E2A';
-		} else if (totalData > 10) {
-			colors = '#FD8D3C';
-		} else if (totalData > 5) {
-			colors = '#FEB24C';
-		} else if (totalData > 0) {
-			colors = '#FED976';
-		} else {
-			colors = '#FFEDA0';
-		}
-		return {
-			fillColor: colors,
-			weight: 1,
-			opacity: 1,
-			color: 'white',
-			dashArray: '2',
-			fillOpacity: 1,
-		};
-	};
+  const style = (feature) => {
+    let totalData = dataCase?.[feature.properties.gid];
+    let colors;
+    if (totalData > 1000) {
+      colors = "#800026";
+    } else if (totalData > 125) {
+      colors = "#BD0026";
+    } else if (totalData > 100) {
+      colors = "#E31A1C";
+    } else if (totalData > 75) {
+      colors = "#FC4E2A";
+    } else if (totalData > 50) {
+      colors = "#FD8D3C";
+    } else if (totalData > 25) {
+      colors = "#FEB24C";
+    } else if (totalData > 0) {
+      colors = "#FED976";
+    } else {
+      colors = "#FFEDA0";
+    }
+    return {
+      fillColor: colors,
+      weight: 1,
+      opacity: 1,
+      color: "white",
+      dashArray: "2",
+      fillOpacity: 1,
+    };
+  };
 
 	const highlightFeature = (e) => {
 		const data = e.target.feature.properties.gid;

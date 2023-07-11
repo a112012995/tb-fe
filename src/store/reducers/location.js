@@ -3,6 +3,8 @@ import { GET_LOCATION, GET_LOCATION_BY_ID } from "../types";
 const initialState = {
   data: [],
   dataById: false,
+  totalPas: false,
+  pasien: false,
   loading: true,
 };
 
@@ -20,7 +22,9 @@ const locationReducers = (state = initialState, action) => {
       return {
         ...state,
         dataById: payload.data,
+        totalPas:payload.data.pasiens.length,
         loading: false,
+        pasien:payload.data.pasiens
       };
 
     default:

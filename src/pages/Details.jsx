@@ -45,12 +45,14 @@ const Details = () => {
 				</div>
 			</div>
 
-			{/* Daerah */}
-			<div className="py-12 px-40">
-				<div>
-					<div className="text-4xl font-bold text-black">Detail Daerah {dataById.kelurahan}</div>
-				</div>
-			</div>
+      {/* Daerah */}
+      <div className="py-12 px-40">
+        <div>
+          <div className="text-4xl font-bold text-black">
+            Detail Daerah {dataById.nama_kelurahan}
+          </div>
+        </div>
+      </div>
 
 			{/* Stats */}
 			<div className="flex space-x-8 justify-center items-center flex-col">

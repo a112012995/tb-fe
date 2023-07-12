@@ -98,12 +98,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 const itemsPerPage = 5;
 
 const TableDet = () => {
-  const { state } = useLocation();
+  // const { state } = useLocation();
   // console.log(state.areaId);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
-  const data = useSelector((state) => state.locationReducers.pasien);
-  // console.log(data);
+  const { dataByIdKel } = useSelector((state) => state.pasienReducers);
+  console.log(dataByIdKel);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -133,16 +133,16 @@ const TableDet = () => {
               <th style={tableHeaderStyle}>Detail Pasien</th>
             </tr>
           </thead>
-          <tbody className="text-black">
-            {data &&
-              data?.map((item, no) => (
+          {dataByIdKel && (
+            <tbody className="text-black">
+              {dataByIdKel?.map((item, no) => (
                 <tr key={item.id} style={{ backgroundColor: "#ffffff" }}>
                   <td style={tableDataStyle}>{no + 1}</td>
                   <td style={tableDataStyle}>{item.kode_pasien}</td>
                   <td style={tableDataStyle}>{item.umur}</td>
                   <td style={tableDataStyle}>{item.jenis_kelamin}</td>
                   <td style={tableDataStyle}>{item.kelurahan_pasien}</td>
-                  <td style={tableDataStyle}>{item.pengobatanTerakhir}</td>
+                  <td style={tableDataStyle}>{item.tb_record.hasil_akhir}</td>
                   <td style={tableDataStyle}>
                     <button
                       className="bg-[#35B438] text-white"
@@ -159,7 +159,8 @@ const TableDet = () => {
                   </td>
                 </tr>
               ))}
-          </tbody>
+            </tbody>
+          )}
         </table>
       </div>
 
@@ -177,7 +178,7 @@ const TableDet = () => {
 
         <button
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === Math.ceil(data.length / itemsPerPage)}
+          disabled={currentPage === Math.ceil(dataByIdKel.length / itemsPerPage)}
           style={buttonStyle}
         >
           &gt;

@@ -99,11 +99,11 @@ const itemsPerPage = 5;
 
 const TableDet = () => {
   const { state } = useLocation();
-  console.log(state.areaId);
+  // console.log(state.areaId);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
   const data = useSelector((state) => state.locationReducers.pasien);
-  console.log(data);
+  // console.log(data);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);

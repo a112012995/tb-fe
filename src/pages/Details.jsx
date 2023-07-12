@@ -14,8 +14,8 @@ const Details = () => {
 	useEffect(() => {
 		dispatch(getLocationById(state.areaId));
 	}, [dispatch, state]);
-	const { dataById } = useSelector((state) => state.locationReducers);
-	// console.log(dataById);
+	const { dataById, totalPas } = useSelector((state) => state.locationReducers);
+	// console.log(totalPas);
 	return (
 		<div className="bg-[#F6F6F6] m-auto items-center justify-center max-w-screen min-h-screen">
 			{/* Navbar */}
@@ -45,14 +45,12 @@ const Details = () => {
 				</div>
 			</div>
 
-      {/* Daerah */}
-      <div className="py-12 px-40">
-        <div>
-          <div className="text-4xl font-bold text-black">
-            Detail Daerah {dataById.nama_kelurahan}
-          </div>
-        </div>
-      </div>
+			{/* Daerah */}
+			<div className="py-12 px-40">
+				<div>
+					<div className="text-4xl font-bold text-black">Detail Daerah {dataById.nama_kelurahan}</div>
+				</div>
+			</div>
 
 			{/* Stats */}
 			<div className="flex space-x-8 justify-center items-center flex-col">
@@ -63,8 +61,8 @@ const Details = () => {
 								<div className="stat">
 									<div className="flex">
 										<div className="flex-col text-center  pt-2">
-											<div className="stat-value text-black font-bold text-5xl">669.420</div>
-											<div className="stat-title text-black text-lg">Jumlah Penduduk</div>
+											<div className="stat-value text-black font-bold text-5xl">{totalPas}</div>
+											<div className="stat-title text-black text-lg">Jumlah Pasien</div>
 										</div>
 										<div className="text-warning">
 											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current">

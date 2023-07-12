@@ -33,13 +33,13 @@ const Map = () => {
   const style = (feature) => {
     let totalData = dataCase?.[feature.properties.gid];
     let colors;
-    if (totalData > 1000) {
+    if (totalData > 200) {
       colors = "#800026";
-    } else if (totalData > 125) {
+    } else if (totalData > 170) {
       colors = "#BD0026";
-    } else if (totalData > 100) {
+    } else if (totalData > 125) {
       colors = "#E31A1C";
-    } else if (totalData > 75) {
+    } else if (totalData > 80) {
       colors = "#FC4E2A";
     } else if (totalData > 50) {
       colors = "#FD8D3C";
@@ -67,7 +67,7 @@ const Map = () => {
 		layer.setStyle({
 			fillOpacity: 1,
 			weight: 4,
-			// dashArray: "",
+			dashArray: "",
 			color: 'black',
 			// fillColor: "#D45962",
 		});
@@ -76,7 +76,7 @@ const Map = () => {
 
 	const resetHighlight = (e) => {
 		setOnSelect(false);
-		e.target.setStyle(style(e.target.feature));
+		// e.target.setStyle(style(e.target.feature));
 	};
 
 	const clickHandler = (e) => {
@@ -131,7 +131,7 @@ const Map = () => {
 						</div>
 						<div className="flex-col ml-3">
 							<p>0 - 0</p>
-							<p>( 0 Kota/Kabupaten)</p>
+							<p>( 0 Kelurahan)</p>
 						</div>
 					</div>
 					<div className="flex items-baseline">
@@ -141,8 +141,8 @@ const Map = () => {
 							</svg>
 						</div>
 						<div className="flex-col ml-3">
-							<p>1 - 215</p>
-							<p>( 18 Kota/Kabupaten)</p>
+							<p>1 - 25</p>
+							<p>( 18 Kelurahan)</p>
 						</div>
 					</div>
 					<div className="flex items-baseline">
@@ -152,8 +152,8 @@ const Map = () => {
 							</svg>
 						</div>
 						<div className="flex-col ml-3">
-							<p>216 - 430</p>
-							<p>( 8 Kota/Kabupaten)</p>
+							<p>26 - 50</p>
+							<p>( 8 Kelurahan)</p>
 						</div>
 					</div>
 					<div className="flex items-baseline">
@@ -163,8 +163,8 @@ const Map = () => {
 							</svg>
 						</div>
 						<div className="flex-col ml-3">
-							<p>431 - 645</p>
-							<p>( 0 Kota/Kabupaten)</p>
+							<p>51 - 80</p>
+							<p>( 0 Kelurahan)</p>
 						</div>
 					</div>
 					<div className="flex items-baseline">
@@ -174,8 +174,8 @@ const Map = () => {
 							</svg>
 						</div>
 						<div className="flex-col ml-3">
-							<p>646 - 860</p>
-							<p>( 0 Kota/Kabupaten)</p>
+							<p>81 - 125</p>
+							<p>( 0 Kelurahan)</p>
 						</div>
 					</div>
 					<div className="flex items-baseline">
@@ -185,8 +185,8 @@ const Map = () => {
 							</svg>
 						</div>
 						<div className="flex-col ml-3">
-							<p>861 - 1.291</p>
-							<p>( 2 Kota/Kabupaten)</p>
+							<p>126 - 170</p>
+							<p>( 2 Kelurahan)</p>
 						</div>
 					</div>
 					<div className="flex items-baseline">
@@ -196,8 +196,19 @@ const Map = () => {
 							</svg>
 						</div>
 						<div className="flex-col ml-3">
-							<p>1.292 - 1.500</p>
-							<p>( 11 Kota/Kabupaten)</p>
+							<p>171 - 200</p>
+							<p>( 11 Kelurahan)</p>
+						</div>
+					</div>
+					<div className="flex items-baseline">
+						<div>
+							<svg height="20" width="20">
+								<circle cx="12" cy="12" r="6" fill="#800026" stroke="black" />
+							</svg>
+						</div>
+						<div className="flex-col ml-3">
+							<p>200 ++</p>
+							<p>( 11 Kelurahan)</p>
 						</div>
 					</div>
 				</div>

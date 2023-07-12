@@ -55,6 +55,11 @@ const Dashboard = () => {
 						Data kasus diatas diupdate setiap 6 bulan sekali, dan silahkan cek kembali secara reguler untuk mendapatkan informasi terbaru.
 					</p>
 				</div>
+				<div className="mt-2 text-[#4F709C]">
+					<a href="https://bit.ly/Dashboard_TB1" target="_blank" rel="noopener noreferrer">
+						<u>*Klik disini untuk melihat visualisasi datail</u>
+					</a>
+				</div>
 				<Footer />
 			</div>
 		</div>

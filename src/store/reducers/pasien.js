@@ -4,7 +4,7 @@ const initialState = {
   data: [],
   dataById: false,
   dataByIdKel: false,
-  record: false,
+  totalData: false,
   loading: true,
 };
 
@@ -15,15 +15,14 @@ const locationReducers = (state = initialState, action) => {
     case GET_PASIEN:
       return {
         ...state,
-        data: payload.data,
-        // record: payload.data.tb_record,
+        data: payload.data.data,
+        totalData: payload.data.totalData,
         loading: false,
       };
     case GET_PASIEN_BY_ID:
       return {
         ...state,
         dataById: payload.data,
-        record: payload.data.tb_record,
         loading: false,
       };
 
@@ -31,7 +30,6 @@ const locationReducers = (state = initialState, action) => {
       return {
         ...state,
         dataByIdKel: payload.data,
-        // record: payload.data,
         loading: false,
       };
 

@@ -6,9 +6,9 @@ const Stats = () => {
       <div className="stat">
         <div className="flex">
           <div className="flex-col text-center pt-2">
-            <div className="stat-value text-white text-5xl">969.000</div>
+            <div className="stat-value text-white text-5xl">1.650.000</div>
             <div className="stat-title text-white text-lg">
-              Orang dengan TBC
+              Jumlah Penduduk
             </div>
           </div>
           <div className="text-warning">
@@ -34,7 +34,7 @@ const Stats = () => {
           <div className="flex-col text-center pt-2">
             <div className="stat-value text-white text-5xl">28.000</div>
             <div className="stat-title text-white text-lg">
-              Orang dengan TBC Resistan Obat
+              Pasien TBC Kota Semarang
             </div>
           </div>
           <div className="text-warning">

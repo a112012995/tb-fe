@@ -5,6 +5,7 @@ import Service from "../components/Service";
 import HowTo from "../components/HowTo";
 import Artikel from "../components/Artikel";
 import Footer from "../components/Footer";
+import LoadPage from "../components/UI/LoadPage";
 import { logout } from "../store/actions/auth";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +18,14 @@ const BeforeLogin = () => {
   const pathName = window.location.pathname;
   const [color, setColor] = useState(false);
   const [colorNav, setColorNav] = useState("text-white");
+  const [load, setLoad] = useState(true);
+
+  // for loading
+  setInterval(function () {
+    setLoad(false);
+  }, 700);
+
+  // for change color navbar
   const changeColor = () => {
     if (window.scrollY >= 90) {
       setColor(true);
@@ -37,6 +46,11 @@ const BeforeLogin = () => {
     }
   }, [pathName, scroll]);
   return (
+    <>
+      {load ? (
+        <LoadPage />
+      ) : (
+        <>
     <div className="bg-[#F6F6F6] text-black ">
       <div
         className={
@@ -111,6 +125,9 @@ const BeforeLogin = () => {
       <Artikel />
       <Footer />
     </div>
+          </>
+      )}
+      </>
   );
 };
 

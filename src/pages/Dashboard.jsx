@@ -6,7 +6,6 @@ import bgHero from '../assets/bg-hero.png';
 import iconInfo from '../assets/icon-info.png';
 import Footer from '../components/Footer';
 import LineGraph from '../components/LineGraph';
-import DropdownMenu from '../components/DropdownMenu';
 
 const Dashboard = () => {
 	return (
@@ -37,14 +36,6 @@ const Dashboard = () => {
 				</div>
 			</div>
 			<div className="px-20 mt-36 text-black ">
-				{/* <div className="flex justify-center items-center gap-5 px-20">
-					<img src={iconTb} alt="icon tb" className="w-[500px] " />
-					<p className="text-justify text-lg">
-						Tuberkulosis (TB) adalah penyakit infeksi yang disebabkan oleh bakteri Mycobacterium tuberculosis. Penyakit ini umumnya menyerang paru-paru, tetapi juga dapat menyerang organ lain seperti ginjal, tulang, dan otak. Gejala utama
-						TB paru meliputi batuk kronis, demam, kelelahan, dan penurunan berat badan. Penularan TB terjadi melalui udara saat seseorang yang terinfeksi batuk atau bersin. Penanganan TB melibatkan pengobatan jangka panjang dengan
-						antibiotik untuk membasmi bakteri penyebabnya.
-					</p>
-				</div> */}
 				<div className="mt-36">
 					<LineGraph />
 				</div>
@@ -57,12 +48,17 @@ const Dashboard = () => {
 						<h1>Disclaimer:</h1>
 					</div>
 					<p className="text-base px-11 text-justify">
-						Peta di atas merupakan Peta Sebaran Kasus Tuberkulosis di Jawa Tengah dan bukan merupakan Peta Level Kewaspadaan Covid-19 Jawa Barat.
+						Peta di atas merupakan Peta Sebaran Kasus Tuberkulosis di Kota Semarang dan bukan merupakan Peta Level Kewaspadaan Covid-19.
 						<br />
 						Tidak seluruh data kasus memiliki kelengkapan alamat Kota/Kab, Kecamatan dan Kelurahan/Desa (butuh proses verifikasi) sehingga tidak seluruhnya dapat divisualisasikan.
 						<br />
-						Data kasus diatas diupdate setiap hari, dan silahkan cek kembali secara reguler untuk mendapatkan informasi terbaru.
+						Data kasus diatas diupdate setiap 6 bulan sekali, dan silahkan cek kembali secara reguler untuk mendapatkan informasi terbaru.
 					</p>
+				</div>
+				<div className="mt-2 text-[#4F709C]">
+					<a href="https://bit.ly/Dashboard_TB1" target="_blank" rel="noopener noreferrer">
+						<u>*Klik disini untuk melihat visualisasi datail</u>
+					</a>
 				</div>
 				<Footer />
 			</div>

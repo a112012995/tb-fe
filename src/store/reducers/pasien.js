@@ -1,10 +1,10 @@
-import { GET_LOCATION, GET_LOCATION_BY_ID } from "../types";
+import { GET_PASIEN, GET_PASIEN_BY_ID, GET_PASIEN_BY_ID_KEL } from "../types";
 
 const initialState = {
   data: [],
   dataById: false,
-  totalPas: false,
-  pasien: false,
+  dataByIdKel: false,
+  totalData: false,
   loading: true,
 };
 
@@ -12,19 +12,25 @@ const locationReducers = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_LOCATION:
+    case GET_PASIEN:
       return {
         ...state,
-        data: payload.data,
+        data: payload.data.data,
+        totalData: payload.data.totalData,
         loading: false,
       };
-    case GET_LOCATION_BY_ID:
+    case GET_PASIEN_BY_ID:
       return {
         ...state,
         dataById: payload.data,
-        totalPas:payload.data.pasiens.length,
         loading: false,
-        pasien:payload.data.pasiens
+      };
+
+    case GET_PASIEN_BY_ID_KEL:
+      return {
+        ...state,
+        dataByIdKel: payload.data,
+        loading: false,
       };
 
     default:

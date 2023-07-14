@@ -2,8 +2,22 @@ import React, { useEffect } from "react";
 import OrderTerms from "../components/Accordion";
 import Footer from "../components/Footer";
 import TableDet from "../components/TabelDet";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getLocationById } from "../store/actions/location";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../store/actions/auth";
+import { getPasienByIdKel } from "../store/actions/pasien";
 
 const Details = () => {
+  const { state } = useLocation();
+  const dispatch = useDispatch();
+  const history = useNavigate();
+  useEffect(() => {
+    dispatch(getLocationById(state.areaId));
+	dispatch(getPasienByIdKel(state.areaId));
+  }, [dispatch, state]);
+  const { dataById, totalPas } = useSelector((state) => state.locationReducers);
+  // console.log(totalPas);
   return (
     <div className="bg-[#F6F6F6] m-auto items-center justify-center max-w-screen min-h-screen">
       {/* Navbar */}
@@ -21,12 +35,20 @@ const Details = () => {
             </div>
           </div>
           <div className="navbar-end gap-12">
-            <a href="#" className="text-2xl font-semibold scroll-smooth">
-              Tentang
+            <a
+              href="/dashboard"
+              className="text-2xl font-semibold scroll-smooth"
+            >
+              Home
             </a>
-            <a href="#" className="text-2xl font-semibold scroll-smooth">
-              Peta
-            </a>
+            <button>
+              <div
+                className="text-2xl font-semibold scroll-smooth"
+                onClick={() => dispatch(logout(history))}
+              >
+                Logout
+              </div>
+            </button>
           </div>
         </div>
       </div>
@@ -35,7 +57,7 @@ const Details = () => {
       <div className="py-12 px-40">
         <div>
           <div className="text-4xl font-bold text-black">
-            Detail Daerah {"Ngaliyan"}
+            Detail Daerah {dataById.nama_kelurahan}
           </div>
         </div>
       </div>
@@ -49,11 +71,11 @@ const Details = () => {
                 <div className="stat">
                   <div className="flex">
                     <div className="flex-col text-center  pt-2">
-                      <div className="stat-value text-black text-5xl">
-                        969.000
+                      <div className="stat-value text-black font-bold text-5xl">
+                        {totalPas}
                       </div>
                       <div className="stat-title text-black text-lg">
-                        Orang dengan TBC
+                        Jumlah Kasus
                       </div>
                     </div>
                     <div className="text-warning">
@@ -77,11 +99,11 @@ const Details = () => {
                 <div className="stat">
                   <div className="flex">
                     <div className="flex-col text-center  pt-2">
-                      <div className="stat-value text-black text-5xl">
-                        969.000
+                      <div className="stat-value text-black font-bold text-5xl">
+                        80
                       </div>
                       <div className="stat-title text-black text-lg">
-                        Orang dengan TBC
+                        Pasien Sembuh
                       </div>
                     </div>
                     <div className="text-warning">
@@ -105,11 +127,11 @@ const Details = () => {
                 <div className="stat">
                   <div className="flex">
                     <div className="flex-col text-center  pt-2">
-                      <div className="stat-value text-black text-5xl">
-                        969.000
+                      <div className="stat-value text-black font-bold text-5xl">
+                        20
                       </div>
                       <div className="stat-title text-black text-lg">
-                        Orang dengan TBC
+                        Pengobatan Gagal
                       </div>
                     </div>
                     <div className="text-warning">
@@ -133,11 +155,11 @@ const Details = () => {
                 <div className="stat">
                   <div className="flex">
                     <div className="flex-col text-center  pt-2">
-                      <div className="stat-value text-black text-5xl">
-                        969.000
+                      <div className="stat-value text-black font-bold text-5xl">
+                        40
                       </div>
                       <div className="stat-title text-black text-lg">
-                        Orang dengan TBC
+                        Pasien Meninggal
                       </div>
                     </div>
                     <div className="text-warning">
@@ -163,17 +185,11 @@ const Details = () => {
         </div>
       </div>
 
-      
-      <div>
-        <TableDet />
-      </div>
-      <div >
-        <OrderTerms />
-      </div>
+      <TableDet />
+      <OrderTerms />
       <Footer />
       {/* Intervensi */}
     </div>
-    
   );
 };
 

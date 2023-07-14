@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const itemsPerPage = 5;
@@ -13,6 +13,7 @@ const TableDet = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const { dataByIdKel } = useSelector((state) => state.pasienReducers);
+  console.log(dataByIdKel)
 
   useEffect(() => {
     setIsModalOpen(false);
@@ -27,11 +28,6 @@ const TableDet = () => {
     setIsModalOpen(true);
   };
 
-
- 
-  // const startIndex = (currentPage - 1) * itemsPerPage;
-  // const endIndex = startIndex + itemsPerPage;
-  // const currentData = data.slice(startIndex, endIndex);
 
   return (
     <div className="relative">
@@ -56,7 +52,7 @@ const TableDet = () => {
                   <td style={tableDataStyle}>{item.kode_pasien}</td>
                   <td style={tableDataStyle}>{item.umur}</td>
                   <td style={tableDataStyle}>{item.jenis_kelamin}</td>
-                  <td style={tableDataStyle}>{item.kelurahan_pasien}</td>
+                  <td style={tableDataStyle}>{item.kelurahan.nama_kelurahan}</td>
                   <td style={tableDataStyle}>{item.tb_record.hasil_akhir}</td>
                   <td style={tableDataStyle}>
                     <button

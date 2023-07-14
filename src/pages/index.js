@@ -6,4 +6,4 @@ import LoginAdmin from "./LoginAdmin";
 import AdminPage from "./Admin";
 import AddAccount from "./AddAccount";
 
-export { Login, BeforeLogin, Details, Dashboard, LoginAdmin, AdminPage, AddAcount };
+export { Login, BeforeLogin, Details, Dashboard, LoginAdmin, AdminPage, AddAccount };

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-
-const itemsPerPage = 5;
+const itemsPerPage = 10;
 
 const TableDet = () => {
   // const { state } = useLocation();
@@ -13,88 +12,185 @@ const TableDet = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const { dataByIdKel } = useSelector((state) => state.pasienReducers);
-  console.log(dataByIdKel)
+  console.log(dataByIdKel);
 
   useEffect(() => {
     setIsModalOpen(false);
   }, [selectedItem]);
 
+  const totalPages = Math.ceil(dataByIdKel.length / itemsPerPage);
+
+  const getCurrentData = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage + 1;
+    const endIndex = startIndex + itemsPerPage - 1;
+    return dataByIdKel.slice(startIndex - 1, endIndex);
+  };
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  const handleDetailClick = (item) => {
-    setSelectedItem(item);
-    setIsModalOpen(true);
+  const handleDetailClick = (itemId) => {
+	const selectedItem = dataByIdKel.find((item) => item.id === itemId);
+	setSelectedItem(selectedItem);
+	setIsModalOpen(!isModalOpen);
   };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const isPreviousDisabled = currentPage === 1;
+  const isNextDisabled = currentPage === totalPages;
+
+  const renderPaginationButtons = () => {
+    const buttons = [];
+    const maxVisibleButtons = 5; // Jumlah tombol yang terlihat sekaligus
+    const totalButtons = Math.min(totalPages, maxVisibleButtons); // Total tombol yang ditampilkan
+    const halfVisibleButtons = Math.floor(maxVisibleButtons / 2); // Setengah dari jumlah tombol yang ditampilkan
+
+    let startPage = currentPage - halfVisibleButtons; // Halaman awal yang ditampilkan
+    if (startPage <= 0) {
+      startPage = 1;
+    }
+
+    let endPage = startPage + totalButtons - 1; // Halaman akhir yang ditampilkan
+    if (endPage > totalPages) {
+      endPage = totalPages;
+    }
+
+    if (startPage > 1) {
+      buttons.push(
+        <button
+          key={1}
+          onClick={() => handlePageChange(1)}
+          disabled={currentPage === 1}
+          style={buttonStyle}
+        >
+          1
+        </button>
+      );
+
+      if (startPage > 2) {
+        buttons.push(
+          <span key="start-ellipsis" style={{ padding: "2px 5px" }}>
+            ...
+          </span>
+        );
+      }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      buttons.push(
+        <button
+          key={i}
+          onClick={() => handlePageChange(i)}
+          disabled={i === currentPage}
+          style={buttonStyle}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        buttons.push(
+          <span key="end-ellipsis" style={{ padding: "2px 5px" }}>
+            ...
+          </span>
+        );
+      }
+
+      buttons.push(
+        <button
+          key={totalPages}
+          onClick={() => handlePageChange(totalPages)}
+          disabled={currentPage === totalPages}
+          style={buttonStyle}
+        >
+          {totalPages}
+        </button>
+      );
+    }
+
+    return buttons;
+  };
 
   return (
     <div className="relative">
       <div className="flex justify-center mt-20 mb-5">
-        <table style={{ borderCollapse: "collapse", width: "1000px" }}>
-          <thead>
-            <tr className="text-white" style={{ backgroundColor: "#030C5A" }}>
-              <th style={tableHeaderStyle}>No</th>
-              <th style={tableHeaderStyle}>Kode Pasien</th>
-              <th style={tableHeaderStyle}>Umur</th>
-              <th style={tableHeaderStyle}>Jenis Kelamin</th>
-              <th style={tableHeaderStyle}>Alamat </th>
-              <th style={tableHeaderStyle}>Pengobatan Terakhir</th>
-              <th style={tableHeaderStyle}>Detail Pasien</th>
-            </tr>
-          </thead>
-          {dataByIdKel && (
-            <tbody className="text-black">
-              {dataByIdKel?.map((item, no) => (
-                <tr key={item.id} style={{ backgroundColor: "#ffffff" }}>
-                  <td style={tableDataStyle}>{no + 1}</td>
-                  <td style={tableDataStyle}>{item.kode_pasien}</td>
-                  <td style={tableDataStyle}>{item.umur}</td>
-                  <td style={tableDataStyle}>{item.jenis_kelamin}</td>
-                  <td style={tableDataStyle}>{item.kelurahan.nama_kelurahan}</td>
-                  <td style={tableDataStyle}>{item.tb_record.hasil_akhir}</td>
-                  <td style={tableDataStyle}>
-                    <button
-                      className="bg-[#35B438] text-white"
-                      onClick={() => handleDetailClick(item.id)}
-                      style={{
-                        width: "80px",
-                        height: "35px",
-                        fontSize: "13px",
-                        borderRadius: "10px",
-                      }}
-                    >
-                      Lihat Detail
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          )}
-        </table>
+        <div className="flex flex-col">
+          <table style={{ borderCollapse: "collapse", width: "1000px" }}>
+            <thead>
+              <tr className="text-white" style={{ backgroundColor: "#030C5A" }}>
+                <th style={tableHeaderStyle}>No</th>
+                <th style={tableHeaderStyle}>Kode Pasien</th>
+                <th style={tableHeaderStyle}>Umur</th>
+                <th style={tableHeaderStyle}>Jenis Kelamin</th>
+                <th style={tableHeaderStyle}>Alamat </th>
+                <th style={tableHeaderStyle}>Pengobatan Terakhir</th>
+                <th style={tableHeaderStyle}>Detail Pasien</th>
+              </tr>
+            </thead>
+            {dataByIdKel && (
+              <tbody className="text-black">
+                {getCurrentData().map((item, index) => (
+                  <tr key={item.id} style={{ backgroundColor: "#ffffff" }}>
+                    <td style={tableDataStyle}>
+                      {(currentPage - 1) * itemsPerPage + index + 1}
+                    </td>
+                    <td style={tableDataStyle}>{item.kode_pasien}</td>
+                    <td style={tableDataStyle}>{item.umur}</td>
+                    <td style={tableDataStyle}>{item.jenis_kelamin}</td>
+                    <td style={tableDataStyle}>
+                      {item.kelurahan.nama_kelurahan}
+                    </td>
+                    <td style={tableDataStyle}>{item.tb_record.hasil_akhir}</td>
+                    <td style={tableDataStyle}>
+                      <button
+                        className="bg-[#35B438] text-white"
+                        onClick={() => handleDetailClick(item.id)}
+                        style={{
+                          width: "80px",
+                          height: "35px",
+                          fontSize: "13px",
+                          borderRadius: "10px",
+                        }}
+                      >
+                        Lihat Detail
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            )}
+          </table>
+          <div
+            className="flex justify-end text-black mt-5"
+            style={paginationStyle}
+          >
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={isPreviousDisabled}
+              style={buttonStyle}
+            >
+              &lt;
+            </button>
+
+            {renderPaginationButtons()}
+
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={isNextDisabled}
+              style={buttonStyle}
+            >
+              &gt;
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div
-        className="flex justify-center text-black mb-10"
-        style={paginationStyle}
-      >
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          style={buttonStyle}
-        >
-          &lt;
-        </button>
-
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === Math.ceil(dataByIdKel.length / itemsPerPage)}
-          style={buttonStyle}
-        >
-          &gt;
-        </button>
-      </div>
       <div className="flex justify-center mt-10 mb-10">
         <button
           className="bg-[#35B438] text-white mb-2"
@@ -114,10 +210,7 @@ const TableDet = () => {
           <div style={modalStyle}>
             <div style={modalHeaderStyle}>
               <h3 style={modalTitleStyle}>Detail Pasien</h3>
-              <button
-                style={modalCloseStyle}
-                onClick={() => setIsModalOpen(false)}
-              >
+              <button style={modalCloseStyle} onClick={handleCloseModal}>
                 X
               </button>
             </div>

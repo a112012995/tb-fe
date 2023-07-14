@@ -15,7 +15,11 @@ const TableDet = () => {
   console.log(dataByIdKel);
 
   useEffect(() => {
-    setIsModalOpen(false);
+    if (selectedItem) {
+      setIsModalOpen(true);
+    } else {
+      setIsModalOpen(false);
+    }
   }, [selectedItem]);
 
   const totalPages = Math.ceil(dataByIdKel.length / itemsPerPage);
@@ -31,9 +35,9 @@ const TableDet = () => {
   };
 
   const handleDetailClick = (itemId) => {
-	const selectedItem = dataByIdKel.find((item) => item.id === itemId);
-	setSelectedItem(selectedItem);
-	setIsModalOpen(!isModalOpen);
+    const selectedItem = dataByIdKel.find((item) => item.id === itemId);
+    setSelectedItem(selectedItem);
+    setIsModalOpen(!isModalOpen);
   };
 
   const handleCloseModal = () => {
@@ -208,22 +212,42 @@ const TableDet = () => {
       {selectedItem && isModalOpen && (
         <div style={modalOverlayStyle}>
           <div style={modalStyle}>
-            <div style={modalHeaderStyle}>
-              <h3 style={modalTitleStyle}>Detail Pasien</h3>
-              <button style={modalCloseStyle} onClick={handleCloseModal}>
-                X
-              </button>
-            </div>
-            <div style={modalBodyStyle}>
-              <p>No: {selectedItem.no}</p>
-              <p>Kode Pasien: {selectedItem.kodePasien}</p>
-              <p>Umur: {selectedItem.umur}</p>
-              <p>Jenis Kelamin: {selectedItem.jenisKelamin}</p>
-              <p>Alamat: {selectedItem.alamat}</p>
-              <p>Pengobatan Terakhir: {selectedItem.pengobatanTerakhir}</p>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Detail Pasien</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Kode Pasien:</td>
+                      <td>{selectedItem.kode_pasien}</td>
+                    </tr>
+                    <tr>
+                      <td>Umur:</td>
+                      <td>{selectedItem.umur}</td>
+                    </tr>
+                    <tr>
+                      <td>Jenis Kelamin:</td>
+                      <td>{selectedItem.jenis_kelamin}</td>
+                    </tr>
+                    <tr>
+                      <td>Alamat:</td>
+                      <td>{selectedItem.kelurahan.nama_kelurahan}</td>
+                    </tr>
+                    <tr>
+                      <td>Pengobatan Terakhir:</td>
+                      <td>{selectedItem.tb_record.hasil_akhir}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div>{/* Tambahkan logic dan tombol aksi tambahan */}</div>
             </div>
             <div style={modalFooterStyle}>
-              {/* Additional logic and action buttons */}
+              {/* Tambahkan tombol aksi jika diperlukan */}
             </div>
           </div>
         </div>

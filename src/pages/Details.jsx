@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getLocationById } from "../store/actions/location";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/actions/auth";
+import { getPasienByIdKel } from "../store/actions/pasien";
 
 const Details = () => {
   const { state } = useLocation();
@@ -13,9 +14,10 @@ const Details = () => {
   const history = useNavigate();
   useEffect(() => {
     dispatch(getLocationById(state.areaId));
+	dispatch(getPasienByIdKel(state.areaId));
   }, [dispatch, state]);
-  const { dataById } = useSelector((state) => state.locationReducers);
-  // console.log(dataById);
+  const { dataById, totalPas } = useSelector((state) => state.locationReducers);
+  // console.log(totalPas);
   return (
     <div className="bg-[#F6F6F6] m-auto items-center justify-center max-w-screen min-h-screen">
       {/* Navbar */}
@@ -55,7 +57,7 @@ const Details = () => {
       <div className="py-12 px-40">
         <div>
           <div className="text-4xl font-bold text-black">
-            Detail Daerah {dataById.kelurahan}
+            Detail Daerah {dataById.nama_kelurahan}
           </div>
         </div>
       </div>
@@ -69,11 +71,11 @@ const Details = () => {
                 <div className="stat">
                   <div className="flex">
                     <div className="flex-col text-center  pt-2">
-                      <div className="stat-value text-black text-5xl">
-                        969.000
+                      <div className="stat-value text-black font-bold text-5xl">
+                        {totalPas}
                       </div>
                       <div className="stat-title text-black text-lg">
-                        Orang dengan TBC
+                        Jumlah Kasus
                       </div>
                     </div>
                     <div className="text-warning">
@@ -97,11 +99,11 @@ const Details = () => {
                 <div className="stat">
                   <div className="flex">
                     <div className="flex-col text-center  pt-2">
-                      <div className="stat-value text-black text-5xl">
-                        969.000
+                      <div className="stat-value text-black font-bold text-5xl">
+                        80
                       </div>
                       <div className="stat-title text-black text-lg">
-                        Orang dengan TBC
+                        Pasien Sembuh
                       </div>
                     </div>
                     <div className="text-warning">
@@ -125,11 +127,11 @@ const Details = () => {
                 <div className="stat">
                   <div className="flex">
                     <div className="flex-col text-center  pt-2">
-                      <div className="stat-value text-black text-5xl">
-                        969.000
+                      <div className="stat-value text-black font-bold text-5xl">
+                        20
                       </div>
                       <div className="stat-title text-black text-lg">
-                        Orang dengan TBC
+                        Pengobatan Gagal
                       </div>
                     </div>
                     <div className="text-warning">
@@ -153,11 +155,11 @@ const Details = () => {
                 <div className="stat">
                   <div className="flex">
                     <div className="flex-col text-center  pt-2">
-                      <div className="stat-value text-black text-5xl">
-                        969.000
+                      <div className="stat-value text-black font-bold text-5xl">
+                        40
                       </div>
                       <div className="stat-title text-black text-lg">
-                        Orang dengan TBC
+                        Pasien Meninggal
                       </div>
                     </div>
                     <div className="text-warning">

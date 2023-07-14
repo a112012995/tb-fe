@@ -14,35 +14,49 @@ const Map = () => {
   }, [dispatch]);
 
   const [onSelect, setOnSelect] = useState(false);
-  const { data, dataById } = useSelector((state) => state.locationReducers);
+  const { data, dataById, totalPas } = useSelector(
+    (state) => state.locationReducers
+  );
+  //   console.log(data);
 
-  const center = [-7.019679560453046, 110.39818740013446];
-
+  //   get response from api get location by id
   const getById = async (id) => {
     await dispatch(getLocationById(id))
       .then((response) => ({ response }))
       .catch((error) => ({ error }));
   };
 
+  const rendah = data.filter((data) => data.jumlah_pasien === 0);
+  const lumayan = data.filter((data) => data.jumlah_pasien < 25 && data.jumlah_pasien > 0);
+  const cukup = data.filter((data) => data.jumlah_pasien < 50 && data.jumlah_pasien > 25);
+  const agakRentan = data.filter((data) => data.jumlah_pasien < 80 && data.jumlah_pasien > 50);
+  const rentan = data.filter((data) => data.jumlah_pasien < 125 && data.jumlah_pasien > 80);
+  const iniBahaya = data.filter((data) => data.jumlah_pasien < 150 && data.jumlah_pasien > 125);
+  const rentanBanget = data.filter((data) => data.jumlah_pasien < 170 && data.jumlah_pasien > 150);
+  const serem = data.filter((data) => data.jumlah_pasien > 170);
+
+  //   setting for mapping use leaflet
+  const center = [-7.019679560453046, 110.39818740013446];
+
   let dataCase = {};
-  data.data?.forEach((item) => {
-    dataCase[item.id] = item.kasus_aktif;
+  data?.forEach((item) => {
+    dataCase[item.id] = item.jumlah_pasien;
   });
 
   const style = (feature) => {
     let totalData = dataCase?.[feature.properties.gid];
     let colors;
-    if (totalData > 1000) {
+    if (totalData > 170) {
       colors = "#800026";
-    } else if (totalData > 40) {
+    } else if (totalData > 150) {
       colors = "#BD0026";
-    } else if (totalData > 30) {
+    } else if (totalData > 125) {
       colors = "#E31A1C";
-    } else if (totalData > 20) {
+    } else if (totalData > 80) {
       colors = "#FC4E2A";
-    } else if (totalData > 10) {
+    } else if (totalData > 50) {
       colors = "#FD8D3C";
-    } else if (totalData > 5) {
+    } else if (totalData > 25) {
       colors = "#FEB24C";
     } else if (totalData > 0) {
       colors = "#FED976";
@@ -66,7 +80,7 @@ const Map = () => {
     layer.setStyle({
       fillOpacity: 1,
       weight: 4,
-      // dashArray: "",
+      dashArray: "",
       color: "black",
       // fillColor: "#D45962",
     });
@@ -75,7 +89,7 @@ const Map = () => {
 
   const resetHighlight = (e) => {
     setOnSelect(false);
-    e.target.setStyle(style(e.target.feature));
+    // e.target.setStyle(style(e.target.feature));
   };
 
   const clickHandler = (e) => {
@@ -92,6 +106,7 @@ const Map = () => {
       click: clickHandler,
     });
   };
+  //   setting for mapping use leaflet (DONE)
 
   return (
     <div id="map">
@@ -105,10 +120,10 @@ const Map = () => {
             <div className="px-5 py-4">
               {onSelect ? (
                 <>
-                  <h2 className=" text-lg font-bold">{dataById.kelurahan}</h2>
-                  <p className="text-sm">
-                    Jumlah Kasus: {dataById.kasus_aktif}
-                  </p>
+                  <h2 className=" text-lg font-bold">
+                    {dataById.nama_kelurahan}
+                  </h2>
+                  <p className="text-sm">Jumlah Kasus: {totalPas}</p>
                 </>
               ) : (
                 <>
@@ -137,67 +152,89 @@ const Map = () => {
           <div className="flex items-baseline">
             <div>
               <svg height="20" width="20">
-                <circle cx="12" cy="12" r="6" fill="#F8D7BE" stroke="black" />
+                <circle cx="12" cy="12" r="6" fill="#FFEDA0" stroke="black" />
               </svg>
             </div>
             <div className="flex-col ml-3">
               <p>0 - 0</p>
-              <p>( 0 Kota/Kabupaten)</p>
+              <p>{`${rendah.length} Kelurahan`}</p>
             </div>
           </div>
           <div className="flex items-baseline">
             <div>
               <svg height="20" width="20">
-                <circle cx="12" cy="12" r="6" fill="#EEBD97" stroke="black" />
+                <circle cx="12" cy="12" r="6" fill="#FED976" stroke="black" />
               </svg>
             </div>
             <div className="flex-col ml-3">
-              <p>1 - 215</p>
-              <p>( 18 Kota/Kabupaten)</p>
+              <p>1 - 25</p>
+              <p>{`${lumayan.length} Kelurahan`}</p>
             </div>
           </div>
           <div className="flex items-baseline">
             <div>
               <svg height="20" width="20">
-                <circle cx="12" cy="12" r="6" fill="#BB763A" stroke="black" />
+                <circle cx="12" cy="12" r="6" fill="#FEB24C" stroke="black" />
               </svg>
             </div>
             <div className="flex-col ml-3">
-              <p>216 - 430</p>
-              <p>( 8 Kota/Kabupaten)</p>
+              <p>26 - 50</p>
+              <p>{`${cukup.length} Kelurahan`}</p>
             </div>
           </div>
           <div className="flex items-baseline">
             <div>
               <svg height="20" width="20">
-                <circle cx="12" cy="12" r="6" fill="#8C4F16" stroke="black" />
+                <circle cx="12" cy="12" r="6" fill="#FD8D3C" stroke="black" />
               </svg>
             </div>
             <div className="flex-col ml-3">
-              <p>431 - 645</p>
-              <p>( 0 Kota/Kabupaten)</p>
+              <p>51 - 80</p>
+              <p>{`${agakRentan.length} Kelurahan`}</p>
             </div>
           </div>
           <div className="flex items-baseline">
             <div>
               <svg height="20" width="20">
-                <circle cx="12" cy="12" r="6" fill="#723F0D" stroke="black" />
+                <circle cx="12" cy="12" r="6" fill="#FC4E2A" stroke="black" />
               </svg>
             </div>
             <div className="flex-col ml-3">
-              <p>646 - 860</p>
-              <p>( 0 Kota/Kabupaten)</p>
+              <p>81 - 125</p>
+              <p>{`${rentan.length} Kelurahan`}</p>
             </div>
           </div>
           <div className="flex items-baseline">
             <div>
               <svg height="20" width="20">
-                <circle cx="12" cy="12" r="6" fill="#572F09" stroke="black" />
+                <circle cx="12" cy="12" r="6" fill="#E31A1C" stroke="black" />
               </svg>
             </div>
             <div className="flex-col ml-3">
-              <p>861 - 1.291</p>
-              <p>( 2 Kota/Kabupaten)</p>
+              <p>126 - 150</p>
+              <p>{`${iniBahaya.length} Kelurahan`}</p>
+            </div>
+          </div>
+          <div className="flex items-baseline">
+            <div>
+              <svg height="20" width="20">
+                <circle cx="12" cy="12" r="6" fill="#BD0026" stroke="black" />
+              </svg>
+            </div>
+            <div className="flex-col ml-3">
+              <p>151 - 170</p>
+              <p>{`${rentanBanget.length} Kelurahan`}</p>
+            </div>
+          </div>
+          <div className="flex items-baseline">
+            <div>
+              <svg height="20" width="20">
+                <circle cx="12" cy="12" r="6" fill="#800026" stroke="black" />
+              </svg>
+            </div>
+            <div className="flex-col ml-3">
+              <p>170 ++</p>
+              <p>{`${serem.length} Kelurahan`}</p>
             </div>
           </div>
         </div>

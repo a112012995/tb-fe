@@ -5,7 +5,7 @@ export const getLocation = (params, history) =>
   async function (dispatch) {
     try {
       const response = await locationService.getLocation(params);
-      dispatch({ type: GET_LOCATION, payload: response });
+      dispatch({ type: GET_LOCATION, payload: response.data });
       // console.log(response)
     } catch (error) {
       console.log(error);

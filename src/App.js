@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Login, BeforeLogin, Details, Dashboard, AdminPage, AddAccount} from "./pages";
+import { Login, BeforeLogin, Details, Dashboard, AdminPage, LoginAdmin, AddAccount } from "./pages";
 import ProtectedUser from "./protectedUser/protectedUser";
 
 
@@ -10,6 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<BeforeLogin />} />
+        <Route path="/login/admin" element={<LoginAdmin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/addacc" element={<AddAccount />} />

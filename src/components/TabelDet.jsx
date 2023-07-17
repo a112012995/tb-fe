@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {getPasienById} from "../store/actions/pasien"
 
-const itemsPerPage = 10;
+const itemsPerPage = 10; 
 
 const TableDet = () => {
   // const { state } = useLocation();
   // console.log(state.areaId);
+  const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-  const { dataByIdKel } = useSelector((state) => state.pasienReducers);
+  const { dataByIdKel, dataById } = useSelector((state) => state.pasienReducers);
   console.log(dataByIdKel);
 
+
   useEffect(() => {
+    dispatch()
     if (selectedItem) {
       setIsModalOpen(true);
     } else {
@@ -212,14 +216,15 @@ const TableDet = () => {
       {selectedItem && isModalOpen && (
         <div style={modalOverlayStyle}>
           <div style={modalStyle}>
+            <div style={modalHeaderStyle}>
+              <h2 style={modalTitleStyle}>Detail Pasien</h2>
+              <button style={modalCloseStyle} onClick={handleCloseModal}>
+                X
+              </button>
+            </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <table>
-                  <thead>
-                    <tr>
-                      <th>Detail Pasien</th>
-                    </tr>
-                  </thead>
                   <tbody>
                     <tr>
                       <td>Kode Pasien:</td>
@@ -244,10 +249,12 @@ const TableDet = () => {
                   </tbody>
                 </table>
               </div>
-              <div>{/* Tambahkan logic dan tombol aksi tambahan */}</div>
+              <div style={{ justifySelf: "end" }}>
+                {/* Additional logic and action buttons can be added here */}
+              </div>
             </div>
             <div style={modalFooterStyle}>
-              {/* Tambahkan tombol aksi jika diperlukan */}
+              {/* Additional action buttons can be added here */}
             </div>
           </div>
         </div>
@@ -320,10 +327,7 @@ const modalCloseStyle = {
   border: "none",
   background: "transparent",
   fontSize: "16px",
-};
-
-const modalBodyStyle = {
-  marginBottom: "10px",
+  alignSelf: "flex-start",
 };
 
 const modalFooterStyle = {

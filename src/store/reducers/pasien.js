@@ -5,6 +5,8 @@ const initialState = {
   dataById: false,
   dataByIdKel: false,
   totalData: false,
+  tbRecord: false,
+  kelurahan: false,
   loading: true,
 };
 
@@ -23,6 +25,8 @@ const locationReducers = (state = initialState, action) => {
       return {
         ...state,
         dataById: payload.data,
+        tbRecord: payload.data.tb_record,
+        kelurahan: payload.data.kelurahan,
         loading: false,
       };
 

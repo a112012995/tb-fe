@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {getPasienById} from "../store/actions/pasien"
@@ -6,25 +6,12 @@ import {getPasienById} from "../store/actions/pasien"
 const itemsPerPage = 10; 
 
 const TableDet = () => {
-  // const { state } = useLocation();
-  // console.log(state.areaId);
   const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-  const { dataByIdKel, dataById } = useSelector((state) => state.pasienReducers);
-  console.log(dataByIdKel);
-
-
-  useEffect(() => {
-    dispatch()
-    if (selectedItem) {
-      setIsModalOpen(true);
-    } else {
-      setIsModalOpen(false);
-    }
-  }, [selectedItem]);
+  const { dataByIdKel, dataById, tbRecord, kelurahan } = useSelector((state) => state.pasienReducers);
+  // console.log(dataByIdKel);
 
   const totalPages = Math.ceil(dataByIdKel.length / itemsPerPage);
 
@@ -39,8 +26,7 @@ const TableDet = () => {
   };
 
   const handleDetailClick = (itemId) => {
-    const selectedItem = dataByIdKel.find((item) => item.id === itemId);
-    setSelectedItem(selectedItem);
+    dispatch(getPasienById(itemId));
     setIsModalOpen(!isModalOpen);
   };
 
@@ -213,7 +199,7 @@ const TableDet = () => {
           Kembali ke Dashboard
         </button>
       </div>
-      {selectedItem && isModalOpen && (
+      {dataById && isModalOpen && (
         <div style={modalOverlayStyle}>
           <div style={modalStyle}>
             <div style={modalHeaderStyle}>
@@ -228,23 +214,23 @@ const TableDet = () => {
                   <tbody>
                     <tr>
                       <td>Kode Pasien:</td>
-                      <td>{selectedItem.kode_pasien}</td>
+                      <td>{dataById.kode_pasien}</td>
                     </tr>
                     <tr>
                       <td>Umur:</td>
-                      <td>{selectedItem.umur}</td>
+                      <td>{dataById.umur}</td>
                     </tr>
                     <tr>
                       <td>Jenis Kelamin:</td>
-                      <td>{selectedItem.jenis_kelamin}</td>
+                      <td>{dataById.jenis_kelamin}</td>
                     </tr>
                     <tr>
                       <td>Alamat:</td>
-                      <td>{selectedItem.kelurahan.nama_kelurahan}</td>
+                      <td>{kelurahan.nama_kelurahan}</td>
                     </tr>
                     <tr>
                       <td>Pengobatan Terakhir:</td>
-                      <td>{selectedItem.tb_record.hasil_akhir}</td>
+                      <td>{tbRecord.hasil_akhir}</td>
                     </tr>
                   </tbody>
                 </table>

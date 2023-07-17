@@ -186,7 +186,6 @@ const Details = () => {
       </div>
 
       <TableDet />
-      <OrderTerms />
       <Footer />
       {/* Intervensi */}
     </div>

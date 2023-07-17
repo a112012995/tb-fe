@@ -1,16 +1,19 @@
-import React, { useState, } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {getPasienById} from "../store/actions/pasien"
+import { getPasienById } from "../store/actions/pasien";
+import OrderTerms from "./Accordion";
 
-const itemsPerPage = 10; 
+const itemsPerPage = 10;
 
 const TableDet = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-  const { dataByIdKel, dataById, tbRecord, kelurahan } = useSelector((state) => state.pasienReducers);
+  const { dataByIdKel, dataById, tbRecord, kelurahan } = useSelector(
+    (state) => state.pasienReducers
+  );
   // console.log(dataByIdKel);
 
   const totalPages = Math.ceil(dataByIdKel.length / itemsPerPage);
@@ -199,37 +202,180 @@ const TableDet = () => {
           Kembali ke Dashboard
         </button>
       </div>
+      <OrderTerms />
       {dataById && isModalOpen && (
         <div style={modalOverlayStyle}>
           <div style={modalStyle}>
-            <div style={modalHeaderStyle}>
+            <div className="bg-[#030C5A]" style={modalHeaderStyle}>
               <h2 style={modalTitleStyle}>Detail Pasien</h2>
               <button style={modalCloseStyle} onClick={handleCloseModal}>
                 X
               </button>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
+            <div>
+              <div className="p-5">
                 <table>
-                  <tbody>
-                    <tr>
-                      <td>Kode Pasien:</td>
-                      <td>{dataById.kode_pasien}</td>
+                  <tbody className="align-baseline">
+                    <tr
+                      style={{
+                        borderBottom: "1px solid #ddd",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                      }}
+                    >
+                      <td style={{ paddingRight: "30px" }}>Kode Pasien</td>
+                      <td>:</td>
+                      <td>{tbRecord.kode_pasien}</td>
                     </tr>
-                    <tr>
-                      <td>Umur:</td>
-                      <td>{dataById.umur}</td>
+                    <tr
+                      style={{
+                        borderBottom: "1px solid #ddd",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                      }}
+                    >
+                      <td style={{ paddingRight: "30px" }}>Kode Fasyankes</td>
+                      <td>:</td>
+                      <td>{tbRecord.kode_fasyankes}</td>
                     </tr>
-                    <tr>
-                      <td>Jenis Kelamin:</td>
-                      <td>{dataById.jenis_kelamin}</td>
+                    <tr
+                      style={{
+                        borderBottom: "1px solid #ddd",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                      }}
+                    >
+                      <td style={{ paddingRight: "30px" }}>Tahun</td>
+                      <td>:</td>
+                      <td>{tbRecord.tahun}</td>
                     </tr>
-                    <tr>
-                      <td>Alamat:</td>
-                      <td>{kelurahan.nama_kelurahan}</td>
+                    <tr
+                      style={{
+                        borderBottom: "1px solid #ddd",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                      }}
+                    >
+                      <td style={{ paddingRight: "30px" }}>Bulan</td>
+                      <td>:</td>
+                      <td>{tbRecord.bulan}</td>
                     </tr>
-                    <tr>
-                      <td>Pengobatan Terakhir:</td>
+                    <tr
+                      style={{
+                        borderBottom: "1px solid #ddd",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                      }}
+                    >
+                      <td style={{ paddingRight: "30px" }}>Tipe Diagnosis</td>
+                      <td>:</td>
+                      <td>{tbRecord.tipe_diagnosis}</td>
+                    </tr>
+                    <tr
+                      style={{
+                        borderBottom: "1px solid #ddd",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                      }}
+                    >
+                      <td style={{ paddingRight: "30px" }}>Anatomi TBC</td>
+                      <td>:</td>
+                      <td>{tbRecord.anatomi_tb}</td>
+                    </tr>
+                    <tr
+                      style={{
+                        borderBottom: "1px solid #ddd",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                      }}
+                    >
+                      <td style={{ paddingRight: "30px" }}>Riwayat TBC</td>
+                      <td>:</td>
+                      <td>{tbRecord.riwayat_tb}</td>
+                    </tr>
+                    <tr
+                      style={{
+                        borderBottom: "1px solid #ddd",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                      }}
+                    >
+                      <td style={{ paddingRight: "30px" }}>
+                        Riwayat Diabetes Melitus
+                      </td>
+                      <td>:</td>
+                      <td>{tbRecord.riwayat_dm}</td>
+                    </tr>
+                    <tr
+                      style={{
+                        borderBottom: "1px solid #ddd",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                      }}
+                    >
+                      <td style={{ paddingRight: "30px" }}>Riwayat HIV</td>
+                      <td>:</td>
+                      <td>{tbRecord.hiv}</td>
+                    </tr>
+                    <tr
+                      style={{
+                        borderBottom: "1px solid #ddd",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                      }}
+                    >
+                      <td style={{ paddingRight: "30px" }}>Panduan Obat</td>
+                      <td>:</td>
+                      <td>{tbRecord.panduan_oat}</td>
+                    </tr>
+                    <tr
+                      style={{
+                        borderBottom: "1px solid #ddd",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                      }}
+                    >
+                      <td style={{ paddingRight: "30px" }}>Sumber Obat</td>
+                      <td>:</td>
+                      <td>{tbRecord.sumber_obat}</td>
+                    </tr>
+                    <tr
+                      style={{
+                        borderBottom: "1px solid #ddd",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                      }}
+                    >
+                      <td style={{ paddingRight: "30px" }}>
+                        Status Pengobatan
+                      </td>
+                      <td>:</td>
+                      <td>{tbRecord.status_pengobatan}</td>
+                    </tr>
+                    <tr
+                      style={{
+                        borderBottom: "1px solid #ddd",
+                        borderTop: "none",
+                        borderLeft: "none",
+                        borderRight: "none",
+                      }}
+                    >
+                      <td style={{ paddingRight: "30px" }}>
+                        Pengobatan Terakhir
+                      </td>
+                      <td>:</td>
                       <td>{tbRecord.hasil_akhir}</td>
                     </tr>
                   </tbody>
@@ -292,9 +438,10 @@ const modalOverlayStyle = {
 const modalStyle = {
   position: "relative",
   backgroundColor: "white",
-  padding: "20px",
+
   borderRadius: "5px",
-  maxWidth: "500px",
+  maxWidth: "100%",
+  color: "black",
 };
 
 const modalHeaderStyle = {
@@ -302,10 +449,12 @@ const modalHeaderStyle = {
   justifyContent: "space-between",
   alignItems: "center",
   marginBottom: "10px",
+  color: "white",
 };
 
 const modalTitleStyle = {
   fontSize: "18px",
+  padding: "20px",
 };
 
 const modalCloseStyle = {
@@ -314,6 +463,7 @@ const modalCloseStyle = {
   background: "transparent",
   fontSize: "16px",
   alignSelf: "flex-start",
+  padding: "10px",
 };
 
 const modalFooterStyle = {

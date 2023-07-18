@@ -1,104 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-import iconGrafik from '../assets/icon-grafik.png';
-
-const apidata = {
-	status: 'OK',
-	message: 'Success',
-	data: [
-		{
-			tahun: 2016,
-			total: 2571,
-		},
-		{
-			tahun: 2017,
-			total: 3295,
-		},
-		{
-			tahun: 2018,
-			total: 3492,
-		},
-		{
-			tahun: 2019,
-			total: 133,
-		},
-		{
-			tahun: 2020,
-			total: 1898,
-		},
-		{
-			tahun: 2021,
-			total: 1109,
-		},
-		{
-			tahun: 2022,
-			total: 4834,
-		},
-		{
-			tahun: 2023,
-			total: 1367,
-		},
-	],
-};
+import React, { useState, useEffect } from "react";
+import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from "recharts";
+import iconGrafik from "../assets/icon-grafik.png";
+import { useDispatch, useSelector } from "react-redux";
+// import { getPasien } from "../store/actions/pasien";
+import { getLocation } from "../store/actions/location";
 
 const LineGraph = () => {
-	const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
+  const dispatch = useDispatch();
 
-	// useEffect(() => {
-	//   fetch("http://127.0.0.1:8000/total")
-	//     .then((response) => response.json())
-	//     .then((data) => setData(data.data))
-	//     .catch((error) => console.error("Error fetching data:", error));
-	// }, []);
+  useEffect(() => {
+    dispatch(getLocation());
+  }, [dispatch]);
 
-	return (
-		<div className="flex gap-20">
-			<div className="card bg-white drop-shadow-lg">
-				<div className="card-body">
-					<LineChart width={800} height={400} data={apidata.data} margin={{ top: 30, right: 30, left: 20, bottom: 10 }}>
-						<Line type="monotone" dataKey="total" stroke="#2196F3" />
-						<CartesianGrid stroke="#ccc" />
-						<XAxis dataKey="tahun" />
-						<YAxis />
-						<Tooltip />
-						<Legend />
-					</LineChart>
-				</div>
-			</div>
-			<div className="card bg-white drop-shadow-lg w-full">
-				<div className="card-body ">
-					<div className="flex gap-1">
-						<img src={iconGrafik} alt="icon-grafik" className="w-6 h-6" />
-						<p>Grafik</p>
-					</div>
-					<select className="select select-info bg-[#F6F6F6] font-normal">
-						<option disabled selected>
-							Jumlah Kasus
-						</option>
-						<option>English</option>
-						<option>Japanese</option>
-						<option>Italian</option>
-					</select>
-					<select className="select select-info bg-[#F6F6F6] font-normal">
-						<option disabled selected>
-							Angka Kesembuhan
-						</option>
-						<option>English</option>
-						<option>Japanese</option>
-						<option>Italian</option>
-					</select>
-					<select className="select select-info bg-[#F6F6F6] font-normal">
-						<option disabled selected>
-							Angka Kematian
-						</option>
-						<option>English</option>
-						<option>Japanese</option>
-						<option>Italian</option>
-					</select>
-				</div>
-			</div>
-		</div>
-	);
+  const { data } = useSelector((state) => state.locationReducers);
+  console.log(data);
+
+  return (
+    <div className="flex gap-20">
+      <div className="card bg-white drop-shadow-lg">
+        <div className="card-body">
+          <BarChart width={730} height={250} data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="nama_kelurahan" tick={{ fontSize: 8 }} angle={-90} textAnchor="end" interval={0} />
+            <YAxis dataKey="jumlah_pasien" />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="jumlah_pasien" fill="#8884d8" />
+            {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
+          </BarChart>
+        </div>
+      </div>
+      <div className="card bg-white drop-shadow-lg w-full">
+        <div className="card-body ">
+          <div className="flex gap-1">
+            <img src={iconGrafik} alt="icon-grafik" className="w-6 h-6" />
+            <p>Grafik</p>
+          </div>
+          <select className="select select-info bg-[#F6F6F6] font-normal">
+            <option disabled selected>
+              Jumlah Kasus
+            </option>
+            <option>English</option>
+            <option>Japanese</option>
+            <option>Italian</option>
+          </select>
+          <select className="select select-info bg-[#F6F6F6] font-normal">
+            <option disabled selected>
+              Angka Kesembuhan
+            </option>
+            <option>English</option>
+            <option>Japanese</option>
+            <option>Italian</option>
+          </select>
+          <select className="select select-info bg-[#F6F6F6] font-normal">
+            <option disabled selected>
+              Angka Kematian
+            </option>
+            <option>English</option>
+            <option>Japanese</option>
+            <option>Italian</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default LineGraph;

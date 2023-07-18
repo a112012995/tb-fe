@@ -10,7 +10,7 @@ const initialState = {
   loading: true,
 };
 
-const locationReducers = (state = initialState, action) => {
+const pasienReducers = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -42,4 +42,4 @@ const locationReducers = (state = initialState, action) => {
   }
 };
 
-export default locationReducers;
+export default pasienReducers;

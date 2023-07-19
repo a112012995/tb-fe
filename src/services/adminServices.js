@@ -21,15 +21,15 @@ const AdminService = {
 		}
 	},
 
-	// getAirportById: async function (id) {
-	// 	try {
-	// 		const response = await API.get(`/api/airport/${id}`);
-	// 		return response;
-	// 	} catch (err) {
-	// 		console.log('Airport service error', err);
-	// 		throw err;
-	// 	}
-	// },
+	getUserById: async function (id) {
+		try {
+			const response = await API.get(`/api/admin/getUser/${id}`);
+			return response;
+		} catch (err) {
+			console.log(err);
+			throw err;
+		}
+	},
 
 	updateUser: async function (id, data) {
 		try {

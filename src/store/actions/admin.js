@@ -5,30 +5,31 @@ export const getAllUser = (params, history) =>
 	async function (dispatch) {
 		try {
 			const response = await AdminService.getAllUser(params);
-			dispatch({ type: GET_ALL_USER, payload: response });
+			dispatch({ type: GET_ALL_USER, payload: response.data });
 		} catch (error) {
 			console.log(error);
 			throw error;
 		}
 	};
-// export const getAirportById = (id) =>
-// 	async function (dispatch) {
-// 		try {
-// 			const response = await AdminService.getAirportById(id);
-// 			console.log(response);
-// 			dispatch({ type: GET_AIRPORT_ID, payload: response.data });
-// 			return response;
-// 		} catch (error) {
-// 			console.log(error);
-// 			throw error;
-// 		}
-// 	};
+export const getUserById = (id) =>
+	async function (dispatch) {
+		try {
+			const response = await AdminService.getUserById(id);
+			console.log(response);
+			dispatch({ type: GET_USER_BY_ID, payload: response.data });
+			return response;
+		} catch (error) {
+			console.log(error);
+			throw error;
+		}
+	};
 
 export const createUser = (params, history) =>
 	async function (dispatch) {
 		try {
-			const response = await AdminService.createUser(params);
+			const response = await AdminService.createUser(params, history);
 			dispatch({ type: CREATE_USER, payload: response.data });
+			history("/admin")
 			return;
 		} catch (error) {
 			console.log(error);

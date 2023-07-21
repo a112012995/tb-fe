@@ -1,4 +1,5 @@
 export const LOGIN = "LOGIN"
+export const LOGIN_ADMIN = "LOGIN_ADMIN"
 export const LOGOUT = "LOGOUT"
 
 export const GET_LOCATION = "GET_LOCATION"

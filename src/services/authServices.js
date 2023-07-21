@@ -14,6 +14,21 @@ const AuthService = {
       throw err;
     }
   },
+
+  loginAdmin: async (data) => {
+    try {
+      const response = await API.post("/api/auth/login/admin", data);
+      API.defaults.headers[
+        "Authorization"
+      ] = `Bearer ${response.data.data.accessToken}`;
+      setHeadersAndStorage(response.data.data);
+      return response;
+    } catch (err) {
+      console.log("Auth service error", err);
+      throw err;
+    }
+  },
+
   logout: () => {
     API.defaults.headers["Authorization"] = "";
     localStorage.removeItem("accessToken");

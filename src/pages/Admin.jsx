@@ -5,13 +5,7 @@ import Footer from "../components/Footer";
 import { getAllUser, deleteUser } from "../store/actions/admin";
 import { logout } from "../store/actions/auth";
 
-// const data = [
-// 	{ No: 1, Username: 'Perawat' },
-// 	{ No: 2, Username: 'EPID' },
-// 	{ No: 3, Username: 'Petugas Lab' },
-// ];
-
-const itemsPerPage = 10;
+const itemsPerPage = 5;
 const AdminPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,20 +25,32 @@ const AdminPage = () => {
     }); // Ganti "/admin" dengan path halaman admin yang sesuai
   };
 
-  // const handleDeleteUser = (userNo) => {
-  // 	// Menghapus pengguna dari array dan mengupdate state users
-  // 	setUsers((prevUsers) => prevUsers.filter((user) => user.No !== userNo));
-  // };
+  const [clickedArrow, setClickedArrow] = useState(null);
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+  const navigateToPreviousPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+    setClickedArrow("previous");
+  };
+
+  const navigateToNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+    setClickedArrow("next");
+  };
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  // const currentData = data.slice(startIndex, endIndex);
+  const currentData = data?.user?.slice(startIndex, endIndex);
+  const totalPages = Math.ceil((data?.user?.length || 0) / itemsPerPage);
+  const pageNumbers = Array.from(
+    { length: totalPages },
+    (_, index) => index + 1
+  );
 
   const redirectToAddPage = () => {
-    navigate("/addacc"); // Ganti "/admin" dengan path halaman admin yang sesuai
+    navigate("/addacc");
   };
 
   const handleDeleteUser = (userId) => {
@@ -54,93 +60,151 @@ const AdminPage = () => {
 
   return (
     <div className="relative bg-white">
-      <div className="px-20 pt-12 pb-9 bg-[#213555] text-white">
-        <div className="navbar ">
-          <div className="navbar-start">
-            <div className="flex items-center">
-              <div>
-                <img src="/logo_dkk.png" alt="logo" className="w-28 h-24" />
-              </div>
-              <div className="flex-col">
-                <div className="font-semibold text-2xl">SDKPT</div>
-                <div className="font-semibold text-2xl">Kota Semarang</div>
+      <div>
+        <div className="px-20 pt-12 pb-9 bg-[#213555] text-white">
+          <div className="navbar ">
+            <div className="navbar-start">
+              <div className="flex items-center">
+                <div>
+                  <img src="/logo_dkk.png" alt="logo" className="w-28 h-24" />
+                </div>
+                <div className="flex-col">
+                  <div className="font-semibold text-2xl">SDKPT</div>
+                  <div className="font-semibold text-2xl">Kota Semarang</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="navbar-end gap-12">
-		  <button>
-            <div
-              onClick={() => dispatch(logout(navigate))}
-              className="text-2xl font-semibold scroll-smooth"
-            >
-              Logout
+            <div className="navbar-end gap-12">
+              <button>
+                <div
+                  onClick={() => dispatch(logout(navigate))}
+                  className="text-2xl font-semibold scroll-smooth"
+                >
+                  Logout
+                </div>
+              </button>
             </div>
-          </button>
           </div>
         </div>
-      </div>
-      <div className="flex mt-20 mx-64">
-        <button
-          onClick={redirectToAddPage}
-          className="btn text-white bg-[#35B438] border-[#35B438]"
-        >
-          Tambahkan Akun
-        </button>
-      </div>
-      <div className="flex justify-center mt-6 mb-5">
-        <table style={{ borderCollapse: "collapse", width: "1000px" }}>
-          <thead>
-            <tr className="text-white" style={{ backgroundColor: "#030C5A" }}>
-              <th style={tableHeaderStyle}>No</th>
-              <th style={tableHeaderStyle}>Username</th>
-              <th style={tableHeaderStyle}>Aksi</th>
-            </tr>
-          </thead>
-          <tbody className="text-black">
-            {data &&
-              data.user?.map((user, no) => (
-                <tr key={user.id}>
-                  <td style={tableDataStyle}>{no + 1}</td>
-                  <td style={tableDataStyle}>{user.username}</td>
-                  <td style={tableDataStyle}>
-                    <button
-                      className="bg-[#35B438] text-white mr-3"
-                      onClick={() => GoEdit(user.id)}
-                      style={{
-                        width: "40px",
-                        height: "25px",
-                        fontSize: "13px",
-                        borderRadius: "10px",
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="bg-[#35B438] text-white"
-                      style={{
-                        width: "50px",
-                        height: "25px",
-                        fontSize: "13px",
-                        borderRadius: "10px",
-                      }}
-                      onClick={() => handleDeleteUser(user.id)}
-                    >
-                      Hapus
-                    </button>
-                  </td>
+        <div className="flex mt-20 mx-64">
+          <button
+            onClick={redirectToAddPage}
+            className="btn text-white bg-[#35B438] border-[#35B438]"
+          >
+            Tambahkan Akun
+          </button>
+        </div>
+        <div className="flex justify-center mt-6 mb-5">
+          <div className="flex flex-col">
+            <table style={{ borderCollapse: "collapse", width: "1000px" }}>
+              <thead>
+                <tr
+                  className="text-white"
+                  style={{ backgroundColor: "#030C5A" }}
+                >
+                  <th style={tableHeaderStyle}>No</th>
+                  <th style={tableHeaderStyle}>Username</th>
+                  <th style={tableHeaderStyle}>Aksi</th>
                 </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="text-black mb-10" style={paginationStyle}>
-        {/* <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} style={buttonStyle}>
-					&lt;
-				</button>
+              </thead>
+              <tbody className="text-black">
+                {currentData && currentData.length > 0 ? (
+                  currentData.map((user, index) => (
+                    <tr key={user.id}>
+                      <td style={tableDataStyle}>{startIndex + index + 1}</td>
+                      <td style={tableDataStyle}>{user.username}</td>
+                      <td style={tableDataStyle}>
+                        <button
+                          className="bg-[#35B438] text-white mr-3"
+                          onClick={() => GoEdit(user.id)}
+                          style={{
+                            width: "40px",
+                            height: "25px",
+                            fontSize: "13px",
+                            borderRadius: "10px",
+                          }}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="bg-[#35B438] text-white"
+                          style={{
+                            width: "50px",
+                            height: "25px",
+                            fontSize: "13px",
+                            borderRadius: "10px",
+                          }}
+                          onClick={() => handleDeleteUser(user.id)}
+                        >
+                          Hapus
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={3} style={tableDataStyle}>
+                      No data available.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+            <div className="flex justify-end text-black mb-5" style={paginationStyle}>
+              {/* Render previous page arrow */}
+              <button
+                onClick={navigateToPreviousPage}
+                style={{
+                  ...buttonStyle,
+                  backgroundColor:
+                    clickedArrow === "previous" && currentPage !== 1
+                      ? "transparent"
+                      : currentPage === 1
+                      ? "gray"
+                      : "white",
+                  color: currentPage === 1 ? "white" : "blue",
+                }}
+                disabled={currentPage === 1}
+              >
+                {"<"}
+              </button>
 
-				<button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === Math.ceil(data.length / itemsPerPage)} style={buttonStyle}>
-					&gt;
-				</button> */}
+              {/* Render pagination buttons */}
+              {pageNumbers.map((pageNumber) => (
+                <button
+                  key={pageNumber}
+                  onClick={() => handlePageChange(pageNumber)}
+                  style={{
+                    ...buttonStyle,
+                    backgroundColor:
+                      pageNumber === currentPage ? "blue" : "white",
+                    color: pageNumber === currentPage ? "white" : "blue",
+                  }}
+                >
+                  {pageNumber}
+                </button>
+              ))}
+
+              {/* Render next page arrow */}
+              <button
+                onClick={navigateToNextPage}
+                style={{
+                  ...buttonStyle,
+                  backgroundColor:
+                    clickedArrow === "next" && currentPage !== totalPages
+                      ? "transparent"
+                      : currentPage === totalPages
+                      ? "gray"
+                      : "white",
+                  color: currentPage === totalPages ? "white" : "blue",
+                }}
+                disabled={currentPage === totalPages}
+              >
+                {">"}
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div>
@@ -164,9 +228,6 @@ const tableDataStyle = {
 
 const paginationStyle = {
   display: "flex",
-  justifyContent: "flex-end",
-  marginTop: "10px",
-  marginRight: "170px",
 };
 
 // Gaya untuk tombol pagination

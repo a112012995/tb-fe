@@ -14,10 +14,24 @@ const Details = () => {
   const history = useNavigate();
   useEffect(() => {
     dispatch(getLocationById(state.areaId));
-	dispatch(getPasienByIdKel(state.areaId));
+    dispatch(getPasienByIdKel(state.areaId));
   }, [dispatch, state]);
   const { dataById, totalPas } = useSelector((state) => state.locationReducers);
-  // console.log(totalPas);
+  const { dataByIdKel } = useSelector((state) => state.pasienReducers);
+  let sembuh = {};
+  let gagal = {}
+  let meninggal ={}
+  if (dataByIdKel) {
+    sembuh = dataByIdKel.filter(
+      (data) => data.tb_record.hasil_akhir === "Pengobatan Lengkap/Sembuh"
+    );
+    gagal = dataByIdKel.filter(
+      (data) => data.tb_record.hasil_akhir === "Gagal"
+    );
+    meninggal = dataByIdKel.filter(
+      (data) => data.tb_record.hasil_akhir === "Meninggal"
+    );
+  }
   return (
     <div className="bg-[#F6F6F6] m-auto items-center justify-center max-w-screen min-h-screen">
       {/* Navbar */}
@@ -100,7 +114,7 @@ const Details = () => {
                   <div className="flex">
                     <div className="flex-col text-center  pt-2">
                       <div className="stat-value text-black font-bold text-5xl">
-                        80
+                        {sembuh.length}
                       </div>
                       <div className="stat-title text-black text-lg">
                         Pasien Sembuh
@@ -128,7 +142,7 @@ const Details = () => {
                   <div className="flex">
                     <div className="flex-col text-center  pt-2">
                       <div className="stat-value text-black font-bold text-5xl">
-                        20
+                        {gagal.length}
                       </div>
                       <div className="stat-title text-black text-lg">
                         Pengobatan Gagal
@@ -156,7 +170,7 @@ const Details = () => {
                   <div className="flex">
                     <div className="flex-col text-center  pt-2">
                       <div className="stat-value text-black font-bold text-5xl">
-                        40
+                        {meninggal.length}
                       </div>
                       <div className="stat-title text-black text-lg">
                         Pasien Meninggal

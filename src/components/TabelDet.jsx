@@ -11,7 +11,7 @@ const TableDet = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-  const { dataByIdKel, dataById, tbRecord, kelurahan } = useSelector(
+  const { dataByIdKel, dataById, fasyankes, } = useSelector(
     (state) => state.pasienReducers
   );
   // console.log(dataByIdKel);
@@ -143,7 +143,7 @@ const TableDet = () => {
                     <td style={tableDataStyle}>
                       {item.kelurahan.nama_kelurahan}
                     </td>
-                    <td style={tableDataStyle}>{item.tb_record.hasil_akhir}</td>
+                    <td style={tableDataStyle}>{item.hasil_akhir}</td>
                     <td style={tableDataStyle}>
                       <button
                         className="bg-[#35B438] text-white"
@@ -226,7 +226,7 @@ const TableDet = () => {
                     >
                       <td style={{ paddingRight: "30px" }}>Kode Pasien</td>
                       <td>:</td>
-                      <td>{tbRecord.kode_pasien}</td>
+                      <td>{dataById.kode_pasien}</td>
                     </tr>
                     <tr
                       style={{
@@ -238,7 +238,7 @@ const TableDet = () => {
                     >
                       <td style={{ paddingRight: "30px" }}>Kode Fasyankes</td>
                       <td>:</td>
-                      <td>{tbRecord.kode_fasyankes}</td>
+                      <td>{fasyankes.kode_fasyankes}</td>
                     </tr>
                     <tr
                       style={{
@@ -250,7 +250,7 @@ const TableDet = () => {
                     >
                       <td style={{ paddingRight: "30px" }}>Tahun</td>
                       <td>:</td>
-                      <td>{tbRecord.tahun}</td>
+                      <td>{dataById.tahun}</td>
                     </tr>
                     <tr
                       style={{
@@ -262,7 +262,7 @@ const TableDet = () => {
                     >
                       <td style={{ paddingRight: "30px" }}>Bulan</td>
                       <td>:</td>
-                      <td>{tbRecord.bulan}</td>
+                      <td>{dataById.bulan}</td>
                     </tr>
                     <tr
                       style={{
@@ -274,7 +274,7 @@ const TableDet = () => {
                     >
                       <td style={{ paddingRight: "30px" }}>Tipe Diagnosis</td>
                       <td>:</td>
-                      <td>{tbRecord.tipe_diagnosis}</td>
+                      <td>{dataById.tipe_diagnosis}</td>
                     </tr>
                     <tr
                       style={{
@@ -286,7 +286,7 @@ const TableDet = () => {
                     >
                       <td style={{ paddingRight: "30px" }}>Anatomi TBC</td>
                       <td>:</td>
-                      <td>{tbRecord.anatomi_tb}</td>
+                      <td>{dataById.anatomi_tb}</td>
                     </tr>
                     <tr
                       style={{
@@ -298,7 +298,7 @@ const TableDet = () => {
                     >
                       <td style={{ paddingRight: "30px" }}>Riwayat TBC</td>
                       <td>:</td>
-                      <td>{tbRecord.riwayat_tb}</td>
+                      <td>{dataById.riwayat_tb}</td>
                     </tr>
                     <tr
                       style={{
@@ -312,7 +312,7 @@ const TableDet = () => {
                         Riwayat Diabetes Melitus
                       </td>
                       <td>:</td>
-                      <td>{tbRecord.riwayat_dm}</td>
+                      <td>{dataById.riwayat_dm}</td>
                     </tr>
                     <tr
                       style={{
@@ -324,7 +324,7 @@ const TableDet = () => {
                     >
                       <td style={{ paddingRight: "30px" }}>Riwayat HIV</td>
                       <td>:</td>
-                      <td>{tbRecord.hiv}</td>
+                      <td>{dataById.riwayat_hiv}</td>
                     </tr>
                     <tr
                       style={{
@@ -336,7 +336,7 @@ const TableDet = () => {
                     >
                       <td style={{ paddingRight: "30px" }}>Panduan Obat</td>
                       <td>:</td>
-                      <td>{tbRecord.panduan_oat}</td>
+                      <td>{dataById.panduan_oat}</td>
                     </tr>
                     <tr
                       style={{
@@ -348,7 +348,7 @@ const TableDet = () => {
                     >
                       <td style={{ paddingRight: "30px" }}>Sumber Obat</td>
                       <td>:</td>
-                      <td>{tbRecord.sumber_obat}</td>
+                      <td>{dataById.sumber_obat}</td>
                     </tr>
                     <tr
                       style={{
@@ -362,7 +362,7 @@ const TableDet = () => {
                         Status Pengobatan
                       </td>
                       <td>:</td>
-                      <td>{tbRecord.status_pengobatan}</td>
+                      <td>{dataById.status_pengobatan}</td>
                     </tr>
                     <tr
                       style={{
@@ -376,7 +376,7 @@ const TableDet = () => {
                         Pengobatan Terakhir
                       </td>
                       <td>:</td>
-                      <td>{tbRecord.hasil_akhir}</td>
+                      <td>{dataById.hasil_akhir}</td>
                     </tr>
                   </tbody>
                 </table>

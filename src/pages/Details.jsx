@@ -18,18 +18,19 @@ const Details = () => {
   }, [dispatch, state]);
   const { dataById, totalPas } = useSelector((state) => state.locationReducers);
   const { dataByIdKel } = useSelector((state) => state.pasienReducers);
+  console.log(dataByIdKel)
   let sembuh = {};
   let gagal = {}
   let meninggal ={}
   if (dataByIdKel) {
     sembuh = dataByIdKel.filter(
-      (data) => data.tb_record.hasil_akhir === "Pengobatan Lengkap/Sembuh"
+      (data) => data.hasil_akhir === "Sembuh"
     );
     gagal = dataByIdKel.filter(
-      (data) => data.tb_record.hasil_akhir === "Gagal"
+      (data) => data.hasil_akhir === "Gagal"
     );
     meninggal = dataByIdKel.filter(
-      (data) => data.tb_record.hasil_akhir === "Meninggal"
+      (data) => data.hasil_akhir === "Meninggal"
     );
   }
   return (

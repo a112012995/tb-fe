@@ -22,7 +22,7 @@ const locationReducers = (state = initialState, action) => {
       return {
         ...state,
         dataById: payload.data,
-        totalPas:payload.data.pasiens.length,
+        totalPas:payload.data.pasienbs.length,
         loading: false,
         pasien:payload.data.pasiens
       };

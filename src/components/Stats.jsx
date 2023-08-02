@@ -17,7 +17,7 @@ const Stats = () => {
   );
   // console.log(data);
   const newData = data.filter(
-    (data) => data.hasil_akhir === "Pengobatan Lengkap/Sembuh"
+    (data) => data.hasil_akhir === "Sembuh"
   );
   const sembuh = newData.length;
   const persen = (sembuh / totalData) * 100;

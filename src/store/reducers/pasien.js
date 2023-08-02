@@ -5,7 +5,7 @@ const initialState = {
   dataById: false,
   dataByIdKel: false,
   totalData: false,
-  tbRecord: false,
+  fasyankes: false,
   kelurahan: false,
   loading: true,
 };
@@ -25,7 +25,7 @@ const pasienReducers = (state = initialState, action) => {
       return {
         ...state,
         dataById: payload.data,
-        tbRecord: payload.data.tb_record,
+        fasyankes: payload.data.fasyanke,
         kelurahan: payload.data.kelurahan,
         loading: false,
       };

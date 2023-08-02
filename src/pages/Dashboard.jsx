@@ -56,7 +56,7 @@ const Dashboard = () => {
 					</p>
 				</div>
 				<div className="mt-2 text-[#4F709C]">
-					<a href="https://bit.ly/Dashboard_TB1" target="_blank" rel="noopener noreferrer">
+					<a href="https://bit.ly/Dashboard_TBNEW" target="_blank" rel="noopener noreferrer">
 						<u>*Klik disini untuk melihat visualisasi datail</u>
 					</a>
 				</div>

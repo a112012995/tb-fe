@@ -4,10 +4,15 @@ export const LOGOUT = "LOGOUT"
 
 export const GET_LOCATION = "GET_LOCATION"
 export const GET_LOCATION_BY_ID = "GET_LOCATION_BY_ID"
+export const GET_KELURAHAN = "GET_KELURAHAN"
+export const GET_KELURAHAN_BY_ID = "GET_KELUIRAHAN_BY_ID"
+export const GET_FASKES = "GET_FASKES"
+export const GET_FASKES_BY_ID = "GET_FASKES_BY_ID"
 
 export const GET_PASIEN = "GET_PASIEN"
 export const GET_PASIEN_BY_ID = "GET_PASIEN_BY_ID"
 export const GET_PASIEN_BY_ID_KEL = "GET_PASIEN_BY_ID_KEL"
+export const FILTER_PASIEN = "FILTER_PASIEN"
 
 export const GET_TAHUN = "GET_TAHUN"; 
 

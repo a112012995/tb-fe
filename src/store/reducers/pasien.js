@@ -1,4 +1,4 @@
-import { GET_PASIEN, GET_PASIEN_BY_ID, GET_PASIEN_BY_ID_KEL } from "../types";
+import { FILTER_PASIEN, GET_PASIEN, GET_PASIEN_BY_ID, GET_PASIEN_BY_ID_KEL } from "../types";
 
 const initialState = {
   data: [],
@@ -34,6 +34,14 @@ const pasienReducers = (state = initialState, action) => {
       return {
         ...state,
         dataByIdKel: payload.data,
+        loading: false,
+      };
+
+      case FILTER_PASIEN:
+      return {
+        ...state,
+        data: payload.data.data,
+        // totalData: payload.data.totalData,
         loading: false,
       };
 

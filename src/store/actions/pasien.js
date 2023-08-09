@@ -1,5 +1,5 @@
 import PasienService from "../../services/pasienService";
-import { GET_PASIEN, GET_PASIEN_BY_ID, GET_PASIEN_BY_ID_KEL } from "../types";
+import { FILTER_PASIEN, GET_PASIEN, GET_PASIEN_BY_ID, GET_PASIEN_BY_ID_KEL } from "../types";
 
 export const getPasien = (params, history) =>
   async function (dispatch) {
@@ -26,7 +26,7 @@ export const getPasienById = (id) =>
     }
   };
 
-  export const getPasienByIdKel = (id) =>
+export const getPasienByIdKel = (id) =>
   async function (dispatch) {
     try {
       const response = await PasienService.getPasienByIdKel(id);
@@ -38,3 +38,15 @@ export const getPasienById = (id) =>
       throw error;
     }
   };
+
+export const filterPasien = (params) => 
+async function (dispatch) {
+  try {
+    const response = await PasienService.filterPasien(params)
+    dispatch({type: FILTER_PASIEN, payload: response})
+    console.log(response)
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}

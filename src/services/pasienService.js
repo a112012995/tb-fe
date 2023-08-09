@@ -31,6 +31,18 @@ const PasienService = {
       throw err;
     }
   },
+
+  filterPasien: async function (data) {
+    try {
+      const response = await API.get('/api/pasien/filter', {
+        params: {...data}
+      })
+      return response
+    } catch (err) {
+      console.log("filter pasien API Error", err)
+      throw err
+    }
+  }
 }
 
 export default PasienService

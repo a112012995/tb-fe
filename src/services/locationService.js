@@ -21,6 +21,48 @@ const LocationService = {
       throw err;
     }
   },
-}
 
-export default LocationService
+  getKelurahan: async function (data) {
+    try {
+      const response = await API.get("/api/kelurahan", data);
+      // console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  },
+
+  getKelurahanById: async function (id) {
+    try {
+      const response = await API.get(`/api/kelurahan/${id}`);
+      return response;
+    } catch (err) {
+      console.log("location service error", err);
+      throw err;
+    }
+  },
+
+  getFaskes: async function (data) {
+    try {
+      const response = await API.get("/api/faskes", data);
+      // console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  },
+
+  getFaskesById: async function (id) {
+    try {
+      const response = await API.get(`/api/faskes/${id}`);
+      return response;
+    } catch (err) {
+      console.log("location service error", err);
+      throw err;
+    }
+  },
+};
+
+export default LocationService;

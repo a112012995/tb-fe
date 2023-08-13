@@ -1,5 +1,5 @@
 import React from "react";
-import serviceImg from "../assets/icon1.png";
+import serviceImg from "../assets/serviceImg.png";
 import serviceVec from "../assets/serviceVec.svg";
 
 const Service = () => {

@@ -43,7 +43,7 @@ const Artikel = () => {
 				</a>
 			</div>
 			<a href="https://tbindonesia.or.id/category/artikel/" target="_blank">
-				<button className="px-5 py-[10px] bg-[#5CB85F] flex flex-row rounded-[25px] text-lg font-light text-white">
+				<button className="px-5 py-[10px] bg-[#3D5A80] flex flex-row rounded-[25px] text-lg font-light text-white">
 					Artikel Lainnya
 					<img src={arrow} className="mt-[6px] w-[18px] ml-4" alt="" />
 				</button>

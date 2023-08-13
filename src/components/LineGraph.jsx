@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import { Button, Collapse, Form, Select } from 'antd';
 import iconGrafik from '../assets/icon-grafik.png';
+import iconsSearch from '../assets/search-icons.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPasien } from '../store/actions/pasien';
 import { getFaskes, getKelurahan, getLocation } from '../store/actions/location';
@@ -64,23 +65,23 @@ const LineGraph = () => {
 
 	//yang dipake di antd
 	const itemsAccordion = [
-		// {
-		// 	key: '1',
-		// 	label: <div className="text-white">Tahun</div>,
-		// 	children: (
-		// 		<Select
-		// 			placeholder="Pilih Tahun"
-		// 			optionFilterProp="children"
-		// 			className="w-full"
-		// 			options={[
-		// 				{ value: '2021', label: '2021' },
-		// 				{ value: '2022', label: '2022' },
-		// 				{ value: '2023', label: '2023' },
-		// 			]}
-		// 		/>
-		// 	),
-		// 	showArrow: false,
-		// },
+		{
+			key: '1',
+			label: <div className="text-white">Tahun</div>,
+			children: (
+				<Select
+					placeholder=<div className="text-black">Pilih Tahun</div>
+					optionFilterProp="children"
+					className="w-full"
+					options={[
+						{ value: '2021', label: '2021' },
+						{ value: '2022', label: '2022' },
+						{ value: '2023', label: '2023' },
+					]}
+				/>
+			),
+			showArrow: false,
+		},
 		{
 			key: '2',
 			label: <div className="text-white">Persebaran</div>,
@@ -88,7 +89,7 @@ const LineGraph = () => {
 				<div className="flex flex-col">
 					<Select
 						showSearch
-						placeholder="Domisili"
+						placeholder=<div className="text-black">Domisili</div>
 						optionFilterProp="children"
 						filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
 						options={
@@ -102,7 +103,7 @@ const LineGraph = () => {
 					<br />
 					<Select
 						showSearch
-						placeholder="Fasyankes"
+						placeholder=<div className="text-black">Fasyankes</div>
 						optionFilterProp="children"
 						filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
 						options={
@@ -122,7 +123,7 @@ const LineGraph = () => {
 			label: <div className="text-white">Gender</div>,
 			children: (
 				<Select
-					placeholder="Pilih Gender"
+					placeholder=<div className="text-black">Pilih Gender</div>
 					optionFilterProp="children"
 					className="w-full"
 					options={[
@@ -160,16 +161,17 @@ const LineGraph = () => {
 				<div className="card-body ">
 					<div className="flex gap-1">
 						<img src={iconGrafik} alt="icon-grafik" className="w-6 h-6" />
-						<p>Grafik</p>
+						<p>Filter</p>
 					</div>
 					<Form>
 						<Form.Item>
 							<div className="bg-[#4F709C] collapse">
-								<Collapse accordion items={itemsAccordion} />
+								<Collapse items={itemsAccordion} />
 							</div>
 						</Form.Item>
-						<Form.Item className="text-center">
-							<Button htmlType="submit" className=" border-[#4F709C] bg-[#4F709C] text-white hover:bg-[#4F709C] hover:border-[#4F709C] hover:text-white">
+						<Form.Item className="justify-center p-5">
+							<Button htmlType="submit" className="flex gap-2 items-center border-[#4F709C] bg-[#4F709C] text-white hover:bg-[#4F709C] hover:border-[#4F709C] hover:text-white">
+								<img src={iconsSearch} alt="icon-search" className="w-4 h-4" />
 								Pratinjau
 							</Button>
 						</Form.Item>

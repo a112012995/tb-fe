@@ -7,37 +7,34 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   return (
-    <div className="px-20 pt-12 pb-9 bg-none text-white">
-      <div className="navbar ">
-        <div className="navbar-start">
-          <a href="/dashboard">
-            <div className="flex items-center">
-              <div>
-                <img src="/logo_dkk.png" alt="logo" className="w-28 h-24" />
-              </div>
-              <div className="flex-col">
-                <div className="font-semibold text-2xl">SDKPT</div>
-                <div className="font-semibold text-2xl">Kota Semarang</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div className="navbar-end gap-12">
-          <a href="#stats" className="text-2xl font-semibold scroll-smooth">
-            Tentang
-          </a>
-          <a href="#map" className="text-2xl font-semibold scroll-smooth">
-            Peta
-          </a>
-          <button>
-            <div
-              onClick={() => dispatch(logout(history))}
-              className="text-2xl font-semibold scroll-smooth"
-            >
-              Logout
-            </div>
-          </button>
-          {/* <div className="dropdown dropdown-end">
+		<div className="px-20 pt-12 pb-9 bg-none text-white">
+			<div className="navbar ">
+				<div className="navbar-start">
+					<a href="/dashboard">
+						<div className="flex items-center">
+							<div>
+								<img src="/logo_dkk.png" alt="logo" className="w-28 h-24" />
+							</div>
+							<div className="flex-col">
+								<div className="font-semibold text-2xl">SDKPT</div>
+								<div className="font-semibold text-2xl">Kota Semarang</div>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div className="navbar-end gap-12">
+					<a href="#stats" className="text-2xl font-semibold scroll-smooth">
+						Tentang
+					</a>
+					<a href="#map" className="text-2xl font-semibold scroll-smooth">
+						Peta
+					</a>
+					<button>
+						<div onClick={() => dispatch(logout(history))} className="btn text-base font-bold scroll-smooth border-[#4F709C] bg-[#4F709C] text-white hover:bg-[#4F709C] hover:border-[#4F709C]">
+							Logout
+						</div>
+					</button>
+					{/* <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img
@@ -54,11 +51,11 @@ const Navbar = () => {
                 <div onClick={() => dispatch(logout(history))}>Logout</div>
               </li>
             </ul> */}
-          {/* </div> */}
-        </div>
-      </div>
-    </div>
-  );
+					{/* </div> */}
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Navbar;

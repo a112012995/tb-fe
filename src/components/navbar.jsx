@@ -1,12 +1,12 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { logout } from "../store/actions/auth";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { logout } from '../store/actions/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  const dispatch = useDispatch();
-  const history = useNavigate();
-  return (
+	const dispatch = useDispatch();
+	const history = useNavigate();
+	return (
 		<div className="px-20 pt-12 pb-9 bg-none text-white">
 			<div className="navbar ">
 				<div className="navbar-start">
@@ -30,28 +30,10 @@ const Navbar = () => {
 						Peta
 					</a>
 					<button>
-						<div onClick={() => dispatch(logout(history))} className="btn text-base font-bold scroll-smooth border-[#4F709C] bg-[#4F709C] text-white hover:bg-[#4F709C] hover:border-[#4F709C]">
+						<div onClick={() => dispatch(logout(history))} className="text-2xl font-semibold scroll-smooth ">
 							Logout
 						</div>
 					</button>
-					{/* <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img
-                  src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1331&q=80"
-                  alt=""
-                />
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-[#F5EFE7] rounded-md w-52 text-black"
-            >
-              <li>
-                <div onClick={() => dispatch(logout(history))}>Logout</div>
-              </li>
-            </ul> */}
-					{/* </div> */}
 				</div>
 			</div>
 		</div>

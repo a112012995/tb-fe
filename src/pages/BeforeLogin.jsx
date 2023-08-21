@@ -73,22 +73,22 @@ const BeforeLogin = () => {
 								</ul>
 								<div className="dropdown dropdown-end mr-24 ">
 									{accessToken ? (
-										<label tabIndex={0} className="btn m-1 text-base font-bold border-[#3D5A80] bg-[#3D5A80] text-white hover:bg-[#3D5A80] hover:border-[#3D5A80]">
+										<label tabIndex={0} className="btn m-1 text-base font-bold border-[#EE6C4D] bg-[#EE6C4D] text-white hover:bg-[#EE6C4D] hover:border-[#EE6C4D]">
 											<div onClick={() => dispatch(logout(history))}>Logout</div>
 										</label>
 									) : (
 										<>
-											<label tabIndex={0} className="btn m-1 text-base font-bold border-[#3D5A80] bg-[#3D5A80] text-white hover:bg-[#3D5A80] hover:border-[#3D5A80]">
+											<label tabIndex={0} className="btn m-1 text-base font-bold border-[#EE6C4D] bg-[#EE6C4D] text-white hover:bg-[#EE6C4D] hover:border-[#EE6C4D]">
 												Login
 											</label>
 											<ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow rounded-box w-52 mt-1 border-white bg-white text-white">
 												<li>
-													<a href="/login" className="font-semibold border-white bg-white text-[#3D5A80] hover:bg-[#3D5A80] hover:border-[#3D5A80] hover:text-white">
+													<a href="/login" className="mb-2 font-semibold border-white bg-white text-[#293241] hover:bg-[#EE6C4D] hover:border-[#EE6C4D] hover:text-white">
 														SDKPT
 													</a>
 												</li>
 												<li>
-													<a href="http://119.2.50.170:9093/tb/index.php/login" className="font-semibold border-white bg-white text-[#3D5A80] hover:bg-[#3D5A80] hover:border-[#3D5A80] hover:text-white">
+													<a href="http://119.2.50.170:9093/tb/index.php/login" className="font-semibold border-white bg-white text-[#293241] hover:bg-[#EE6C4D] hover:border-[#EE6C4D] hover:text-white">
 														Semar Betul
 													</a>
 												</li>

@@ -48,7 +48,7 @@ const Details = () => {
 							Home
 						</a>
 						<button>
-							<div className="btn text-base font-bold border-[#4F709C] bg-[#4F709C] text-white hover:bg-[#4F709C] hover:border-[#4F709C] scroll-smooth" onClick={() => dispatch(logout(history))}>
+							<div className="text-2xl font-semibold scroll-smooth" onClick={() => dispatch(logout(history))}>
 								Logout
 							</div>
 						</button>

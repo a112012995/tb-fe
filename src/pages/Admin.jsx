@@ -86,14 +86,42 @@ const AdminPage = () => {
             </div>
           </div>
         </div>
-        <div className="flex mt-20 mx-64">
-          <button
-            onClick={redirectToAddPage}
-            className="btn text-white bg-[#35B438] border-[#35B438]"
-          >
-            Tambahkan Akun
-          </button>
+        <div className="flex justify-end mt-20 mx-64">
+          <div className="mb-3">
+            <div className="relative w-64">
+              <input
+                type="search"
+                className="relative m-0 block w-full rounded border border-solid border-gray-300 bg-gray-200 bg-clip-padding pl-10 pr-10 py-[0.5rem] text-white font-normal leading-[1.6] placeholder-gray-300 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-white focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder-text-neutral-200 dark:focus:border-primary"
+                placeholder="Search"
+                aria-label="Search"
+                aria-describedby="button-addon2"
+              />
+              <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="h-5 w-5"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div className=" pl-10">
+            <button
+              onClick={redirectToAddPage}
+              className="btn text-white bg-[#35B438] border-[#35B438]"
+            >
+              Tambahkan Akun
+            </button>
+          </div>
         </div>
+
         <div className="flex justify-center mt-6 mb-5">
           <div className="flex flex-col">
             <table style={{ borderCollapse: "collapse", width: "1000px" }}>
@@ -150,7 +178,10 @@ const AdminPage = () => {
                 )}
               </tbody>
             </table>
-            <div className="flex justify-end text-black mb-5" style={paginationStyle}>
+            <div
+              className="flex justify-end text-black mb-5"
+              style={paginationStyle}
+            >
               {/* Render previous page arrow */}
               <button
                 onClick={navigateToPreviousPage}

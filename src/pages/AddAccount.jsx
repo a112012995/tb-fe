@@ -66,6 +66,11 @@ const AddAccount = () => {
               Tambah Akun
             </div>
           </div>
+          <div className="toast">
+            <div className="alert alert-info">
+              <span>New message arrived.</span>
+            </div>
+          </div>
           <div className="w-96  bg-white">
             <form class="w-full max-w-md" onSubmit={handleSubmit}>
               <div class="md:flex md:items-center mb-6">

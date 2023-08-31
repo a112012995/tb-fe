@@ -10,14 +10,25 @@ const EditAccount = () => {
   const { dataById } = useSelector((state) => state.adminReducers);
   console.log(dataById);
   const { state } = useLocation();
+  const userId = state ? state.userId : null;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    dispatch(getUserById(state.userId));
-    setUsername(dataById.username);
-    // setPassword(dataById.password);
-  }, [dispatch]);
+    if (userId) {
+      dispatch(getUserById(userId));
+    }
+    
+  }, [dispatch, userId]);
+
+  useEffect(() => {
+    // Set username and password when dataById changes
+    console.log("EditAccount component mounted");
+    if (dataById) {
+      setUsername(dataById.username);
+      setPassword(dataById.password);
+    }
+  }, [dataById]);
 
   const handleUsername = (event) => {
     setUsername(event.target.value);
@@ -33,17 +44,28 @@ const EditAccount = () => {
       username,
       password,
     };
-    const res = await dispatch(updateUser(id, data))
-      .then((response) => ({ response }))
-      .catch((error) => ({ error }));
 
-    console.log(res.error);
-    // navigate("/admin")
+    try {
+      const response = await dispatch(updateUser(id, data));
+
+      if (response && response.error) {
+        console.error(response.error);
+      } else {
+        // Navigasi kembali ke halaman admin setelah berhasil menyimpan
+        navigate("/admin");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    console.log("Update user form function called");
   };
+
 
   const BackAdmin = () => {
     navigate("/admin");
   };
+
+  
 
   return (
     <div className="relative bg-white">
@@ -73,12 +95,12 @@ const EditAccount = () => {
             <div className="text-3xl px-10 font-bold text-black">Edit Akun</div>
           </div>
           <div className="w-96  bg-white">
-            <form onSubmit={updateUserForm} class="w-full max-w-md">
+            <form onSubmit={updateUserForm} className="w-full max-w-md">
               <div className="md:flex md:items-center mb-6">
                 <div className="md:w-1/3">
                   <label
                     className="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    for="inline-full-name"
+                    htmlFor="inline-full-name"
                   >
                     Username
                   </label>

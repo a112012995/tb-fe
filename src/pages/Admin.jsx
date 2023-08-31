@@ -69,12 +69,20 @@ const AdminPage = () => {
                   <img src="/logo_dkk.png" alt="logo" className="w-28 h-24" />
                 </div>
                 <div className="flex-col">
+                  <div className="font-semibold text-2xl">Dashboard Admin</div>
                   <div className="font-semibold text-2xl">SDKPT</div>
-                  <div className="font-semibold text-2xl">Kota Semarang</div>
                 </div>
               </div>
             </div>
             <div className="navbar-end gap-12">
+              <button>
+                <div
+                onClick={() => dispatch(AdminPage(navigate))}
+                className="text-2xl font-semibold scroll-smooth"
+              >
+                Admin
+              </div>
+              </button>
               <button>
                 <div
                   onClick={() => dispatch(logout(navigate))}
@@ -92,7 +100,7 @@ const AdminPage = () => {
               <input
                 type="search"
                 className="relative m-0 block w-full rounded border border-solid border-gray-300 bg-gray-200 bg-clip-padding pl-10 pr-10 py-[0.5rem] text-white font-normal leading-[1.6] placeholder-gray-300 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-white focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder-text-neutral-200 dark:focus:border-primary"
-                placeholder="Search"
+                placeholder="Cari Akun"
                 aria-label="Search"
                 aria-describedby="button-addon2"
               />
@@ -115,13 +123,12 @@ const AdminPage = () => {
           <div className=" pl-10">
             <button
               onClick={redirectToAddPage}
-              className="btn text-white bg-[#35B438] border-[#35B438]"
+              className="btn text-white bg-[#4F709C] border-[#4F709C] rounded-full"
             >
-              Tambahkan Akun
+              Tambah Akun
             </button>
           </div>
         </div>
-
         <div className="flex justify-center mt-6 mb-5">
           <div className="flex flex-col">
             <table style={{ borderCollapse: "collapse", width: "1000px" }}>
@@ -143,28 +150,29 @@ const AdminPage = () => {
                       <td style={tableDataStyle}>{user.username}</td>
                       <td style={tableDataStyle}>
                         <button
-                          className="bg-[#35B438] text-white mr-3"
+                          className="bg-transparant text-[#4F709C] mr-3"
                           onClick={() => GoEdit(user.id)}
                           style={{
-                            width: "40px",
-                            height: "25px",
-                            fontSize: "13px",
+                            width: "80px",
+                            height: "30px",
+                            fontSize: "15px",
                             borderRadius: "10px",
+                          
                           }}
                         >
-                          Edit
+                          Edit Akun
                         </button>
                         <button
-                          className="bg-[#35B438] text-white"
-                          style={{
-                            width: "50px",
-                            height: "25px",
-                            fontSize: "13px",
+                          className="bg-transparant text-[#4F709C]"                          style={{
+                            width: "90px",
+                            height: "30px",
+                            fontSize: "15px",
                             borderRadius: "10px",
+                            marginLeft:"10px",
                           }}
                           onClick={() => handleDeleteUser(user.id)}
                         >
-                          Hapus
+                          Hapus Akun
                         </button>
                       </td>
                     </tr>
@@ -183,6 +191,7 @@ const AdminPage = () => {
               style={paginationStyle}
             >
               {/* Render previous page arrow */}
+              <>Tampilkan Halaman</>
               <button
                 onClick={navigateToPreviousPage}
                 style={{

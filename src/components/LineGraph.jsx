@@ -120,7 +120,7 @@ const LineGraph = () => {
     }
   };
 
-  console.log(def);
+  // console.log(def);
 
   //yang dipake di antd
   const itemsAccordion = [

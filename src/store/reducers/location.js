@@ -15,6 +15,7 @@ const initialState = {
   dataKelId: false,
   dataFasId: false,
   totalPas: false,
+  survei:false,
   pasien: false,
   loading: true,
 };
@@ -34,6 +35,7 @@ const locationReducers = (state = initialState, action) => {
         ...state,
         dataById: payload.data,
         totalPas: payload.data.pasienbs.length,
+        survei: payload.data.survei,
         loading: false,
         pasien: payload.data.pasiens,
       };

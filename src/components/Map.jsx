@@ -15,10 +15,10 @@ const Map = () => {
 
   const [onSelect, setOnSelect] = useState(false);
   const [modal, setModal] = useState(false);
-  const { data, dataById, totalPas } = useSelector(
+  const { data, dataById, totalPas, survei } = useSelector(
     (state) => state.locationReducers
   );
-  //   console.log(data);
+  console.log(survei);
 
   //   get response from api get location by id
   const getById = async (id) => {
@@ -146,6 +146,35 @@ const Map = () => {
                       {dataById.nama_kelurahan}
                     </h2>
                     <p className="text-sm">Jumlah Kasus: {totalPas}</p>
+                    <div className="mt-3">
+                      <div className="flex justify-between">
+                        <span>Tingkat Literasi</span>
+                        <p>{Math.round(survei.persentase_literasi * 100)}%</p>
+                      </div>
+                      <progress
+                        className="progress progress-primary w-full"
+                        value={Math.round(survei.persentase_literasi * 100)}
+                        max="100"
+                      ></progress>
+                      <div className="flex justify-between">
+                        <span>Stigma Masyarakat</span>
+                        <p>{Math.round(survei.persentase_stigma * 100)}%</p>
+                      </div>
+                      <progress
+                        className="progress progress-primary w-full"
+                        value={Math.round(survei.persentase_stigma * 100)}
+                        max="100"
+                      ></progress>
+                      <div className="flex justify-between">
+                        <span>Tingkat Pengetahuan</span>
+                        <p>{Math.round(survei.persentase_pengetahuan * 100)}%</p>
+                      </div>
+                      <progress
+                        className="progress progress-primary w-full"
+                        value={Math.round(survei.persentase_pengetahuan * 100)}
+                        max="100"
+                      ></progress>
+                    </div>
                   </>
                 ) : (
                   <>

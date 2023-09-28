@@ -127,7 +127,7 @@ const TableDet = () => {
 										<td className="p-3 border-b-[1px] border-[#727d90] text-center">{item.kelurahan.nama_kelurahan}</td>
 										<td className="p-3 border-b-[1px] border-[#727d90] text-center">{item.hasil_akhir}</td>
 										<td className="p-3 border-b-[1px] border-[#727d90] text-center">
-											<button className="btn w-20 h-9 text-xs border-[#4F709C] bg-[#4F709C] text-white hover:bg-[#4F709C] hover:border-[#4F709C]" onClick={() => showModal(item.id)}>
+											<button className="btn w-20 h-9 text-xs bg-[#5CB85F] text-white hover:bg-[#4F709C] hover:border-[#4F709C]" onClick={() => showModal(item.id)}>
 												Lihat Detail
 											</button>
 											<dialog open={isModalOpen} onClose={handleCloseModal} className="modal bg-transparent">

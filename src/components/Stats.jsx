@@ -29,18 +29,18 @@ const Stats = () => {
       {loading && <LoadData />}
       {totalData && (
         <>
-          <div className="stats bg-[#4F709C]" id="stats">
+          <div className="stats stats-vertical lg:stats-horizontal bg-[#4F709C]" id="stats">
             <div className="stat">
-              <div className="flex">
+              <div className="flex justify-center">
                 <div className="flex-col text-center pt-2">
-                  <div className="stat-value text-white text-5xl">
+                  <div className="stat-value text-white min-[240px]:text-4xl md:text-5xl">
                     1,650,000
                   </div>
                   <div className="stat-title text-white text-lg">
                     Jumlah Penduduk
                   </div>
                 </div>
-                <div className="text-warning">
+                <div className="text-warning min-[240px]:hidden md:flex">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -59,16 +59,16 @@ const Stats = () => {
             </div>
 
             <div className="stat">
-              <div className="flex">
+              <div className="flex justify-center">
                 <div className="flex-col text-center pt-2">
-                  <div className="stat-value text-white text-5xl">
+                  <div className="stat-value text-white min-[240px]:text-4xl md:text-5xl">
                     {new Intl.NumberFormat().format(totalData)}
                   </div>
                   <div className="stat-title text-white text-lg">
                     Kasus Aktif
                   </div>
                 </div>
-                <div className="text-warning">
+                <div className="text-warning min-[240px]:hidden md:flex">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -87,16 +87,16 @@ const Stats = () => {
             </div>
 
             <div className="stat">
-              <div className="flex">
+              <div className="flex justify-center">
                 <div className="flex-col text-center pt-2">
-                  <div className="stat-value text-white text-5xl">
+                  <div className="stat-value text-white min-[240px]:text-4xl md:text-5xl">
                     {new Intl.NumberFormat().format(sembuh)}
                   </div>
                   <div className="stat-title text-white text-lg">
                     Pasien Sembuh
                   </div>
                 </div>
-                <div className="text-warning">
+                <div className="text-warning min-[240px]:hidden md:flex">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -115,16 +115,16 @@ const Stats = () => {
             </div>
 
             <div className="stat">
-              <div className="flex">
+              <div className="flex justify-center">
                 <div className="flex-col text-center pt-2">
-                  <div className="stat-value text-white text-5xl">
+                  <div className="stat-value text-white min-[240px]:text-4xl md:text-5xl">
                     {Math.round(persen)}%
                   </div>
                   <div className="stat-title text-white text-lg">
                     Keberhasilan Pengobatan
                   </div>
                 </div>
-                <div className="text-warning">
+                <div className="text-warning min-[240px]:hidden md:flex">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

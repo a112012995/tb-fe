@@ -4,7 +4,7 @@ import serviceVec from "../assets/serviceVec.svg";
 
 const Service = () => {
   return (
-    <div className="mt-[101px] flex flex-row space-x-[103px] px-[210px]" id="service">
+    <div className="mt-[101px] flex min-[240px]:flex-col md:flex-row md:space-x-[103px] md:px-[210px] min-[240px]:px-4" id="service">
       <div>
         <img src={serviceImg} alt="" className="drop-shadow-lg" />
       </div>
@@ -12,7 +12,7 @@ const Service = () => {
         <h4 className="font-bold text-[24px] my-8">
           Kenali Gejala Tuberkulosis
         </h4>
-        <p className=" mt-6 w-[468px]">
+        <p className=" mt-6 md:w-[468px]">
           Tuberkulosis (TB) adalah penyakit menular yang disebabkan oleh infeksi
           bakteri Mycobacterium tuberculosis. Meskipun biasanya menyerang
           paru-paru, TB juga dapat mempengaruhi organ lain dalam tubuh. Berikut

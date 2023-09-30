@@ -134,10 +134,11 @@ const Map = () => {
       <div id="map">
         <MapContainer
           center={center}
+          maxZoom={11.5}
           zoom={12}
           style={{ width: "screen", height: "80vh" }}
         >
-          <div className="flex flex-row-reverse pt-20 pr-7">
+          <div className="flex flex-row-reverse min-[240px]:hidden md:flex pt-20 pr-7">
             <div className="card bg-white w-60 shadow-xl z-[999]">
               <div className="px-5 py-4">
                 {onSelect ? (
@@ -199,7 +200,7 @@ const Map = () => {
         </MapContainer>
         <div className="mt-2">
           <h1 className="font-semibold">Jumlah Kasus</h1>
-          <div className="flex gap-5 mt-1">
+          <div className="grid min-[240px]:grid-cols-2 md:flex gap-5 mt-1">
             {/* ini model modal */}
             <button onClick={() => modalHandler(rendah)}>
               <div className="flex items-baseline">

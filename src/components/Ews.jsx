@@ -6,7 +6,7 @@ const Ews = () => {
   const { survei } = useSelector((state) => state.locationReducers);
   console.log(survei);
   return (
-    <div className="grid grid-cols-3 px-52 mt-16 gap-5">
+    <div className="flex md:flex-row min-[240px]:flex-col min-[240px]:px-4 md:px-52 mt-16 gap-5">
       <div className="p-6 rounded-md border-2 bg-white w-full space-y-8">
         <h4 className="font-semibold text-2xl">Literasi</h4>
         <div className="flex space-x-6">

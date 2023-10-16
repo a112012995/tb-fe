@@ -12,6 +12,17 @@ const LocationService = {
     }
   },
 
+  getLocFaskes: async function (data) {
+    try {
+      const response = await API.get("/api/mapping/faskes", data);
+      // console.log(response)
+      return response;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  },
+
   getLocationById: async function (id) {
     try {
       const response = await API.get(`/api/mapping/${id}`);

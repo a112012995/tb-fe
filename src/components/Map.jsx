@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { statesData } from "../geojson/data";
-import { getLocationById, getLocation } from "../store/actions/location";
+import { getLocationById } from "../store/actions/location";
 import { useNavigate } from "react-router-dom";
 
 const Map = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  useEffect(() => {
-    dispatch(getLocation());
-  }, [dispatch]);
 
   const [onSelect, setOnSelect] = useState(false);
   const [modal, setModal] = useState(false);
   const { data, dataById, totalPas, survei } = useSelector(
     (state) => state.locationReducers
   );
-  console.log(survei);
 
   //   get response from api get location by id
   const getById = async (id) => {
@@ -134,8 +130,8 @@ const Map = () => {
       <div id="map">
         <MapContainer
           center={center}
-          maxZoom={11.5}
-          zoom={12}
+          // maxZoom={11.5}
+          zoom={11.5}
           style={{ width: "screen", height: "80vh" }}
         >
           <div className="flex flex-row-reverse min-[240px]:hidden md:flex pt-20 pr-7">
@@ -168,7 +164,9 @@ const Map = () => {
                       ></progress>
                       <div className="flex justify-between">
                         <span>Tingkat Pengetahuan</span>
-                        <p>{Math.round(survei.persentase_pengetahuan * 100)}%</p>
+                        <p>
+                          {Math.round(survei.persentase_pengetahuan * 100)}%
+                        </p>
                       </div>
                       <progress
                         className="progress progress-primary w-full"

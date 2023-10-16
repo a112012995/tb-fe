@@ -5,17 +5,19 @@ import {
   GET_LOCATION_BY_ID,
   GET_FASKES,
   GET_FASKES_BY_ID,
+  GET_LOCATION_FASKES,
 } from "../types";
 
 const initialState = {
   data: [],
-  dataKel:[],
-  dataFas:[],
+  dataKel: [],
+  dataFas: [],
+  locFaskes: [],
   dataById: false,
   dataKelId: false,
   dataFasId: false,
   totalPas: false,
-  survei:false,
+  survei: false,
   pasien: false,
   loading: true,
 };
@@ -28,6 +30,12 @@ const locationReducers = (state = initialState, action) => {
       return {
         ...state,
         data: payload.data,
+        loading: false,
+      };
+    case GET_LOCATION_FASKES:
+      return {
+        ...state,
+        locFaskes: payload.data,
         loading: false,
       };
     case GET_LOCATION_BY_ID:
@@ -51,7 +59,7 @@ const locationReducers = (state = initialState, action) => {
         dataKelId: payload.data,
         loading: false,
       };
-      case GET_FASKES:
+    case GET_FASKES:
       return {
         ...state,
         dataFas: payload.data,

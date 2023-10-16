@@ -2,7 +2,7 @@ import axios from "axios";
 // import store from "../store";
 
 const API = axios.create({
-  baseURL: "http://34.101.204.149:3001/",
+  baseURL: "http://localhost:3001/",
   headers: {
     Accept: "application/json",
     Authorization: `Bearer ${localStorage.getItem("accessToken") || ""}`,

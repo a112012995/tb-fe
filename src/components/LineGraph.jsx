@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -9,16 +9,11 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { Button, Collapse, Form, Select } from "antd";
+import { Collapse, Select } from "antd";
 import iconGrafik from "../assets/icon-grafik.png";
 import iconsSearch from "../assets/search-icons.png";
 import { useDispatch, useSelector } from "react-redux";
-import { filterPasien, getPasien } from "../store/actions/pasien";
-import {
-  getFaskes,
-  getKelurahan,
-  getLocation,
-} from "../store/actions/location";
+import { filterPasien, } from "../store/actions/pasien";
 
 const LineGraph = () => {
   const [def, setDef] = useState(false);
@@ -29,12 +24,12 @@ const LineGraph = () => {
   const [tahun, setTahun] = useState();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getPasien());
-    dispatch(getLocation());
-    dispatch(getKelurahan());
-    dispatch(getFaskes());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   // dispatch(getPasien());
+  //   dispatch(getLocation());
+  //   dispatch(getKelurahan());
+  //   dispatch(getFaskes());
+  // }, [dispatch]);
 
   const { dataKel, dataFas } = useSelector((state) => state.locationReducers);
   const { data } = useSelector((state) => state.pasienReducers);
@@ -76,11 +71,6 @@ const LineGraph = () => {
     Perempuan: groupedData[month]["P"],
   }));
 
-  const resetFilter = (e) => {
-    e.preventDefault();
-    setDef(false);
-  };
-
   const persebaranHandler = (value) => {
     setPersebaran(value);
     if (value === 1) {
@@ -111,7 +101,7 @@ const LineGraph = () => {
       .then((response) => ({ response }))
       .catch((error) => ({ error }));
 
-    console.log(res.response);
+    // console.log(res.response);
 
     if (res.error) {
       setError(res.error.response.data.message);

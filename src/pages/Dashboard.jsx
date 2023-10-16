@@ -6,8 +6,26 @@ import bgHero from "../assets/bg-hero.png";
 import iconInfo from "../assets/icon-info.png";
 import Footer from "../components/Footer";
 import LineGraph from "../components/LineGraph";
+import Pkp from "../components/Pkp";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {
+  getFaskes,
+  getKelurahan,
+  getLocation,
+  getLocationFaskes,
+} from "../store/actions/location";
+import { getPasien } from "../store/actions/pasien";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getPasien());
+    dispatch(getLocation());
+    dispatch(getKelurahan());
+    dispatch(getFaskes());
+    dispatch(getLocationFaskes());
+  }, [dispatch]);
   return (
     <div className="bg-[#F6F6F6]">
       <div>
@@ -46,7 +64,8 @@ const Dashboard = () => {
           </div>
           <LineGraph />
         </div>
-        <div className="w-full mt-28">
+        <Pkp />
+        <div className="w-full mt-20">
           <div className="text-xl font-bold mb-4 text-[#293241]">
             <u>Pemetaan</u>
           </div>
@@ -69,11 +88,6 @@ const Dashboard = () => {
             kembali secara reguler untuk mendapatkan informasi terbaru.
           </p>
         </div>
-        {/* <div className="mt-2 text-[#4F709C]">
-					<a href="https://bit.ly/Dashboard_TBNEW" target="_blank" rel="noopener noreferrer">
-						<u>*Klik disini untuk melihat visualisasi datail</u>
-					</a>
-				</div> */}
         <Footer />
       </div>
     </div>

@@ -1,5 +1,13 @@
-import locationService from "../../services/locationService"
-import { GET_FASKES, GET_FASKES_BY_ID, GET_KELURAHAN_BY_ID, GET_KELURAHAN, GET_LOCATION,GET_LOCATION_BY_ID } from "../types"
+import locationService from "../../services/locationService";
+import {
+  GET_FASKES,
+  GET_FASKES_BY_ID,
+  GET_KELURAHAN_BY_ID,
+  GET_KELURAHAN,
+  GET_LOCATION,
+  GET_LOCATION_BY_ID,
+  GET_LOCATION_FASKES
+} from "../types";
 
 export const getLocation = (params, history) =>
   async function (dispatch) {
@@ -13,20 +21,32 @@ export const getLocation = (params, history) =>
     }
   };
 
-  export const getLocationById = (id) =>
+  export const getLocationFaskes = (params, history) =>
   async function (dispatch) {
     try {
-      const response = await locationService.getLocationById(id);
-      dispatch({ type: GET_LOCATION_BY_ID, payload: response.data });
+      const response = await locationService.getLocFaskes(params);
+      dispatch({ type: GET_LOCATION_FASKES, payload: response.data });
       // console.log(response)
-      return response
     } catch (error) {
       console.log(error);
       throw error;
     }
   };
 
-  export const getKelurahan = (params, history) =>
+export const getLocationById = (id) =>
+  async function (dispatch) {
+    try {
+      const response = await locationService.getLocationById(id);
+      dispatch({ type: GET_LOCATION_BY_ID, payload: response.data });
+      // console.log(response)
+      return response;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+
+export const getKelurahan = (params, history) =>
   async function (dispatch) {
     try {
       const response = await locationService.getKelurahan(params);
@@ -38,20 +58,20 @@ export const getLocation = (params, history) =>
     }
   };
 
-  export const getKelurahanById = (id) =>
+export const getKelurahanById = (id) =>
   async function (dispatch) {
     try {
       const response = await locationService.getKelurahanById(id);
       dispatch({ type: GET_KELURAHAN_BY_ID, payload: response.data });
       // console.log(response)
-      return response
+      return response;
     } catch (error) {
       console.log(error);
       throw error;
     }
   };
 
-  export const getFaskes = (params, history) =>
+export const getFaskes = (params, history) =>
   async function (dispatch) {
     try {
       const response = await locationService.getFaskes(params);
@@ -63,13 +83,13 @@ export const getLocation = (params, history) =>
     }
   };
 
-  export const getFaskesById = (id) =>
+export const getFaskesById = (id) =>
   async function (dispatch) {
     try {
       const response = await locationService.getFaskesById(id);
       dispatch({ type: GET_FASKES_BY_ID, payload: response.data });
       // console.log(response)
-      return response
+      return response;
     } catch (error) {
       console.log(error);
       throw error;

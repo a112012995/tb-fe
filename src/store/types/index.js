@@ -25,3 +25,7 @@ export const CREATE_USER = 'CREATE_USER';
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER';
+
+export const REAL_DATA = 'REAL_DATA';
+export const PREDICTED_DATA = 'PREDICTED_DATA';
+

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/actions/auth";
 import { getPasienByIdKel } from "../store/actions/pasien";
 import Ews from "../components/Ews";
+import Predict from "../components/Predict";
 
 const Details = () => {
   const { state } = useLocation();
@@ -29,6 +30,7 @@ const Details = () => {
     meninggal = dataByIdKel.filter((data) => data.hasil_akhir === "Meninggal");
   }
   return (
+  <>
     <div className="bg-[#F6F6F6] m-auto items-center justify-center max-w-screen min-h-screen">
       {/* Navbar */}
       <div className="md:px-20 md:pt-12 md:pb-9 bg-[#213555] text-white">
@@ -82,7 +84,10 @@ const Details = () => {
                 </li>
               </ul>
             </div>
-            <a href="/dashboard" className="text-2xl font-semibold min-[240px]:hidden md:flex">
+            <a
+              href="/dashboard"
+              className="text-2xl font-semibold min-[240px]:hidden md:flex"
+            >
               Home
             </a>
             <button className="min-[240px]:hidden md:flex">
@@ -229,11 +234,13 @@ const Details = () => {
         </div>
       </div>
       <Ews />
+      <Predict />
       <TableDet />
       <OrderTerms />
       <Footer />
       {/* Intervensi */}
     </div>
+    </>
   );
 };
 

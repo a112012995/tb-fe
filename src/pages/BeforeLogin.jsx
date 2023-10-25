@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/main-logo.png";
 import Banner from "../components/Banner";
+import Map from "../components/Map";
 import Service from "../components/Service";
 import HowTo from "../components/HowTo";
 import Artikel from "../components/Artikel";
 import Footer from "../components/Footer";
+import Stats from "../components/Stats";
 import LoadPage from "../components/UI/LoadPage";
 import { logout } from "../store/actions/auth";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getLocation } from "../store/actions/location";
+import { getPasien } from "../store/actions/pasien";
 
 const BeforeLogin = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -19,6 +23,15 @@ const BeforeLogin = () => {
   const [color, setColor] = useState(false);
   const [colorNav, setColorNav] = useState("text-white");
   const [load, setLoad] = useState(true);
+
+  useEffect(() => {
+    // dispatch(getPasien());
+    dispatch(getLocation());
+    dispatch(getPasien())
+    // dispatch(getKelurahan());
+    // dispatch(getFaskes());
+    // dispatch(getLocationFaskes());
+  }, [dispatch]);
 
   // for loading
   setInterval(function () {
@@ -55,7 +68,7 @@ const BeforeLogin = () => {
             <div
               className={
                 color
-                  ? `navbar fixed top-0 bg-[#F6F6F6] z-50 shadow-md`
+                  ? `navbar fixed top-0 bg-[#F6F6F6] z-[1500] shadow-md`
                   : `navbar fixed top-0 z-50`
               }
             >
@@ -183,8 +196,21 @@ const BeforeLogin = () => {
               </div>
             </div>
             <Banner />
+            <div className="flex space-x-8 justify-center items-center flex-col">
+              <div className="md:-mt-[75px] min-[240px]:-mt-[150px] card rounded-3xl w-fit bg-[#4F709C] drop-shadow-lg">
+                <div className="flex pb-4 pt-3 px-10 flex-col">
+                  <div>
+                    <Stats />
+                  </div>
+                </div>
+              </div>
+            </div>
             <Service />
             <HowTo />
+            <div className="md:px-36 min-[244px]:px-4 mt-20">
+              <h2 className="font-bold text-2xl mb-8">Persebaran Kasus</h2>
+              <Map />
+            </div>
             <Artikel />
             <Footer />
           </div>

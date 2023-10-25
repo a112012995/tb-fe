@@ -32,7 +32,7 @@ const Banner = () => {
             )}
           </div>
         </div>
-        <div className="drop-shadow-md md:ml-24 md:mt-[330px]">
+        <div className="drop-shadow-md md:ml-24 md:mt-[230px] mb-[100px]">
           <img src={bannerIcon} alt="" />
         </div>
       </div>

@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import symbol from "../assets/search.svg";
-import icon from "../assets/plusIcon.svg";
+// import icon from "../assets/plusIcon.svg";
 
 const Pkp = () => {
   const { locFaskes } = useSelector((state) => state.locationReducers);
+  console.log(locFaskes);
   const [searchQuery, setSearchQuery] = useState("");
 
   // Filter the data based on the search query
   const filteredData = locFaskes.filter((item) =>
-    item.nama_fasyankes.toLowerCase().includes(searchQuery.toLowerCase())
+    item.nama_pusk.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -32,46 +33,121 @@ const Pkp = () => {
               />{" "}
             </div>
           </div>
-          <div className="divide-y-2 overflow-auto h-72 px-4">
+          <div className="divide-y-2 overflow-auto h-[340px] px-4">
             {filteredData?.map((item) => (
               <div key={item.id} className="py-2">
                 <button className="text-left w-full">
-                  <h2 className="text-lg font-semibold">
-                    {item.nama_fasyankes}
-                  </h2>
-                  <p className="text-zinc-400">{item.jumlah_pasien} kasus</p>
+                  <h2 className="text-lg font-semibold">{item.nama_pusk}</h2>
+                  <p className="text-zinc-400">
+                    Kode Puskesmas {item.kode_pusk}
+                  </p>
                 </button>
               </div>
             ))}
           </div>
         </div>
-        <div className="w-full bg-white p-2 rounded-lg shadow-md px-8 py-6">
-          <h2 className="text-2xl font-semibold">Cakupan Pemberian Zn</h2>
-          <div className="flex flex-row mt-4">
-            <div className="space-y-4">
-              <button className="text-left flex space-x-2 border-2 rounded-md w-72">
-                <img className="w-14" src={icon} alt="" />
-                <div className="pr-8">
-                  <h2 className="font-semibold text-lg">Sasaran 100%</h2>
-                  <p>6</p>
+        <div className="w-[1000px] bg-white rounded-lg shadow-md py-4 px-8">
+          <div className="flex justify-between border-b-2 pb-2">
+            <div>
+              <h2 className="text-xl font-semibold ">Puskesmas Poncol</h2>
+              <p>Rata-rata 70%</p>
+            </div>
+            {/* <h4 className="place-self-center underline font-bold">
+              Selengkapnya
+            </h4> */}
+          </div>
+          <div className="grid auto-cols-[308px] grid-flow-col gap-6 overflow-x-auto mt-4">
+            <div className="border-2 p-3 rounded-md">
+              <h2 className="font-bold">
+                 Standar Pelayanan Minimal (SPM)
+              </h2>
+              <div className="flex flex-row mt-4">
+                <div className="space-y-4">
+                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                    <h2 className="font-semibold">
+                      ABS Target Sasaran
+                    </h2>
+                    <p>93,4792%</p>
+                  </button>
+                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                    <h2 className="font-semibold">Realisasi</h2>
+                    <p>100</p>
+                  </button>
+                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                    <h2 className="font-semibold">Nilai</h2>
+                    <p>100%</p>
+                  </button>
                 </div>
-              </button>
-              <button className="text-left flex space-x-2 border-2 rounded-md w-72">
-                <img className="w-14" src={icon} alt="" />
-                <div className="pr-8">
-                  <h2 className="font-semibold text-lg">ABS Target Sasaran</h2>
-                  <p>6</p>
+              </div>
+            </div>
+            <div className="border-2 p-3 rounded-md">
+              <h2 className="font-bold">
+                Cakupan Terapi Pencegahan TB
+              </h2>
+              <div className="flex flex-row mt-4">
+                <div className="space-y-4">
+                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                    <h2 className="font-semibold">
+                      ABS Target Sasaran
+                    </h2>
+                    <p>2</p>
+                  </button>
+                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                    <h2 className="font-semibold">Realisasi</h2>
+                    <p>0</p>
+                  </button>
+                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                    <h2 className="font-semibold">Nilai</h2>
+                    <p>0%</p>
+                  </button>
                 </div>
-              </button>
-              <button className="text-left flex space-x-2 border-2 rounded-md w-72">
-                <img className="w-14" src={icon} alt="" />
-                <div className="pr-8">
-                  <h2 className="font-semibold text-lg">
-                    Realisasi Sampai Juli
-                  </h2>
-                  <p>5</p>
+              </div>
+            </div>
+            <div className="border-2 p-3 rounded-md">
+              <h2 className="font-bold">
+                Cakupan Penyuluhan
+              </h2>
+              <div className="flex flex-row mt-4">
+                <div className="space-y-4">
+                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                    <h2 className="font-semibold">
+                      ABS Target Sasaran
+                    </h2>
+                    <p>12</p>
+                  </button>
+                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                    <h2 className="font-semibold">Realisasi</h2>
+                    <p>12</p>
+                  </button>
+                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                    <h2 className="font-semibold">Nilai</h2>
+                    <p>100%</p>
+                  </button>
                 </div>
-              </button>
+              </div>
+            </div>
+            <div className="border-2 p-3 rounded-md">
+              <h2 className="font-bold">
+                Cakupan Skrining TB
+              </h2>
+              <div className="flex flex-row mt-4">
+                <div className="space-y-4">
+                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                    <h2 className="font-semibold">
+                      ABS Target Sasaran
+                    </h2>
+                    <p>2234,25</p>
+                  </button>
+                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                    <h2 className="font-semibold">Realisasi</h2>
+                    <p>1291</p>
+                  </button>
+                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                    <h2 className="font-semibold">Nilai</h2>
+                    <p>57,8%</p>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -13,7 +13,7 @@ function App() {
 				<Route element={<ProtectedUser />}>
 					<Route path="/admin" element={<AdminPage />} />
 					<Route path="/addacc" element={<AddAccount />} />
-					<Route path="/editacc" element={<EditAccount />} />
+					<Route path="/editPusk" element={<EditAccount />} />
 					<Route path="/details" element={<Details />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 				</Route>

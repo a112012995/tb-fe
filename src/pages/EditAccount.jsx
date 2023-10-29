@@ -4,20 +4,30 @@ import { useDispatch, useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import { logout } from "../store/actions/auth";
 import { getLocationFaskes } from "../store/actions/location";
+import * as XLSX from "xlsx";
+import { createNilai } from "../store/actions/penilaian";
 
 const itemsPerPage = 8;
 const EditAccount = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { locFaskes } = useSelector((state) => state.locationReducers);
-  console.log(locFaskes);
+  // console.log(locFaskes);
 
   useEffect(() => {
     dispatch(getLocationFaskes());
   }, [dispatch]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  // const [users, setUsers] = useState(data);
+  const [penilaian, setPenilaian] = useState("");
+  const [popUp, setPopUp] = useState(false);
+  // const [id_pusk, setId_pusk] = useState("");
+  // const [kegiatan, setKegiatan] = useState("");
+  // const [sasaran, setSasaran] = useState("");
+  // const [target, setTarget] = useState("");
+  // const [realisasi, setRealisasi] = useState("");
+  // const [capaian, setCapaian] = useState("");
+  // const [nilai, setNilai] = useState("");
 
   const [clickedArrow, setClickedArrow] = useState(null);
   const handlePageChange = (pageNumber) => {
@@ -32,6 +42,81 @@ const EditAccount = () => {
   const navigateToNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
     setClickedArrow("next");
+  };
+
+  const columnMappings = {
+    1: "satuan",
+    __EMPTY_7: "abs_target",
+    "PUSKESMAS PONCOL": "sasaran",
+    __EMPTY_2: "kegiatan",
+    __EMPTY_8: "realisasi",
+    __EMPTY_5: "target",
+    __EMPTY_9: "capaian",
+    __EMPTY_10: "nilai  ",
+  };
+
+  const readUploadFile = (e) => {
+    e.preventDefault();
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      if (file.name.endsWith(".xls") || file.name.endsWith(".xlsx")) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const data = e.target.result;
+          const workbook = XLSX.read(data, { type: "array" });
+          const sheetName = workbook.SheetNames[0];
+          const worksheet = workbook.Sheets[sheetName];
+          const json = XLSX.utils.sheet_to_json(worksheet);
+
+          const specificRows = json.slice(26, 44);
+          const updatedJsonData = specificRows.map((item) => {
+            for (const originalColumnName in columnMappings) {
+              const newColumnName = columnMappings[originalColumnName];
+              if (item[originalColumnName] !== undefined) {
+                item[newColumnName] = item[originalColumnName];
+                delete item[originalColumnName];
+              }
+            }
+            // console.log(typeof item);
+            // alert("data masuk")
+            return item;
+          });
+          setPenilaian(updatedJsonData);
+        };
+        reader.readAsArrayBuffer(file);
+      } else {
+        alert("Silakan unggah file Excel (.xls atau .xlsx) yang valid.");
+      }
+    }
+  };
+
+  // console.log(penilaian);
+
+  const formPenilaian = (id, event) => {
+    penilaian.forEach(async (item) => {
+      const sasaran = item.sasaran.toString();
+      const target = item.abs_target.toString();
+      const realisasi = item.realisasi.toString();
+      const capaian = item.capaian.toString();
+      const nilai = item.sasaran.toString();
+      // console.log(item.kegiatan);
+      const data = {
+        id_pusk: id,
+        kegiatan: item.kegiatan,
+        sasaran,
+        target,
+        realisasi,
+        capaian,
+        nilai,
+      };
+      const res = await dispatch(createNilai(data))
+        .then((response) => ({ response }))
+        .catch((error) => ({ error }));
+        console.log(res)
+      if (res.response) {
+        alert("berhasil tambah data");
+      }
+    });
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -111,8 +196,8 @@ const EditAccount = () => {
                     </thead>
                     <tbody className="text-black">
                       {currentData && currentData.length > 0 ? (
-                        currentData.map((user, index) => (
-                          <tr key={user.id}>
+                        currentData.map((item, index) => (
+                          <tr key={item.id}>
                             <td
                               className={`border py-2 px-3 ${
                                 index % 2 === 0 ? "bg-white" : "bg-gray-300" // Menentukan warna latar belakang berdasarkan nomor ganjil/genap
@@ -126,7 +211,7 @@ const EditAccount = () => {
                               }`}
                             >
                               <span className="flex items-center">
-                                Puskesmas {user.nama_pusk}
+                                Puskesmas {item.nama_pusk}
                               </span>
                             </td>
                             <td
@@ -135,7 +220,7 @@ const EditAccount = () => {
                               }`}
                             >
                               <span className="flex items-center">
-                                {user.kode_pusk}
+                                {item.kode_pusk}
                               </span>
                             </td>
                             <td
@@ -144,18 +229,22 @@ const EditAccount = () => {
                               }`}
                             >
                               <div className="flex items-center justify-center space-x-2">
-                                <input
-                                  type="file"
-                                  className="file-input file-input-bordered file-input-sm w-full max-w-xs rounded-md "
-                                />
+                                <form>
+                                  <label htmlFor="upload">
+                                    <input
+                                      type="file"
+                                      name="upload"
+                                      accept=".xls, .xlsx"
+                                      id="upload"
+                                      required
+                                      onChange={readUploadFile}
+                                      className="file-input file-input-bordered file-input-sm w-full max-w-xs rounded-md "
+                                    />
+                                  </label>
+                                </form>
                                 <button
+                                  onClick={() => formPenilaian(item.id)}
                                   className="px-3 py-1 bg-[#5CB85F] text-white rounded-md"
-                                  // onClick={() => {
-                                  //   // Tambahkan logika penyimpanan di sini
-                                  //   // Misalnya, Anda dapat mengirim file ke server atau melakukan tindakan lainnya.
-                                  //   // Anda juga dapat mengakses nilai input file dengan referensinya.
-                                  //   // console.log(inputFileRef.current.files);
-                                  // }}
                                   type="submit"
                                 >
                                   Simpan

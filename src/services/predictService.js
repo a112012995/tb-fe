@@ -20,6 +20,25 @@ const PredictService = {
       throw err;
     }
   },
+
+  kerentanan: async function (id) {
+    try {
+      const response = await API.get(`api/v1/vulnerability/id=${id}`);
+      return response;
+    } catch (err) {
+      console.log("kerentanan service error", err);
+      throw err;
+    }
+  },
+  intervensi: async function (id) {
+    try {
+      const response = await API.get(`api/v1/intervention/id=${id}`);
+      return response;
+    } catch (err) {
+      console.log("intervention service error", err);
+      throw err;
+    }
+  },
 };
 
 export default PredictService;

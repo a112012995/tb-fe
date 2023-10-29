@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { statesData } from "../geojson/data";
 import { getLocationById } from "../store/actions/location";
+import { getIntervention, getKerentanan } from "../store/actions/predict";
 import { useNavigate } from "react-router-dom";
 
 const Map = () => {
@@ -15,6 +16,10 @@ const Map = () => {
   const { data, dataById, totalPas, survei } = useSelector(
     (state) => state.locationReducers
   );
+  const { kerentanan, intervensi } = useSelector(
+    (state) => state.predictReducers
+  );
+  console.log(intervensi);
 
   //   get response from api get location by id
   const getById = async (id) => {
@@ -22,6 +27,20 @@ const Map = () => {
       .then((response) => ({ response }))
       .catch((error) => ({ error }));
   };
+
+  const kerentananHandler = async (id) => {
+    await dispatch(getKerentanan(id))
+      .then((response) => ({ response }))
+      .catch((error) => ({ error }));
+  };
+
+  const interventionHandler = async (id) => {
+    await dispatch(getIntervention(id))
+      .then((response) => ({ response }))
+      .catch((error) => ({ error }));
+  };
+
+  // console.log(getKerentanan(8));
 
   const rendah = data.filter((data) => data.jumlah_pasien === 0);
   const lumayan = data.filter(
@@ -88,6 +107,8 @@ const Map = () => {
     const data = e.target.feature.properties.gid;
     var layer = e.target;
     getById(data);
+    kerentananHandler(data);
+    interventionHandler(data);
     layer.setStyle({
       fillOpacity: 1,
       weight: 4,
@@ -174,13 +195,36 @@ const Map = () => {
                         max="100"
                       ></progress>
                     </div>
+                    {kerentanan === "tidak rentan"}
+                    {/* <p className="text-sm">Kerentanan: {totalPas}</p> */}
+                    <p
+                      className={`text-sm font-semibold mt-2 ${
+                        kerentanan === "Tidak Rentan"
+                          ? "text-[#059335]"
+                          : kerentanan === "Cukup Rentan"
+                          ? "text-[#FFB800]"
+                          : kerentanan === "Rentan"
+                          ? "text-[#ff0000]"
+                          : kerentanan === "Sangat Rentan"
+                          ? "text-[YOUR_SANGAT_RENTAN_COLOR]"
+                          : ""
+                      }`}
+                    >
+                      Kerentanan: {kerentanan}
+                    </p>
+                    <div className="space-y-2 mt-2">
+                      {intervensi &&
+                        intervensi.map((item) => (
+                          <p className="text-sm">
+                            <span className="font-semibold">Intervensi:</span> {item.judul_intervensi}
+                          </p>
+                        ))}
+                    </div>
                   </>
                 ) : (
                   <>
                     <h2 className=" text-lg font-bold">Data</h2>
-                    <p className="text-sm">
-                      Hover on each county for more details
-                    </p>
+                    <p className="text-sm">Arahkan mouse ke peta</p>
                   </>
                 )}
               </div>

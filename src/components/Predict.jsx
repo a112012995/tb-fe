@@ -23,7 +23,6 @@ const Predict = () => {
   const { dataReal, dataPredict } = useSelector(
     (state) => state.predictReducers
   );
-  //   console.log(dataReal)
 
   const combinedData = dataPredict?.map((predictedItem) => {
     const realItem = dataReal.find(

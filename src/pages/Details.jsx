@@ -9,6 +9,7 @@ import { logout } from "../store/actions/auth";
 import { getPasienByIdKel } from "../store/actions/pasien";
 import Ews from "../components/Ews";
 import Predict from "../components/Predict";
+import { getIntervention } from "../store/actions/predict";
 
 const Details = () => {
   const { state } = useLocation();
@@ -17,6 +18,7 @@ const Details = () => {
   useEffect(() => {
     dispatch(getLocationById(state.areaId));
     dispatch(getPasienByIdKel(state.areaId));
+    dispatch(getIntervention(state.areaId))
   }, [dispatch, state]);
   const { dataById, totalPas } = useSelector((state) => state.locationReducers);
   const { dataByIdKel } = useSelector((state) => state.pasienReducers);

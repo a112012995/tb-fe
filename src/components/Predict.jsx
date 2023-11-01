@@ -63,9 +63,10 @@ const Predict = () => {
             type="monotone"
             dataKey="RealValue"
             stroke="#8884d8"
+            strokeWidth={2}
             activeDot={{ r: 8 }}
           />
-          <Line type="monotone" dataKey="PredictedValue" stroke="#82ca9d" />
+          <Line strokeWidth={2} type="monotone" dataKey="PredictedValue" stroke="#82ca9d" />
         </LineChart>
       </ResponsiveContainer>
     </div>

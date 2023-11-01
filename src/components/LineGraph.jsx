@@ -34,6 +34,7 @@ const LineGraph = () => {
   const { dataKel, dataFas } = useSelector((state) => state.locationReducers);
   const { data } = useSelector((state) => state.pasienReducers);
   const dataDef = useSelector((state) => state.locationReducers.data);
+  dataDef.sort((a, b) => b.jumlah_pasien - a.jumlah_pasien);
   // console.log(dataDef);
 
   const sortedData = data.sort((a, b) => {

@@ -1,27 +1,44 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import symbol from "../assets/search.svg";
+import { getFaskesById } from "../store/actions/location";
 // import icon from "../assets/plusIcon.svg";
 
 const Pkp = () => {
-  const { locFaskes } = useSelector((state) => state.locationReducers);
-  console.log(locFaskes);
+  const dispatch = useDispatch();
+  const { locFaskes, dataFasId } = useSelector(
+    (state) => state.locationReducers
+  );
+  console.log(dataFasId);
   const [searchQuery, setSearchQuery] = useState("");
+  const [error, setError] = useState(false);
 
   // Filter the data based on the search query
   const filteredData = locFaskes.filter((item) =>
     item.nama_pusk.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const faskesById = async (id) => {
+    const res = await dispatch(getFaskesById(id))
+      .then((response) => ({ response }))
+      .catch((error) => ({ error }));
+    console.log(res);
+    if (res.error) {
+      setError(res.error.response.data.message);
+    } else {
+      setError(false);
+    }
+  };
+
   return (
-    <div className="mt-20">
+    <div className="mt-20" id="pkp">
       <h2 className="text-xl font-bold mb-4 text-[#293241] underline">
-        Penilaian Faskes
+        Penilaian Puskesmas
       </h2>
       <div className="flex min-[240px]:flex-col md:flex-row md:space-x-10 min-[240px]:space-y-8 md:space-y-0">
         <div className=" bg-white shadow-md rounded-lg ">
           <div className="flex flex-row space-x-4 bg-[#4F709C] p-3 rounded-t-md justify-between">
-            <h4 className="text-xl font-semibold text-white">Faskes</h4>
+            <h4 className="text-xl font-semibold text-white">Puskesmas</h4>
             <div class="flex bg-white input input-sm input-bordered border-gray-300 rounded-md space-x-3 mx-5 w-44">
               <img src={symbol} className="w-4" alt="" />
               <input
@@ -36,8 +53,13 @@ const Pkp = () => {
           <div className="divide-y-2 overflow-auto h-[340px] px-4">
             {filteredData?.map((item) => (
               <div key={item.id} className="py-2">
-                <button className="text-left w-full">
-                  <h2 className="text-lg font-semibold">{item.nama_pusk}</h2>
+                <button
+                  onClick={() => faskesById(item.id)}
+                  className="text-left w-full"
+                >
+                  <h2 className="text-lg font-semibold">
+                    Puskesmas {item.nama_pusk}
+                  </h2>
                   <p className="text-zinc-400">
                     Kode Puskesmas {item.kode_pusk}
                   </p>
@@ -47,109 +69,57 @@ const Pkp = () => {
           </div>
         </div>
         <div className="w-[1000px] bg-white rounded-lg shadow-md py-4 px-8">
-          <div className="flex justify-between border-b-2 pb-2">
-            <div>
-              <h2 className="text-xl font-semibold ">Puskesmas Poncol</h2>
-              <p>Rata-rata 70%</p>
+          {!dataFasId && !error && (
+            <div className=" rounded-lg w-full p-4 text-center bg-[#CFE2FF] border-[#9EC5FE] border-2">
+              <h2 className="text-2xl font-semibold text-[#052C65]">
+                Pilih Puskesmas
+              </h2>
             </div>
-            {/* <h4 className="place-self-center underline font-bold">
+          )}
+          {!error && dataFasId ? (
+            <>
+              <div className=" border-b-2 pb-2">
+                <div>
+                  <h2 className="text-xl font-semibold ">
+                    Puskesmas {dataFasId.nama_pusk}
+                  </h2>
+                  <p>Kode Puskesmas {dataFasId.kode_pusk}</p>
+                </div>
+                {/* <h4 className="place-self-center underline font-bold">
               Selengkapnya
             </h4> */}
-          </div>
-          <div className="grid auto-cols-[308px] grid-flow-col gap-6 overflow-x-auto mt-4">
-            <div className="border-2 p-3 rounded-md">
-              <h2 className="font-bold">
-                 Standar Pelayanan Minimal (SPM)
-              </h2>
-              <div className="flex flex-row mt-4">
-                <div className="space-y-4">
-                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                    <h2 className="font-semibold">
-                      ABS Target Sasaran
-                    </h2>
-                    <p>93,4792%</p>
-                  </button>
-                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                    <h2 className="font-semibold">Realisasi</h2>
-                    <p>100</p>
-                  </button>
-                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                    <h2 className="font-semibold">Nilai</h2>
-                    <p>100%</p>
-                  </button>
-                </div>
               </div>
-            </div>
-            <div className="border-2 p-3 rounded-md">
-              <h2 className="font-bold">
-                Cakupan Terapi Pencegahan TB
-              </h2>
-              <div className="flex flex-row mt-4">
-                <div className="space-y-4">
-                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                    <h2 className="font-semibold">
-                      ABS Target Sasaran
-                    </h2>
-                    <p>2</p>
-                  </button>
-                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                    <h2 className="font-semibold">Realisasi</h2>
-                    <p>0</p>
-                  </button>
-                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                    <h2 className="font-semibold">Nilai</h2>
-                    <p>0%</p>
-                  </button>
-                </div>
+              <div className="grid auto-cols-[308px] grid-flow-col gap-6 overflow-x-auto mt-4">
+                {dataFasId.penilaians?.map((item) => (
+                  <div key={item.id} className="border-2 p-3 rounded-md">
+                    <h2 className="font-bold">{item.kegiatan}</h2>
+                    <div className="flex flex-row mt-4">
+                      <div className="space-y-4">
+                        <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                          <h2 className="font-semibold">ABS Target Sasaran</h2>
+                          <p>{item.target}</p>
+                        </button>
+                        <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                          <h2 className="font-semibold">Realisasi</h2>
+                          <p>{item.realisasi}</p>
+                        </button>
+                        <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                          <h2 className="font-semibold">Nilai</h2>
+                          <p>{Math.round(item.nilai * 100)}%</p>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
+            </>
+          ) : error ? (
+            <div className=" rounded-lg w-full p-4 text-center bg-[#FFF5DC]">
+              <h2 className="text-2xl font-semibold text-[#FFB800]">{error}</h2>
             </div>
-            <div className="border-2 p-3 rounded-md">
-              <h2 className="font-bold">
-                Cakupan Penyuluhan
-              </h2>
-              <div className="flex flex-row mt-4">
-                <div className="space-y-4">
-                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                    <h2 className="font-semibold">
-                      ABS Target Sasaran
-                    </h2>
-                    <p>12</p>
-                  </button>
-                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                    <h2 className="font-semibold">Realisasi</h2>
-                    <p>12</p>
-                  </button>
-                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                    <h2 className="font-semibold">Nilai</h2>
-                    <p>100%</p>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="border-2 p-3 rounded-md">
-              <h2 className="font-bold">
-                Cakupan Skrining TB
-              </h2>
-              <div className="flex flex-row mt-4">
-                <div className="space-y-4">
-                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                    <h2 className="font-semibold">
-                      ABS Target Sasaran
-                    </h2>
-                    <p>2234,25</p>
-                  </button>
-                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                    <h2 className="font-semibold">Realisasi</h2>
-                    <p>1291</p>
-                  </button>
-                  <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                    <h2 className="font-semibold">Nilai</h2>
-                    <p>57,8%</p>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
     </div>

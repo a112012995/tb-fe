@@ -28,6 +28,7 @@ export const DELETE_USER = "DELETE_USER";
 
 export const REAL_DATA = "REAL_DATA";
 export const PREDICTED_DATA = "PREDICTED_DATA";
+export const GET_KERENTANAN = "GET_KERENTANAN";
 export const KERENTANAN = "KERENTANAN";
 export const INTERVENSI = "INTERVENSI";
 

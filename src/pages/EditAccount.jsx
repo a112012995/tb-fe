@@ -20,7 +20,7 @@ const EditAccount = () => {
     (state) => state.locationReducers
   );
   const { nilaiPusk } = useSelector((state) => state.penilaianReducers);
-  console.log(nilaiPusk);
+  // console.log(nilaiPusk);
 
   useEffect(() => {
     dispatch(getLocationFaskes());
@@ -56,14 +56,16 @@ const EditAccount = () => {
   };
 
   const columnMappings = {
-    1: "satuan",
-    __EMPTY_7: "abs_target",
-    "PUSKESMAS PONCOL": "sasaran",
-    __EMPTY_2: "kegiatan",
-    __EMPTY_8: "realisasi",
-    __EMPTY_5: "target",
-    __EMPTY_9: "capaian",
-    __EMPTY_10: "nilai",
+    "Table 1": "kegiatan",
+    __EMPTY: "satuan",
+    __EMPTY_1: "target",
+    __EMPTY_2: "sasaran",
+    __EMPTY_3: "target_sasaran",
+    __EMPTY_4: "realisasi",
+    __EMPTY_5: "capaian",
+    __EMPTY_6: "nilai",
+    __EMPTY_7: "bulan",
+    __EMPTY_8: "tahun",
   };
 
   const readUploadFile = (e) => {
@@ -79,7 +81,8 @@ const EditAccount = () => {
           const worksheet = workbook.Sheets[sheetName];
           const json = XLSX.utils.sheet_to_json(worksheet);
 
-          const specificRows = json.slice(26, 44);
+          const specificRows = json.slice(1, 20);
+          console.log(specificRows)
           const updatedJsonData = specificRows.map((item) => {
             for (const originalColumnName in columnMappings) {
               const newColumnName = columnMappings[originalColumnName];
@@ -101,7 +104,7 @@ const EditAccount = () => {
     }
   };
 
-  console.log(penilaian);
+  // console.log(penilaian);
 
   const formPenilaian = (event) => {
     // const getScore = dispatch(getNilaiPusk(id));
@@ -110,25 +113,33 @@ const EditAccount = () => {
       alert("Silakan unggah file Excel (.xls atau .xlsx) yang valid.");
     } else {
       penilaian?.forEach(async (item) => {
+        const satuan = item.satuan.toString();
+        const target = item.target.toString();
         const sasaran = item.sasaran.toString();
-        const target = item.abs_target.toString();
+        const target_sasaran = item.target_sasaran.toString();
         const realisasi = item.realisasi.toString();
         const capaian = item.capaian.toString();
         const nilai = item.nilai.toString();
+        const bulan = item.bulan;
+        const tahun = item.tahun;
         // console.log(item.kegiatan);
         const data = {
           id_pusk: id,
           kegiatan: item.kegiatan,
-          sasaran,
+          satuan,
           target,
+          sasaran,
+          target_sasaran,
           realisasi,
           capaian,
           nilai,
+          bulan,
+          tahun
         };
         const res = await dispatch(createNilai(data))
           .then((response) => ({ response }))
           .catch((error) => ({ error }));
-        console.log(res);
+        // console.log(res);
         if (!res.error) {
           setModal(false);
           setError(false);
@@ -252,10 +263,10 @@ const EditAccount = () => {
                 </button>
                 <button className="flex items-center">
                   <a
-                    href="/editPusk"
+                    href="/admin"
                     className="text-2xl font-semibold scroll-smooth text-white"
                   >
-                    Puskesmas
+                    User
                   </a>
                 </button>
                 <button>
@@ -435,7 +446,7 @@ const EditAccount = () => {
                       <a href="/dashboard">Lihat Dashboard</a>
                     </button>
                     <div className="divider">OR</div>
-                    {/* <form>
+                    <form>
                       <label htmlFor="upload">
                         <input
                           type="file"
@@ -447,13 +458,13 @@ const EditAccount = () => {
                           className="file-input w-full max-w-xs"
                         />
                       </label>
-                    </form> */}
+                    </form>
                     <button
-                      onClick={() => deleteById(id)}
+                      onClick={() => formPenilaian(id)}
                       className="px-4 py-2 bg-[#DC3545] text-white font-semibold text-md rounded-md"
                       type="submit"
                     >
-                      Hapus Data Penilaian
+                      Upload Penilaian baru
                     </button>
                   </div>
                 </div>

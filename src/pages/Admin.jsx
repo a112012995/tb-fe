@@ -2,20 +2,31 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../components/Footer";
+import {jwtDecode} from 'jwt-decode';
 import { getAllUser, deleteUser } from "../store/actions/admin";
 import { logout } from "../store/actions/auth";
 
 const itemsPerPage = 5;
 const AdminPage = () => {
+  const accessToken = localStorage.getItem("accessToken");
+  const [token, setToken] = useState(false);
+
+  // Define your JWT secret key (used for verifying the token)
+  // var token = accessToken;
+  // token = token.replace('Bearer','');
+  // var jwt = require('jsonwebtoken');
+  // var decoded = jwt.decode(token);
+  // console.log(decoded)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data } = useSelector((state) => state.adminReducers);
-  console.log(data);
-
+  
   useEffect(() => {
     dispatch(getAllUser());
-  }, [dispatch]);
-
+    setToken(jwtDecode(accessToken))
+  }, [dispatch, accessToken]);
+  
+  console.log(token);
   const [currentPage, setCurrentPage] = useState(1);
   // const [users, setUsers] = useState(data);
 
@@ -81,7 +92,7 @@ const AdminPage = () => {
               </div>
             </div>
             <div className="navbar-end gap-12 relative">
-            <button className="flex items-center">
+              <button className="flex items-center">
                 <a
                   href="/dashboard"
                   className="text-2xl font-semibold scroll-smooth text-white"
@@ -94,7 +105,7 @@ const AdminPage = () => {
                   href="/editPusk"
                   className="text-2xl font-semibold scroll-smooth text-white"
                 >
-                  Puskesmas
+                  PKP
                 </a>
               </button>
               <button>

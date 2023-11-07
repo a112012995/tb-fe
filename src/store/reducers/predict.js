@@ -1,6 +1,7 @@
-import { REAL_DATA, PREDICTED_DATA, KERENTANAN, INTERVENSI } from "../types";
+import { REAL_DATA, PREDICTED_DATA, KERENTANAN, INTERVENSI, GET_KERENTANAN } from "../types";
 
 const initialState = {
+  dataKerentanan: false,
   dataReal: [],
   dataPredict: [],
   kerentanan: false,
@@ -26,6 +27,11 @@ const predictReducers = (state = initialState, action) => {
         ...state,
         kerentanan: payload.kategori_kerentanan,
       };
+      case GET_KERENTANAN:
+        return {
+          ...state,
+          dataKerentanan: payload,
+        };
       case INTERVENSI:
       return {
         ...state,

@@ -3,7 +3,8 @@ import {
   PREDICTED_DATA,
   REAL_DATA,
   KERENTANAN,
-  INTERVENSI
+  INTERVENSI,
+  GET_KERENTANAN
 } from "../types";
 
 export const realData = (id) =>
@@ -39,6 +40,18 @@ export const realData = (id) =>
       dispatch({ type: KERENTANAN, payload: response.data });
       // console.log(response)
       return response;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+
+  export const getAllKerentanan = (params, history) =>
+  async function (dispatch) {
+    try {
+      const response = await predictService.getKerentanan(params);
+      dispatch({ type: GET_KERENTANAN, payload: response.data });
+      console.log(response)
     } catch (error) {
       console.log(error);
       throw error;

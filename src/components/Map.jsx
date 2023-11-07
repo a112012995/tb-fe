@@ -8,18 +8,19 @@ import { getIntervention, getKerentanan } from "../store/actions/predict";
 import { useNavigate } from "react-router-dom";
 
 const Map = () => {
+  const accessToken = localStorage.getItem("accessToken");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [onSelect, setOnSelect] = useState(false);
   const [modal, setModal] = useState(false);
-  const { data, dataById, totalPas, survei } = useSelector(
+  const { data, dataById, totalPas, hit } = useSelector(
     (state) => state.locationReducers
   );
-  const { kerentanan, intervensi } = useSelector(
+  const { kerentanan, intervensi, dataKerentanan } = useSelector(
     (state) => state.predictReducers
   );
-  console.log(intervensi);
+  // console.log(dataKerentanan);
 
   //   get response from api get location by id
   const getById = async (id) => {
@@ -63,35 +64,28 @@ const Map = () => {
   );
   const serem = data.filter((data) => data.jumlah_pasien > 170);
 
-  // console.log(cukup);
-
   //   setting for mapping use leaflet
   const center = [-7.019679560453046, 110.39818740013446];
 
   let dataCase = {};
-  data?.forEach((item) => {
-    dataCase[item.id] = item.jumlah_pasien;
-  });
+  if (dataKerentanan) {
+    dataKerentanan?.forEach((item) => {
+      dataCase[item.id] = item.kategori_kerentanan;
+    });
+  }
+  console.log(dataKerentanan);
 
   const style = (feature) => {
-    let totalData = dataCase?.[feature.properties.gid];
+    let ketKerentanan = dataCase?.[feature.properties.gid];
     let colors;
-    if (totalData > 170) {
-      colors = "#800026";
-    } else if (totalData > 150) {
-      colors = "#BD0026";
-    } else if (totalData > 125) {
-      colors = "#E31A1C";
-    } else if (totalData > 80) {
-      colors = "#FC4E2A";
-    } else if (totalData > 50) {
-      colors = "#FD8D3C";
-    } else if (totalData > 25) {
-      colors = "#FEB24C";
-    } else if (totalData > 0) {
-      colors = "#FED976";
-    } else {
-      colors = "#FFEDA0";
+    if (ketKerentanan === "Tidak Rentan") {
+      colors = "#059335";
+    } else if (ketKerentanan === "Cukup Rentan") {
+      colors = "#FFB800";
+    } else if (ketKerentanan === "Rentan") {
+      colors = "#ff0000";
+    } else if (ketKerentanan === "Sangat Rentan") {
+      colors = "#00000";
     }
     return {
       fillColor: colors,
@@ -139,13 +133,6 @@ const Map = () => {
     });
   };
 
-  const modalHandler = (range) => {
-    setModal(range);
-  };
-
-  // console.log(modal)
-  //   setting for mapping use leaflet (DONE)
-
   return (
     <>
       <div id="map">
@@ -163,35 +150,35 @@ const Map = () => {
                     <h2 className=" text-lg font-bold">
                       {dataById.nama_kelurahan}
                     </h2>
-                    <p className="text-sm">Jumlah Kasus: {totalPas}</p>
+                    {accessToken && (
+                      <p className="text-sm">Jumlah Kasus: {totalPas}</p>
+                    )}
                     <div className="mt-3">
                       <div className="flex justify-between">
                         <span>Tingkat Literasi</span>
-                        <p>{Math.round(survei.persentase_literasi * 100)}%</p>
+                        <p>{Math.round(hit.persentase_literasi * 100)}%</p>
                       </div>
                       <progress
                         className="progress progress-primary w-full"
-                        value={Math.round(survei.persentase_literasi * 100)}
+                        value={Math.round(hit.persentase_literasi * 100)}
                         max="100"
                       ></progress>
                       <div className="flex justify-between">
                         <span>Stigma Masyarakat</span>
-                        <p>{Math.round(survei.persentase_stigma * 100)}%</p>
+                        <p>{Math.round(hit.persentase_stigma * 100)}%</p>
                       </div>
                       <progress
                         className="progress progress-primary w-full"
-                        value={Math.round(survei.persentase_stigma * 100)}
+                        value={Math.round(hit.persentase_stigma * 100)}
                         max="100"
                       ></progress>
                       <div className="flex justify-between">
                         <span>Tingkat Pengetahuan</span>
-                        <p>
-                          {Math.round(survei.persentase_pengetahuan * 100)}%
-                        </p>
+                        <p>{Math.round(hit.persentase_pengetahuan * 100)}%</p>
                       </div>
                       <progress
                         className="progress progress-primary w-full"
-                        value={Math.round(survei.persentase_pengetahuan * 100)}
+                        value={Math.round(hit.persentase_pengetahuan * 100)}
                         max="100"
                       ></progress>
                     </div>
@@ -206,7 +193,7 @@ const Map = () => {
                           : kerentanan === "Rentan"
                           ? "text-[#ff0000]"
                           : kerentanan === "Sangat Rentan"
-                          ? "text-[YOUR_SANGAT_RENTAN_COLOR]"
+                          ? "text-black"
                           : ""
                       }`}
                     >
@@ -216,7 +203,8 @@ const Map = () => {
                       {intervensi &&
                         intervensi.map((item) => (
                           <p className="text-sm">
-                            <span className="font-semibold">Intervensi:</span> {item.judul_intervensi}
+                            <span className="font-semibold">Intervensi:</span>{" "}
+                            {item.judul_intervensi}
                           </p>
                         ))}
                     </div>
@@ -240,203 +228,7 @@ const Map = () => {
             style={style}
           />
         </MapContainer>
-        <div className="mt-2">
-          <h1 className="font-semibold">Jumlah Kasus</h1>
-          <div className="grid min-[240px]:grid-cols-2 md:flex gap-5 mt-1">
-            {/* ini model modal */}
-            <button onClick={() => modalHandler(rendah)}>
-              <div className="flex items-baseline">
-                <div>
-                  <svg height="20" width="20">
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="6"
-                      fill="#FFEDA0"
-                      stroke="black"
-                    />
-                  </svg>
-                </div>
-                <div className="flex-col ml-3 text-start">
-                  <p>0 - 0</p>
-                  <p>{`${rendah.length} Kelurahan`}</p>
-                </div>
-              </div>
-            </button>
-
-            <button onClick={() => modalHandler(lumayan)}>
-              <div className="flex items-baseline">
-                <div>
-                  <svg height="20" width="20">
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="6"
-                      fill="#FED976"
-                      stroke="black"
-                    />
-                  </svg>
-                </div>
-                <div className="flex-col ml-3 text-start">
-                  <p>1 - 25</p>
-                  <p>{`${lumayan.length} Kelurahan`}</p>
-                </div>
-              </div>
-            </button>
-            <button onClick={() => modalHandler(cukup)}>
-              <div className="flex items-baseline">
-                <div>
-                  <svg height="20" width="20">
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="6"
-                      fill="#FEB24C"
-                      stroke="black"
-                    />
-                  </svg>
-                </div>
-                <div className="flex-col ml-3 text-start">
-                  <p>26 - 50</p>
-                  <p>{`${cukup.length} Kelurahan`}</p>
-                </div>
-              </div>
-            </button>
-            <button onClick={() => modalHandler(agakRentan)}>
-              <div className="flex items-baseline">
-                <div>
-                  <svg height="20" width="20">
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="6"
-                      fill="#FD8D3C"
-                      stroke="black"
-                    />
-                  </svg>
-                </div>
-                <div className="flex-col ml-3 text-start">
-                  <p>51 - 80</p>
-                  <p>{`${agakRentan.length} Kelurahan`}</p>
-                </div>
-              </div>
-            </button>
-            <button onClick={() => modalHandler(rentan)}>
-              <div className="flex items-baseline">
-                <div>
-                  <svg height="20" width="20">
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="6"
-                      fill="#FC4E2A"
-                      stroke="black"
-                    />
-                  </svg>
-                </div>
-                <div className="flex-col ml-3 text-start">
-                  <p>81 - 125</p>
-                  <p>{`${rentan.length} Kelurahan`}</p>
-                </div>
-              </div>
-            </button>
-
-            <button onClick={() => modalHandler(iniBahaya)}>
-              <div className="flex items-baseline">
-                <div>
-                  <svg height="20" width="20">
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="6"
-                      fill="#E31A1C"
-                      stroke="black"
-                    />
-                  </svg>
-                </div>
-                <div className="flex-col ml-3 text-start">
-                  <p>126 - 150</p>
-                  <p>{`${iniBahaya.length} Kelurahan`}</p>
-                </div>
-              </div>
-            </button>
-
-            <button onClick={() => modalHandler(rentanBanget)}>
-              <div className="flex items-baseline">
-                <div>
-                  <svg height="20" width="20">
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="6"
-                      fill="#BD0026"
-                      stroke="black"
-                    />
-                  </svg>
-                </div>
-                <div className="flex-col ml-3 text-start">
-                  <p>151 - 170</p>
-                  <p>{`${rentanBanget.length} Kelurahan`}</p>
-                </div>
-              </div>
-            </button>
-
-            <button onClick={() => modalHandler(serem)}>
-              <div className="flex items-baseline">
-                <div>
-                  <svg height="20" width="20">
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="6"
-                      fill="#800026"
-                      stroke="black"
-                    />
-                  </svg>
-                </div>
-                <div className="flex-col ml-3 text-start">
-                  <p>170 ++</p>
-                  <p>{`${serem.length} Kelurahan`}</p>
-                </div>
-              </div>
-            </button>
-          </div>
-        </div>
       </div>
-
-      {modal && (
-        <div class="fixed inset-0 flex items-center justify-center z-[1000]">
-          <div class="modal-box rounded-md bg-[#4F709C] text-white scroll-smooth will-change-scroll h-96 relative">
-            <div class="overflow-x-auto">
-              <table class="table">
-                <thead>
-                  <tr class="font-bold text-sm text-white border-b-slate-400">
-                    <th>No</th>
-                    <th>Kelurahan</th>
-                    <th>Jumlah Kasus</th>
-                    <th>Tingkat Kerentanan</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {modal &&
-                    modal?.map((item, no) => (
-                      <tr className="text-center border-b-transparent">
-                        <th>{no + 1}</th>
-                        <td className="text-start">{item.nama_kelurahan}</td>
-                        <td>{item.jumlah_pasien}</td>
-                        <td>Rentan</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div
-            class="modal-backdrop fixed inset-0 bg-black opacity-50"
-            onClick={() => setModal(false)}
-          ></div>
-        </div>
-      )}
     </>
   );
 };

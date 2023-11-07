@@ -16,7 +16,7 @@ export const getLocation = (params, history) =>
       dispatch({ type: GET_LOCATION, payload: response.data });
       // console.log(response)
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -28,7 +28,7 @@ export const getLocation = (params, history) =>
       dispatch({ type: GET_LOCATION_FASKES, payload: response.data });
       // console.log(response)
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -41,7 +41,7 @@ export const getLocationById = (id) =>
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -53,7 +53,7 @@ export const getKelurahan = (params, history) =>
       dispatch({ type: GET_KELURAHAN, payload: response.data });
       // console.log(response)
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -66,7 +66,7 @@ export const getKelurahanById = (id) =>
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -78,7 +78,7 @@ export const getFaskes = (params, history) =>
       dispatch({ type: GET_FASKES, payload: response.data });
       // console.log(response)
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -91,7 +91,7 @@ export const getFaskesById = (id) =>
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };

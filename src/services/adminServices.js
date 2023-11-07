@@ -6,7 +6,7 @@ const AdminService = {
 			const response = await API.get('/api/admin/getuser', data);
 			return response;
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 			throw error;
 		}
 	},
@@ -26,7 +26,7 @@ const AdminService = {
 			const response = await API.get(`/api/admin/getUser/${id}`);
 			return response;
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 			throw err;
 		}
 	},

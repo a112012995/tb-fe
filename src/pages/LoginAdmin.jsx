@@ -31,7 +31,7 @@ const LoginAdmin = () => {
 			.then((response) => ({ response }))
 			.catch((error) => ({ error }));
 
-		console.log(res);
+		// console.log(res);
 
 		if (res.error) {
 			setError(res.error.response.data.message);

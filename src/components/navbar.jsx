@@ -45,6 +45,11 @@ const Navbar = () => {
             >
               <li>
                 <a href="#stats" className="hover:text-[#FFB800]">
+                  Manual Book
+                </a>
+              </li>
+              <li>
+                <a href="#stats" className="hover:text-[#FFB800]">
                   Tentang
                 </a>
               </li>
@@ -63,6 +68,13 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
+          <a
+            href="https://drive.google.com/file/d/17LyMeseOLjPV2ojri0wxJQapeNh-aJd5/view?usp=sharing"
+            target="_blank"
+            className="text-2xl font-semibold scroll-smooth min-[240px]:hidden md:flex"
+          >
+            Manual Book
+          </a>
           <a
             href="#stats"
             className="text-2xl font-semibold scroll-smooth min-[240px]:hidden md:flex"

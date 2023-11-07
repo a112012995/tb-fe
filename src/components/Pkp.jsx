@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import symbol from "../assets/search.svg";
-import { getFaskesById } from "../store/actions/location";
+// import { getFaskesById } from "../store/actions/location";
+import { getNilaiPusk } from "../store/actions/penilaian";
+import { useNavigate } from "react-router-dom";
 // import icon from "../assets/plusIcon.svg";
 
 const Pkp = () => {
   const dispatch = useDispatch();
-  const { locFaskes, dataFasId } = useSelector(
-    (state) => state.locationReducers
-  );
-  console.log(dataFasId);
+  const navigate = useNavigate();
+  const { locFaskes } = useSelector((state) => state.locationReducers);
+
+  const { nilaiPusk } = useSelector((state) => state.penilaianReducers);
+  console.log(nilaiPusk);
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState(false);
 
@@ -19,16 +22,25 @@ const Pkp = () => {
   );
 
   const faskesById = async (id) => {
-    const res = await dispatch(getFaskesById(id))
+    const res = await dispatch(getNilaiPusk(id))
       .then((response) => ({ response }))
       .catch((error) => ({ error }));
-    console.log(res);
+    // console.log(res);
     if (res.error) {
       setError(res.error.response.data.message);
     } else {
       setError(false);
     }
   };
+
+  const throwIdPus = () => {
+    navigate("/penilaian", {
+      state: { id_pusk: nilaiPusk.id },
+    });
+  };
+
+  const today = new Date();
+  const currentMonth = today.toLocaleString("default", { month: "long" });
 
   return (
     <div className="mt-20" id="pkp">
@@ -68,36 +80,39 @@ const Pkp = () => {
             ))}
           </div>
         </div>
-        <div className="w-[1000px] bg-white rounded-lg shadow-md py-4 px-8">
-          {!dataFasId && !error && (
+        <div className="md:w-[1000px] min-[244px]:w-full bg-white rounded-lg shadow-md py-4 px-8">
+          {!nilaiPusk && !error && (
             <div className=" rounded-lg w-full p-4 text-center bg-[#CFE2FF] border-[#9EC5FE] border-2">
               <h2 className="text-2xl font-semibold text-[#052C65]">
                 Pilih Puskesmas
               </h2>
             </div>
           )}
-          {!error && dataFasId ? (
+          {!error && nilaiPusk ? (
             <>
-              <div className=" border-b-2 pb-2">
+              <div className="flex flex-row justify-between border-b-2 pb-2">
                 <div>
                   <h2 className="text-xl font-semibold ">
-                    Puskesmas {dataFasId.nama_pusk}
+                    Puskesmas {nilaiPusk.nama_pusk}
                   </h2>
-                  <p>Kode Puskesmas {dataFasId.kode_pusk}</p>
+                  <p>Bulan {currentMonth}</p>
                 </div>
-                {/* <h4 className="place-self-center underline font-bold">
-              Selengkapnya
-            </h4> */}
+                <button
+                  onClick={() => throwIdPus()}
+                  className="place-self-center underline font-bold"
+                >
+                  Selengkapnya
+                </button>
               </div>
               <div className="grid auto-cols-[308px] grid-flow-col gap-6 overflow-x-auto mt-4">
-                {dataFasId.penilaians?.map((item) => (
+                {nilaiPusk.penilaians?.map((item) => (
                   <div key={item.id} className="border-2 p-3 rounded-md">
                     <h2 className="font-bold">{item.kegiatan}</h2>
                     <div className="flex flex-row mt-4">
                       <div className="space-y-4">
                         <button className="text-left border-2 rounded-md w-full px-4 py-1">
                           <h2 className="font-semibold">ABS Target Sasaran</h2>
-                          <p>{item.target}</p>
+                          <p>{item.target_sasaran}</p>
                         </button>
                         <button className="text-left border-2 rounded-md w-full px-4 py-1">
                           <h2 className="font-semibold">Realisasi</h2>

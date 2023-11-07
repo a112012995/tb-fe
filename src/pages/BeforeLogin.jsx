@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getLocation } from "../store/actions/location";
 import { getPasien } from "../store/actions/pasien";
+import { getAllKerentanan } from "../store/actions/predict";
 
 const BeforeLogin = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -28,7 +29,7 @@ const BeforeLogin = () => {
     // dispatch(getPasien());
     dispatch(getLocation());
     dispatch(getPasien())
-    // dispatch(getKelurahan());
+    dispatch(getAllKerentanan());
     // dispatch(getFaskes());
     // dispatch(getLocationFaskes());
   }, [dispatch]);

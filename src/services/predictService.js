@@ -30,6 +30,15 @@ const PredictService = {
       throw err;
     }
   },
+  getKerentanan: async function (data) {
+    try {
+      const response = await API.get(`api/v1/vulnerability`, data);
+      return response;
+    } catch (err) {
+      console.log("kerentanan service error", err);
+      throw err;
+    }
+  },
   intervensi: async function (id) {
     try {
       const response = await API.get(`api/v1/intervention/id=${id}`);

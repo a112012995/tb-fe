@@ -30,8 +30,8 @@ const Predict = () => {
     );
     return {
       Month: predictedItem.Month,
-      RealValue: realItem ? realItem.RealValue : null,
-      PredictedValue: predictedItem.PredictedValue,
+      Kasus: realItem ? realItem.RealValue : null,
+      Prediksi_Kasus: Math.round(predictedItem.PredictedValue),
     };
   });
 
@@ -61,12 +61,12 @@ const Predict = () => {
           <Legend />
           <Line
             type="monotone"
-            dataKey="RealValue"
+            dataKey="Kasus"
             stroke="#8884d8"
             strokeWidth={2}
             activeDot={{ r: 8 }}
           />
-          <Line strokeWidth={2} type="monotone" dataKey="PredictedValue" stroke="#82ca9d" />
+          <Line strokeWidth={2} type="monotone" dataKey="Prediksi_Kasus" stroke="#82ca9d" />
         </LineChart>
       </ResponsiveContainer>
     </div>

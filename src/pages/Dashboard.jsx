@@ -16,6 +16,7 @@ import {
   getLocationFaskes,
 } from "../store/actions/location";
 import { getPasien } from "../store/actions/pasien";
+import { getAllKerentanan } from "../store/actions/predict";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Dashboard = () => {
     dispatch(getLocation());
     dispatch(getKelurahan());
     dispatch(getFaskes());
+    dispatch(getAllKerentanan())
     dispatch(getLocationFaskes());
   }, [dispatch]);
   return (

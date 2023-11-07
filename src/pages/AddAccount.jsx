@@ -9,6 +9,7 @@ const AddAccount = () => {
   const navigate = useNavigate();
   const history = useNavigate();
   const [username, setUsername] = useState("");
+  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
 
   const handleUsername = (event) => {
@@ -18,17 +19,21 @@ const AddAccount = () => {
   const handlePassword = (event) => {
     setPassword(event.target.value);
   };
+  const handleRole = (event) => {
+    setRole(event.target.value);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
       username,
+      role,
       password,
     };
-    const res = await dispatch(createUser(data, history))
+    await dispatch(createUser(data, history))
       .then((response) => ({ response }))
       .catch((err) => ({ err }));
-    console.log(res);
+    // console.log(res);
   };
 
   const BackAdmin = () => {
@@ -50,7 +55,7 @@ const AddAccount = () => {
             </div>
           </div>
           <div className="navbar-end gap-12">
-            <a href="#" className="text-2xl font-semibold scroll-smooth">
+            <a href="/admin" className="text-2xl font-semibold scroll-smooth">
               Home
             </a>
             <a href="login" className="text-2xl font-semibold scroll-smooth">
@@ -66,11 +71,6 @@ const AddAccount = () => {
               Tambah Akun
             </div>
           </div>
-          <div className="toast">
-            <div className="alert alert-info">
-              <span>New message arrived.</span>
-            </div>
-          </div>
           <div className="w-96  bg-white">
             <form class="w-full max-w-md" onSubmit={handleSubmit}>
               <div class="md:flex md:items-center mb-6">
@@ -84,19 +84,35 @@ const AddAccount = () => {
                 </div>
                 <div class="md:w-2/3">
                   <input
-                    class="bg-white appearance-none border-2 border-gray-400 rounded-md w-full py-2 px-8 text-black leading-tight focus:outline-none focus:bg-white focus:border-black"
-                    id="inline-full-name"
-                    type="username"
-                    placeholder="Perawat"
-                    style={{
-                      fontFamily: "Plus Jakarta Sans, sans-serif",
-                      borderRadius: "20px",
-                      width: "400px",
-                      height: "42px",
-                    }}
+                    type="text"
+                    placeholder="Type here"
+                    className="input input-bordered w-full max-w-xs"
                     value={username}
                     onChange={handleUsername}
                   />
+                </div>
+              </div>
+              <div class="md:flex md:items-center mb-6">
+                <div class="md:w-1/3">
+                  <label
+                    class="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
+                    for="inline-password"
+                  >
+                    Role
+                  </label>
+                </div>
+                <div class="md:w-2/3">
+                  <select
+                    className="select select-bordered w-full max-w-xs"
+                    defaultValue={role}
+                    onChange={handleRole}
+                  >
+                    {/* <option disabled>
+                      Role
+                    </option> */}
+                    <option value={"puskesmas"}>Puskesmas</option>
+                    <option value={"stackholder"}>Stackholder</option>
+                  </select>
                 </div>
               </div>
               <div class="md:flex md:items-center mb-6">
@@ -110,16 +126,9 @@ const AddAccount = () => {
                 </div>
                 <div class="md:w-2/3">
                   <input
-                    class="bg-white appearance-none border-2 border-gray-400 justify-center rounded-md w-full py-2 px-8 text-black leading-tight focus:outline-none focus:bg-white focus:border-black"
-                    id="inline-password"
                     type="password"
-                    placeholder="*********"
-                    style={{
-                      fontFamily: "Plus Jakarta Sans, sans-serif",
-                      borderRadius: "20px",
-                      width: "400px",
-                      height: "42px",
-                    }}
+                    placeholder="********"
+                    className="input input-bordered w-full max-w-xs"
                     value={password}
                     onChange={handlePassword}
                   />

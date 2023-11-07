@@ -18,6 +18,7 @@ const initialState = {
   dataFasId: false,
   totalPas: false,
   survei: false,
+  hit: false,
   pasien: false,
   loading: true,
 };
@@ -41,9 +42,10 @@ const locationReducers = (state = initialState, action) => {
     case GET_LOCATION_BY_ID:
       return {
         ...state,
-        dataById: payload.data,
-        totalPas: payload.data.pasienbs.length,
-        survei: payload.data.survei,
+        dataById: payload.data.find,
+        totalPas: payload.data.find.pasienbs.length,
+        survei: payload.data,
+        hit: payload.data.find.survei,
         loading: false,
         pasien: payload.data.pasiens,
       };

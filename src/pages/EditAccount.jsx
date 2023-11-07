@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import { logout } from "../store/actions/auth";
-import { getFaskesById, getLocationFaskes } from "../store/actions/location";
+import { getFaskes, getFaskesById, getLocationFaskes } from "../store/actions/location";
 import * as XLSX from "xlsx";
 import {
   createNilai,
@@ -16,14 +16,14 @@ const itemsPerPage = 8;
 const EditAccount = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { locFaskes, dataFasId } = useSelector(
+  const { dataFas, dataFasId } = useSelector(
     (state) => state.locationReducers
   );
   const { nilaiPusk } = useSelector((state) => state.penilaianReducers);
   // console.log(nilaiPusk);
 
   useEffect(() => {
-    dispatch(getLocationFaskes());
+    dispatch(getFaskes());
   }, [dispatch]);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -226,8 +226,8 @@ const EditAccount = () => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentData = locFaskes?.slice(startIndex, endIndex);
-  const totalPages = Math.ceil((locFaskes?.length || 0) / itemsPerPage);
+  const currentData = dataFas?.slice(startIndex, endIndex);
+  const totalPages = Math.ceil((dataFas?.length || 0) / itemsPerPage);
   const pageNumbers = Array.from(
     { length: totalPages },
     (_, index) => index + 1

@@ -4,12 +4,6 @@ import { useSelector } from "react-redux";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 const Ews = () => {
-  const data = [
-    { name: "Group A", value: 400 },
-    { name: "Group B", value: 300 },
-    { name: "Group C", value: 300 },
-    { name: "Group D", value: 200 },
-  ];
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
   // const RADIAN = Math.PI / 180;
@@ -39,7 +33,7 @@ const Ews = () => {
   //   );
   // };
   const { survei, hit } = useSelector((state) => state.locationReducers);
-  console.log(hit);
+  // console.log(hit);
   const surLiterasi = survei.literasi?.slice(0, 4);
   const surStigma = survei.stigma?.slice(0, 4);
   const surPengetahuan = survei.pengetahuan?.slice(0, 4);

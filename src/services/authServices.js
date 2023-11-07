@@ -10,7 +10,7 @@ const AuthService = {
       setHeadersAndStorage(response.data.data);
       return response;
     } catch (err) {
-      console.log("Auth service error", err);
+      // console.log("Auth service error", err);
       throw err;
     }
   },
@@ -24,7 +24,7 @@ const AuthService = {
       setHeadersAndStorage(response.data.data);
       return response;
     } catch (err) {
-      console.log("Auth service error", err);
+      // console.log("Auth service error", err);
       throw err;
     }
   },

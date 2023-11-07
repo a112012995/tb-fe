@@ -8,7 +8,7 @@ export const getPasien = (params, history) =>
       dispatch({ type: GET_PASIEN, payload: response });
       // console.log(response)
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -21,7 +21,7 @@ export const getPasienById = (id) =>
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -34,7 +34,7 @@ export const getPasienByIdKel = (id) =>
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -44,9 +44,9 @@ async function (dispatch) {
   try {
     const response = await PasienService.filterPasien(params)
     dispatch({type: FILTER_PASIEN, payload: response})
-    console.log(response)
+    // console.log(response)
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     throw error
   }
 }

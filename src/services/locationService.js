@@ -7,7 +7,7 @@ const LocationService = {
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   },
@@ -18,7 +18,7 @@ const LocationService = {
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   },
@@ -28,7 +28,7 @@ const LocationService = {
       const response = await API.get(`/api/mapping/${id}`);
       return response;
     } catch (err) {
-      console.log("location service error", err);
+      // console.log("location service error", err);
       throw err;
     }
   },
@@ -39,7 +39,7 @@ const LocationService = {
       // console.log(response);
       return response;
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       throw error
     }
   },
@@ -49,7 +49,7 @@ const LocationService = {
       const response = await API.get(`/api/kelurahan/${id}`);
       return response;
     } catch (err) {
-      console.log("location service error", err);
+      // console.log("location service error", err);
       throw err;
     }
   },
@@ -60,7 +60,7 @@ const LocationService = {
       // console.log(response);
       return response;
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       throw error
     }
   },
@@ -70,7 +70,7 @@ const LocationService = {
       const response = await API.get(`/api/faskes/${id}`);
       return response;
     } catch (err) {
-      console.log("location service error", err);
+      // console.log("location service error", err);
       throw err;
     }
   },

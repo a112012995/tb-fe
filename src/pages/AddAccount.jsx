@@ -72,17 +72,17 @@ const AddAccount = () => {
             </div>
           </div>
           <div className="w-96  bg-white">
-            <form class="w-full max-w-md" onSubmit={handleSubmit}>
-              <div class="md:flex md:items-center mb-6">
-                <div class="md:w-1/3">
+            <form className="w-full max-w-md" onSubmit={handleSubmit}>
+              <div className="md:flex md:items-center mb-6">
+                <div className="md:w-1/3">
                   <label
-                    class="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
+                    className="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
                     for="inline-full-name"
                   >
                     Username
                   </label>
                 </div>
-                <div class="md:w-2/3">
+                <div className="md:w-2/3">
                   <input
                     type="text"
                     placeholder="Type here"
@@ -92,16 +92,16 @@ const AddAccount = () => {
                   />
                 </div>
               </div>
-              <div class="md:flex md:items-center mb-6">
-                <div class="md:w-1/3">
+              <div className="md:flex md:items-center mb-6">
+                <div className="md:w-1/3">
                   <label
-                    class="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
+                    className="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
                     for="inline-password"
                   >
                     Role
                   </label>
                 </div>
-                <div class="md:w-2/3">
+                <div className="md:w-2/3">
                   <select
                     className="select select-bordered w-full max-w-xs"
                     defaultValue={role}
@@ -115,16 +115,16 @@ const AddAccount = () => {
                   </select>
                 </div>
               </div>
-              <div class="md:flex md:items-center mb-6">
-                <div class="md:w-1/3">
+              <div className="md:flex md:items-center mb-6">
+                <div className="md:w-1/3">
                   <label
-                    class="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
+                    className="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
                     for="inline-password"
                   >
                     Password
                   </label>
                 </div>
-                <div class="md:w-2/3">
+                <div className="md:w-2/3">
                   <input
                     type="password"
                     placeholder="********"

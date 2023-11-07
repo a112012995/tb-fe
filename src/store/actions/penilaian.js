@@ -12,9 +12,9 @@ export const createNilai = (params, history) =>
     try {
       const response = await penilaianServices.createPenilaian(params);
       dispatch({ type: CREATE_PENILAIAN, payload: response.data });
-      console.log(response);
+      // console.log(response);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -27,7 +27,7 @@ export const getNilaiPusk = (id) =>
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -40,7 +40,7 @@ export const updateNilaiPusk = (id, params) =>
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -53,7 +53,7 @@ export const deleteNilaiPusk = (id) =>
       // console.log(response);
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };

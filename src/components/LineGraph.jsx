@@ -13,7 +13,7 @@ import { Collapse, Select } from "antd";
 import iconGrafik from "../assets/icon-grafik.png";
 import iconsSearch from "../assets/search-icons.png";
 import { useDispatch, useSelector } from "react-redux";
-import { filterPasien, } from "../store/actions/pasien";
+import { filterPasien } from "../store/actions/pasien";
 
 const LineGraph = () => {
   const [def, setDef] = useState(false);
@@ -31,7 +31,9 @@ const LineGraph = () => {
   //   dispatch(getFaskes());
   // }, [dispatch]);
 
-  const { dataKel, dataFas } = useSelector((state) => state.locationReducers);
+  const { dataKel, locFaskes } = useSelector(
+    (state) => state.locationReducers
+  );
   const { data } = useSelector((state) => state.pasienReducers);
   const dataDef = useSelector((state) => state.locationReducers.data);
   dataDef.sort((a, b) => b.jumlah_pasien - a.jumlah_pasien);
@@ -184,8 +186,8 @@ const LineGraph = () => {
                   .includes(input.toLowerCase())
               }
               options={
-                dataFas &&
-                dataFas.map((item) => ({
+                locFaskes &&
+                locFaskes.map((item) => ({
                   value: item.id,
                   label: item.nama_fasyankes,
                 }))

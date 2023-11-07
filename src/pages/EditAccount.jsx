@@ -82,7 +82,7 @@ const EditAccount = () => {
           const json = XLSX.utils.sheet_to_json(worksheet);
 
           const specificRows = json.slice(1, 20);
-          console.log(specificRows)
+          // console.log(specificRows)
           const updatedJsonData = specificRows.map((item) => {
             for (const originalColumnName in columnMappings) {
               const newColumnName = columnMappings[originalColumnName];
@@ -222,7 +222,7 @@ const EditAccount = () => {
     }
   };
 
-  console.log(id);
+  // console.log(id);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -431,10 +431,10 @@ const EditAccount = () => {
         </div>
 
         {modal && !error && (
-          <div class="fixed inset-0 flex items-center justify-center z-[2000]">
-            <div class="p-6 rounded-md bg-white  h-fit relative">
+          <div className="fixed inset-0 flex items-center justify-center z-[2000]">
+            <div className="p-6 rounded-md bg-white  h-fit relative">
               <div className=" rounded-lg w-fit p-4 text-center bg-[#CFE2FF] border-[#9EC5FE] border-2">
-                <div class="flex flex-col self-center text-center justify-center">
+                <div className="flex flex-col self-center text-center justify-center">
                   <h2 className="font-bold text-2xl">
                     Puskesmas {dataFasId.nama_pusk} Sudah Dinilai
                   </h2>
@@ -471,16 +471,16 @@ const EditAccount = () => {
               </div>
             </div>
             <div
-              class="modal-backdrop fixed inset-0 bg-black opacity-50"
+              className="modal-backdrop fixed inset-0 bg-black opacity-50"
               onClick={() => setModal(false)}
             ></div>
           </div>
         )}
         {modal && error && (
-          <div class="fixed inset-0 flex items-center justify-center z-[2000]">
-            <div class="p-6 rounded-md bg-white  h-fit relative">
+          <div className="fixed inset-0 flex items-center justify-center z-[2000]">
+            <div className="p-6 rounded-md bg-white  h-fit relative">
               <div className=" rounded-lg w-fit p-4 text-center bg-[#FFF3CD] text-[#664D03] border-[#FFE69E] border-2">
-                <div class="flex flex-col self-center text-center justify-center">
+                <div className="flex flex-col self-center text-center justify-center">
                   <h2 className="font-bold text-2xl">{modal}</h2>
                   <h2 className="font-bold">
                     Silahkan input nilai berupa excel
@@ -511,7 +511,7 @@ const EditAccount = () => {
               </div>
             </div>
             <div
-              class="modal-backdrop fixed inset-0 bg-black opacity-50"
+              className="modal-backdrop fixed inset-0 bg-black opacity-50"
               onClick={() => setModal(false)}
             ></div>
           </div>

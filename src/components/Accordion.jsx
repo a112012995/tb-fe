@@ -13,7 +13,7 @@ const OrderTerms = () => {
           <div className="flex-col space-y-5">
             {intervensi &&
               intervensi.map((item) => (
-                <div className="card w-full bg-[white] border-2 text-black">
+                <div key={item.judul_intervensi} className="card w-full bg-[white] border-2 text-black">
                   <div className="p-5">
                     <h2 className="card-title">{item.judul_intervensi}</h2>
                     <p>{item.isi_intervensi}</p>

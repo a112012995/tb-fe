@@ -7,7 +7,7 @@ const PenilaianService = {
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   },
@@ -17,7 +17,7 @@ const PenilaianService = {
       const response = await API.get(`/api/nilai/getNilaiPusk/${id}`);
       return response;
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       throw err;
     }
   },
@@ -27,7 +27,7 @@ const PenilaianService = {
       const response = await API.put(`/api/nilai/update/${id}`, data);
       return response;
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       throw err;
     }
   },
@@ -37,7 +37,7 @@ const PenilaianService = {
       const response = await API.delete(`/api/nilai/deleteNilai/${id}`);
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   },

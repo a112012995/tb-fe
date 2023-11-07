@@ -15,7 +15,7 @@ export const realData = (id) =>
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -28,7 +28,7 @@ export const realData = (id) =>
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -41,7 +41,7 @@ export const realData = (id) =>
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -51,9 +51,9 @@ export const realData = (id) =>
     try {
       const response = await predictService.getKerentanan(params);
       dispatch({ type: GET_KERENTANAN, payload: response.data });
-      console.log(response)
+      // console.log(response)
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };
@@ -66,7 +66,7 @@ export const realData = (id) =>
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   };

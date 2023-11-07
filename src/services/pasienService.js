@@ -7,7 +7,7 @@ const PasienService = {
       // console.log(response)
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   },
@@ -17,7 +17,7 @@ const PasienService = {
       const response = await API.get(`/api/pasien/${id}`);
       return response;
     } catch (err) {
-      console.log("pasien service error", err);
+      // console.log("pasien service error", err);
       throw err;
     }
   },
@@ -27,7 +27,7 @@ const PasienService = {
       const response = await API.get(`/api/pasien/kel/${id}`);
       return response;
     } catch (err) {
-      console.log("pasien service error", err);
+      // console.log("pasien service error", err);
       throw err;
     }
   },
@@ -39,7 +39,7 @@ const PasienService = {
       })
       return response
     } catch (err) {
-      console.log("filter pasien API Error", err)
+      // console.log("filter pasien API Error", err)
       throw err
     }
   }

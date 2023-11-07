@@ -13,8 +13,8 @@ const Map = () => {
   const navigate = useNavigate();
 
   const [onSelect, setOnSelect] = useState(false);
-  const [modal, setModal] = useState(false);
-  const { data, dataById, totalPas, hit } = useSelector(
+  // const [modal, setModal] = useState(false);
+  const { dataById, totalPas, hit } = useSelector(
     (state) => state.locationReducers
   );
   const { kerentanan, intervensi, dataKerentanan } = useSelector(
@@ -43,26 +43,26 @@ const Map = () => {
 
   // console.log(getKerentanan(8));
 
-  const rendah = data.filter((data) => data.jumlah_pasien === 0);
-  const lumayan = data.filter(
-    (data) => data.jumlah_pasien < 25 && data.jumlah_pasien > 0
-  );
-  const cukup = data.filter(
-    (data) => data.jumlah_pasien < 50 && data.jumlah_pasien > 25
-  );
-  const agakRentan = data.filter(
-    (data) => data.jumlah_pasien < 80 && data.jumlah_pasien > 50
-  );
-  const rentan = data.filter(
-    (data) => data.jumlah_pasien < 125 && data.jumlah_pasien > 80
-  );
-  const iniBahaya = data.filter(
-    (data) => data.jumlah_pasien < 150 && data.jumlah_pasien > 125
-  );
-  const rentanBanget = data.filter(
-    (data) => data.jumlah_pasien < 170 && data.jumlah_pasien > 150
-  );
-  const serem = data.filter((data) => data.jumlah_pasien > 170);
+  // const rendah = data.filter((data) => data.jumlah_pasien === 0);
+  // const lumayan = data.filter(
+  //   (data) => data.jumlah_pasien < 25 && data.jumlah_pasien > 0
+  // );
+  // const cukup = data.filter(
+  //   (data) => data.jumlah_pasien < 50 && data.jumlah_pasien > 25
+  // );
+  // const agakRentan = data.filter(
+  //   (data) => data.jumlah_pasien < 80 && data.jumlah_pasien > 50
+  // );
+  // const rentan = data.filter(
+  //   (data) => data.jumlah_pasien < 125 && data.jumlah_pasien > 80
+  // );
+  // const iniBahaya = data.filter(
+  //   (data) => data.jumlah_pasien < 150 && data.jumlah_pasien > 125
+  // );
+  // const rentanBanget = data.filter(
+  //   (data) => data.jumlah_pasien < 170 && data.jumlah_pasien > 150
+  // );
+  // const serem = data.filter((data) => data.jumlah_pasien > 170);
 
   //   setting for mapping use leaflet
   const center = [-7.019679560453046, 110.39818740013446];
@@ -73,7 +73,7 @@ const Map = () => {
       dataCase[item.id] = item.kategori_kerentanan;
     });
   }
-  console.log(dataKerentanan);
+  // console.log(dataKerentanan);
 
   const style = (feature) => {
     let ketKerentanan = dataCase?.[feature.properties.gid];

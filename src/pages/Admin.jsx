@@ -26,7 +26,7 @@ const AdminPage = () => {
     setToken(jwtDecode(accessToken))
   }, [dispatch, accessToken]);
   
-  console.log(token);
+  // console.log(token);
   const [currentPage, setCurrentPage] = useState(1);
   // const [users, setUsers] = useState(data);
 

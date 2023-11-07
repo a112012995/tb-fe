@@ -9,15 +9,15 @@ import { useNavigate } from "react-router-dom";
 const Pkp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { locFaskes } = useSelector((state) => state.locationReducers);
+  const { dataFas } = useSelector((state) => state.locationReducers);
 
   const { nilaiPusk } = useSelector((state) => state.penilaianReducers);
-  console.log(nilaiPusk);
+  // console.log(nilaiPusk);
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState(false);
 
   // Filter the data based on the search query
-  const filteredData = locFaskes.filter((item) =>
+  const filteredData = dataFas.filter((item) =>
     item.nama_pusk.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -51,7 +51,7 @@ const Pkp = () => {
         <div className=" bg-white shadow-md rounded-lg ">
           <div className="flex flex-row space-x-4 bg-[#4F709C] p-3 rounded-t-md justify-between">
             <h4 className="text-xl font-semibold text-white">Puskesmas</h4>
-            <div class="flex bg-white input input-sm input-bordered border-gray-300 rounded-md space-x-3 mx-5 w-44">
+            <div className="flex bg-white input input-sm input-bordered border-gray-300 rounded-md space-x-3 mx-5 w-44">
               <img src={symbol} className="w-4" alt="" />
               <input
                 type="text"

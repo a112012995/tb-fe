@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/actions/auth";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -8,12 +8,22 @@ const Penilaian = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { state } = useLocation();
-  //   console.log(state.id_pusk)
+    console.log(state)
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    dispatch(getFaskesById(state.id_pusk));
+    const fetchData = async () => {
+      try {
+        await dispatch(getFaskesById(state.id_pusk));
+      } catch (error) {
+        setError(error.response.data.message); // Set the error message in case of an error
+      }
+    };
+
+    fetchData();
   }, [dispatch, state]);
   const { dataFasId } = useSelector((state) => state.locationReducers);
-  // console.log(dataFasId);
+  console.log(dataFasId);
 
   const groupDataByMonth = (penilaians) => {
     const groupedData = {};
@@ -111,53 +121,65 @@ const Penilaian = () => {
             </div>
           </div>
         </div>
-        <h2 className="md:mx-20 min-[244px]:mx-4 mt-8 font-bold text-2xl text-center">
-          History Penilaian Puskesmas {dataFasId.nama_pusk} <br /> P2TB
-        </h2>
-        {Object.keys(groupedPenilaians).map((key, index) => {
-          const [year, month] = key.split("-");
-          const monthYearData = groupedPenilaians[key];
-          return (
-            <div
-              key={index}
-              className=" bg-white rounded-lg shadow-md py-4 md:px-8 min-[244px]:px-4 md:mx-20 min-[244px]:mx-4 mt-10"
-            >
-              <h2 className="text-2xl font-bold">Bulan {month}</h2>
-              <h2 className="text-xl font-semibold">Tahun {year}</h2>
-              <div className="grid auto-cols-[308px] grid-flow-col gap-6 overflow-x-auto mt-4">
-                {monthYearData.map((item) => (
-                  <div key={item.id} className="border-2 p-3 rounded-md">
-                    <h2 className="font-bold">{item.kegiatan}</h2>
-                    <div className="flex flex-row mt-4">
-                      <div className="space-y-4">
-                        <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                          <h2 className="font-semibold">Satuan</h2>
-                          <p>{item.satuan}</p>
-                        </button>
-                        <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                          <h2 className="font-semibold">ABS Target Sasaran</h2>
-                          <p>{item.target_sasaran}</p>
-                        </button>
-                        <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                          <h2 className="font-semibold">Realisasi</h2>
-                          <p>{item.realisasi}</p>
-                        </button>
-                        <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                          <h2 className="font-semibold">Capaian</h2>
-                          <p>{item.capaian}</p>
-                        </button>
-                        <button className="text-left border-2 rounded-md w-full px-4 py-1">
-                          <h2 className="font-semibold">Nilai</h2>
-                          <p>{Math.round(item.nilai * 100)}%</p>
-                        </button>
+        {error ? (
+          <div className=" rounded-lg p-4 py-10 text-center bg-[#FFF5DC] mx-44 mt-8">
+            <h2 className="text-2xl font-semibold text-[#FFB800]">{error}</h2>
+            <p className="font-semibold text-gray-600">
+              Tunggu admin atau dinkes memasukkan data penilaian puskesmas
+            </p>
+          </div>
+        ) : (
+          <h2 className="md:mx-20 min-[244px]:mx-4 mt-8 font-bold text-2xl text-center">
+            History Penilaian Puskesmas {dataFasId.nama_pusk} <br /> P2TB
+          </h2>
+        )}
+        {!error &&
+          Object.keys(groupedPenilaians).map((key, index) => {
+            const [year, month] = key.split("-");
+            const monthYearData = groupedPenilaians[key];
+            return (
+              <div
+                key={index}
+                className=" bg-white rounded-lg shadow-md py-4 md:px-8 min-[244px]:px-4 md:mx-20 min-[244px]:mx-4 mt-10"
+              >
+                <h2 className="text-2xl font-bold">Bulan {month}</h2>
+                <h2 className="text-xl font-semibold">Tahun {year}</h2>
+                <div className="grid auto-cols-[308px] grid-flow-col gap-6 overflow-x-auto mt-4">
+                  {monthYearData.map((item) => (
+                    <div key={item.id} className="border-2 p-3 rounded-md">
+                      <h2 className="font-bold">{item.kegiatan}</h2>
+                      <div className="flex flex-row mt-4">
+                        <div className="space-y-4">
+                          <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                            <h2 className="font-semibold">Satuan</h2>
+                            <p>{item.satuan}</p>
+                          </button>
+                          <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                            <h2 className="font-semibold">
+                              ABS Target Sasaran
+                            </h2>
+                            <p>{item.target_sasaran}</p>
+                          </button>
+                          <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                            <h2 className="font-semibold">Realisasi</h2>
+                            <p>{item.realisasi}</p>
+                          </button>
+                          <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                            <h2 className="font-semibold">Capaian</h2>
+                            <p>{item.capaian}</p>
+                          </button>
+                          <button className="text-left border-2 rounded-md w-full px-4 py-1">
+                            <h2 className="font-semibold">Nilai</h2>
+                            <p>{Math.round(item.nilai * 100)}%</p>
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </>
   );

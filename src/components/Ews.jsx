@@ -74,7 +74,7 @@ const Ews = () => {
       <div className="p-6 rounded-md border-2 bg-white w-full space-y-8">
         <h4 className="font-semibold text-2xl">Stigma</h4>
         <div className="flex">
-          <PieChart width={650} height={300}>
+        <PieChart width={650} height={300}>
             <Pie
               data={surStigma}
               dataKey="value"

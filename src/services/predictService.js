@@ -48,6 +48,15 @@ const PredictService = {
       throw err;
     }
   },
+  jumlahKasus: async function (id) {
+    try {
+      const response = await API.get(`api/v1/cases/id=${id}`);
+      return response;
+    } catch (err) {
+      // console.log("intervention service error", err);
+      throw err;
+    }
+  },
 };
 
 export default PredictService;

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { statesData } from "../geojson/data";
+import { getLocationById } from "../store/actions/location";
 import {
   getCasesById,
   getIntervention,
@@ -23,7 +24,14 @@ const Map = () => {
   const { kerentanan, intervensi, dataKerentanan, jumlahKasus } = useSelector(
     (state) => state.predictReducers
   );
-  // console.log(intervensi);
+  console.log(intervensi);
+
+  //   get response from api get location by id
+  const getById = async (id) => {
+    await dispatch(getLocationById(id))
+      .then((response) => ({ response }))
+      .catch((error) => ({ error }));
+  };
 
   const jumlahKasusHandler = async (id) => {
     await dispatch(getCasesById(id))
@@ -102,6 +110,7 @@ const Map = () => {
   const highlightFeature = (e) => {
     const data = e.target.feature.properties.gid;
     var layer = e.target;
+    getById(data);
     jumlahKasusHandler(data)
     kerentananHandler(data);
     interventionHandler(data);

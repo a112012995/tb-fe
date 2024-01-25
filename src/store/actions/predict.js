@@ -4,7 +4,8 @@ import {
   REAL_DATA,
   KERENTANAN,
   INTERVENSI,
-  GET_KERENTANAN
+  GET_KERENTANAN,
+  GET_CASES_BY_ID
 } from "../types";
 
 export const realData = (id) =>
@@ -63,6 +64,18 @@ export const realData = (id) =>
     try {
       const response = await predictService.intervensi(id);
       dispatch({ type: INTERVENSI, payload: response.data });
+      // console.log(response)
+      return response;
+    } catch (error) {
+      // console.log(error);
+      throw error;
+    }
+  };
+  export const getCasesById = (id) =>
+  async function (dispatch) {
+    try {
+      const response = await predictService.jumlahKasus(id);
+      dispatch({ type: GET_CASES_BY_ID, payload: response.data });
       // console.log(response)
       return response;
     } catch (error) {

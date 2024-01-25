@@ -11,6 +11,7 @@ export const GET_FASKES = "GET_FASKES";
 export const GET_FASKES_BY_ID = "GET_FASKES_BY_ID";
 
 export const GET_PASIEN = "GET_PASIEN";
+export const GET_CASES_BY_ID = "GET_CASES_BY_ID";
 export const GET_PASIEN_BY_ID = "GET_PASIEN_BY_ID";
 export const GET_PASIEN_BY_ID_KEL = "GET_PASIEN_BY_ID_KEL";
 export const FILTER_PASIEN = "FILTER_PASIEN";

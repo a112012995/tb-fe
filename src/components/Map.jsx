@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { statesData } from "../geojson/data";
-import { getLocationById } from "../store/actions/location";
-import { getIntervention, getKerentanan } from "../store/actions/predict";
+import {
+  getCasesById,
+  getIntervention,
+  getKerentanan,
+} from "../store/actions/predict";
 import { useNavigate } from "react-router-dom";
 
 const Map = () => {
@@ -14,17 +17,16 @@ const Map = () => {
 
   const [onSelect, setOnSelect] = useState(false);
   // const [modal, setModal] = useState(false);
-  const { dataById, totalPas, hit } = useSelector(
+  const { dataById, hit } = useSelector(
     (state) => state.locationReducers
   );
-  const { kerentanan, intervensi, dataKerentanan } = useSelector(
+  const { kerentanan, intervensi, dataKerentanan, jumlahKasus } = useSelector(
     (state) => state.predictReducers
   );
-  // console.log(dataKerentanan);
+  // console.log(intervensi);
 
-  //   get response from api get location by id
-  const getById = async (id) => {
-    await dispatch(getLocationById(id))
+  const jumlahKasusHandler = async (id) => {
+    await dispatch(getCasesById(id))
       .then((response) => ({ response }))
       .catch((error) => ({ error }));
   };
@@ -85,7 +87,7 @@ const Map = () => {
     } else if (ketKerentanan === "Rentan") {
       colors = "#ff0000";
     } else if (ketKerentanan === "Sangat Rentan") {
-      colors = "#00000";
+      colors = "black";
     }
     return {
       fillColor: colors,
@@ -100,7 +102,7 @@ const Map = () => {
   const highlightFeature = (e) => {
     const data = e.target.feature.properties.gid;
     var layer = e.target;
-    getById(data);
+    jumlahKasusHandler(data)
     kerentananHandler(data);
     interventionHandler(data);
     layer.setStyle({
@@ -151,7 +153,7 @@ const Map = () => {
                       {dataById.nama_kelurahan}
                     </h2>
                     {accessToken && (
-                      <p className="text-sm">Jumlah Kasus: {totalPas}</p>
+                      <p className="text-sm">Jumlah Kasus: {jumlahKasus}</p>
                     )}
                     <div className="mt-3">
                       <div className="flex justify-between">
@@ -201,12 +203,13 @@ const Map = () => {
                     </p>
                     <div className="space-y-2 mt-2">
                       {intervensi &&
-                        intervensi.map((item) => (
-                          <p className="text-sm">
+                        intervensi.slice(0,3).map((item, index) => (
+                          <p className="text-sm" key={index}>
                             <span className="font-semibold">Intervensi:</span>{" "}
-                            {item.judul_intervensi}
+                            {item.isi_intervensi}
                           </p>
                         ))}
+                        <p className="font-bold underline">Klik daerah untuk melihat detail</p>
                     </div>
                   </>
                 ) : (

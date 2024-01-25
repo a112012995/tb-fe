@@ -12,9 +12,10 @@ const Pkp = () => {
   const { dataFas } = useSelector((state) => state.locationReducers);
 
   const { nilaiPusk } = useSelector((state) => state.penilaianReducers);
-  // console.log(nilaiPusk);
+  console.log(nilaiPusk);
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState(false);
+  const [throwId, setThrowId] = useState("");
 
   // Filter the data based on the search query
   const filteredData = dataFas.filter((item) =>
@@ -22,6 +23,7 @@ const Pkp = () => {
   );
 
   const faskesById = async (id) => {
+    setThrowId(id);
     const res = await dispatch(getNilaiPusk(id))
       .then((response) => ({ response }))
       .catch((error) => ({ error }));
@@ -33,14 +35,15 @@ const Pkp = () => {
     }
   };
 
-  const throwIdPus = () => {
+  const throwIdPus = (id) => {
     navigate("/penilaian", {
-      state: { id_pusk: nilaiPusk.id },
+      state: { id_pusk: id },
     });
   };
 
   const today = new Date();
   const currentMonth = today.toLocaleString("default", { month: "long" });
+  console.log(throwId);
 
   return (
     <div className="mt-20" id="pkp">
@@ -62,7 +65,7 @@ const Pkp = () => {
               />{" "}
             </div>
           </div>
-          <div className="divide-y-2 overflow-auto h-[340px] px-4">
+          <div className="divide-y-2 overflow-auto h-[395px] px-4">
             {filteredData?.map((item) => (
               <div key={item.id} className="py-2">
                 <button
@@ -98,7 +101,7 @@ const Pkp = () => {
                   <p>Bulan {currentMonth}</p>
                 </div>
                 <button
-                  onClick={() => throwIdPus()}
+                  onClick={() => throwIdPus(nilaiPusk.id)}
                   className="place-self-center underline font-bold"
                 >
                   Selengkapnya
@@ -129,8 +132,18 @@ const Pkp = () => {
               </div>
             </>
           ) : error ? (
-            <div className=" rounded-lg w-full p-4 text-center bg-[#FFF5DC]">
-              <h2 className="text-2xl font-semibold text-[#FFB800]">{error}</h2>
+            <div className="rounded-lg w-full h-[400px] text-center flex items-center justify-center bg-[#FFF5DC]">
+              <div className="space-y-3">
+                <h2 className="text-2xl font-semibold text-[#FFB800]">
+                  {error}
+                </h2>
+                <button
+                  onClick={() => throwIdPus(throwId)}
+                  className="self-center underline font-semibold"
+                >
+                  Lihat Selengkapnya
+                </button>
+              </div>
             </div>
           ) : (
             <div></div>

@@ -18,9 +18,7 @@ const Map = () => {
 
   const [onSelect, setOnSelect] = useState(false);
   // const [modal, setModal] = useState(false);
-  const { dataById, hit } = useSelector(
-    (state) => state.locationReducers
-  );
+  const { dataById, hit } = useSelector((state) => state.locationReducers);
   const { kerentanan, intervensi, dataKerentanan, jumlahKasus } = useSelector(
     (state) => state.predictReducers
   );
@@ -111,7 +109,7 @@ const Map = () => {
     const data = e.target.feature.properties.gid;
     var layer = e.target;
     getById(data);
-    jumlahKasusHandler(data)
+    jumlahKasusHandler(data);
     kerentananHandler(data);
     interventionHandler(data);
     layer.setStyle({
@@ -212,13 +210,17 @@ const Map = () => {
                     </p>
                     <div className="space-y-2 mt-2">
                       {intervensi &&
-                        intervensi.slice(0,3).map((item, index) => (
+                        intervensi.slice(0, 3).map((item, index) => (
                           <p className="text-sm" key={index}>
                             <span className="font-semibold">Intervensi:</span>{" "}
                             {item.isi_intervensi}
                           </p>
                         ))}
-                        <p className="font-bold underline">Klik daerah untuk melihat detail</p>
+                      {accessToken && (
+                        <p className="font-bold underline">
+                          Klik daerah untuk melihat detail
+                        </p>
+                      )}
                     </div>
                   </>
                 ) : (

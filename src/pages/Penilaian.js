@@ -26,7 +26,7 @@ const Penilaian = () => {
   console.log(dataFasId);
 
   const groupDataByMonth = (penilaians) => {
-    const groupedData = {};
+    const groupedData = [];
 
     for (const item of penilaians) {
       const month = item.bulan;
@@ -45,8 +45,71 @@ const Penilaian = () => {
 
   const groupedPenilaians = dataFasId
     ? groupDataByMonth(dataFasId.penilaians)
-    : {};
-  // console.log(groupedPenilaians);
+    : [];
+  console.log(groupedPenilaians);
+
+  const monthOrder = {
+    "Januari": 1,
+    "Febuari": 2,
+    "Maret": 3,
+    "April": 4,
+    "Mei": 5,
+    "Juni": 6,
+    "Juli": 7,
+    "Agustus": 8,
+    "September": 9,
+    "Oktober": 10,
+    "November": 11,
+    "Desember": 12,
+  };
+  
+  // Convert data to an array of objects with month and year information
+  const dataArray = Object.entries(groupedPenilaians).map(([monthYear, activities]) => {
+    const [year, month] = monthYear.split('-');
+    let monthName;
+    const monthNumber = monthOrder[month]
+  
+  // Using if-else statements to find the month name
+  if (monthNumber === 1) {
+    monthName = "Januari";
+  } else if (monthNumber === 2) {
+    monthName = "Febuari";
+  } else if (monthNumber === 3) {
+    monthName = "Maret";
+  } else if (monthNumber === 4) {
+    monthName = "April";
+  } else if (monthNumber === 5) {
+    monthName = "Mei";
+  } else if (monthNumber === 6) {
+    monthName = "Juni";
+  } else if (monthNumber === 7) {
+    monthName = "Juli";
+  } else if (monthNumber === 8) {
+    monthName = "Agustus";
+  } else if (monthNumber === 9) {
+    monthName = "September";
+  } else if (monthNumber === 10) {
+    monthName = "Oktober";
+  } else if (monthNumber === 11) {
+    monthName = "November";
+  } else if (monthNumber === 12) {
+    monthName = "Desember";
+  } else if (monthNumber === undefined) {
+    monthName = "Mei"
+  }
+    return { year: parseInt(year), month: monthName, activities };
+  });
+  
+  // Sort the array based on the year and month
+  dataArray.sort((a, b) => {
+    if (a.year !== b.year) {
+      return b.year - a.year;
+    }
+    return b.month - a.month;
+  }).reverse();
+  
+  // Output the sorted data
+  console.log(dataArray);
 
   return (
     <>
@@ -134,18 +197,16 @@ const Penilaian = () => {
           </h2>
         )}
         {!error &&
-          Object.keys(groupedPenilaians).map((key, index) => {
-            const [year, month] = key.split("-");
-            const monthYearData = groupedPenilaians[key];
+          dataArray?.map((key, index) => {
             return (
               <div
                 key={index}
                 className=" bg-white rounded-lg shadow-md py-4 md:px-8 min-[244px]:px-4 md:mx-20 min-[244px]:mx-4 mt-10"
               >
-                <h2 className="text-2xl font-bold">Bulan {month}</h2>
-                <h2 className="text-xl font-semibold">Tahun {year}</h2>
+                <h2 className="text-2xl font-bold">Bulan {key.month}</h2>
+                <h2 className="text-xl font-semibold">Tahun {key.year}</h2>
                 <div className="grid auto-cols-[308px] grid-flow-col gap-6 overflow-x-auto mt-4">
-                  {monthYearData.map((item) => (
+                  {key.activities.map((item) => (
                     <div key={item.id} className="border-2 p-3 rounded-md">
                       <h2 className="font-bold">{item.kegiatan}</h2>
                       <div className="flex flex-row mt-4">

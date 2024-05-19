@@ -1,6 +1,7 @@
 import SurveyService from "../../services/surveyServices";
 import {
   CREATE_SURVEY, GET_ALL_SURVEY,
+  GET_ALL_SURVEY_STAT,
   GET_SURVEY_BY_ID_KEL
 } from "../types";
 
@@ -29,6 +30,19 @@ export const createSurvey = (data) =>
       throw error;
     }
   };
+
+  export const getAllSurveyStatus = () =>
+    async function (dispatch) {
+      try {
+        const response = await SurveyService.getAllSurveyStatus();
+        dispatch({ type: GET_ALL_SURVEY_STAT, payload: response.data });
+        // console.log(response)
+        return response;
+      } catch (error) {
+        // console.log(error);
+        throw error;
+      }
+    };
 
   export const getAllSurvey = () =>
   async function (dispatch) {

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { createUser } from "../../store/actions/admin";
+import { createUser, getAllUser } from "../../store/actions/admin";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ModalAdd = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const ModalAdd = () => {
   };
 
   const handleSubmit = async (event) => {
+    event.preventDefault();
     const data = {
       username,
       role,
@@ -33,11 +35,28 @@ const ModalAdd = () => {
       .then((response) => ({ response }))
       .catch((err) => ({ err }));
 
+    console.log(res);
+    if (!res.err) {
+      document.getElementById("my_modal_1").close();
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Akun baru berhasil ditambahkan",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      dispatch(getAllUser());
+      setUsername("");
+      setRole("");
+      setPassword("");
+      setError("")
+    }
     if (res.err) {
-      console.log(res.err);
       setError(res.err.response.data.message);
     }
   };
+
+  console.log(role)
 
   return (
     <>
@@ -65,10 +84,10 @@ const ModalAdd = () => {
               <h4 className="text-[#213555] font-semibold ">Role</h4>
               <select
                 className="select select-bordered w-full"
-                defaultValue={role}
+                value={role}
                 onChange={handleRole}
               >
-                <option value={""} disabled>
+                <option value={""}>
                   Pilih Akses
                 </option>
                 <option value={"puskesmas"}>Puskesmas</option>
@@ -95,6 +114,7 @@ const ModalAdd = () => {
               </button>
               <button
                 className="btn"
+                type="button"
                 onClick={() => document.getElementById("my_modal_1").close()}
               >
                 Close

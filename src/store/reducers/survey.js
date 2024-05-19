@@ -1,8 +1,9 @@
-import { CREATE_SURVEY, GET_ALL_SURVEY, GET_SURVEY_BY_ID_KEL } from "../types";
+import { CREATE_SURVEY, GET_ALL_SURVEY, GET_ALL_SURVEY_STAT, GET_SURVEY_BY_ID_KEL } from "../types";
 
 const initialState = {
   data: false,
-  dataAll: false,
+  dataAll: [],
+  dataStat:[],
   dataKel: false,
 };
 
@@ -14,6 +15,11 @@ const surveyReducers = (state = initialState, action) => {
       return {
         ...state,
         dataAll: payload,
+      };
+      case GET_ALL_SURVEY_STAT:
+      return {
+        ...state,
+        dataStat: payload,
       };
     case CREATE_SURVEY:
       return {

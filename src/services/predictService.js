@@ -41,10 +41,10 @@ const PredictService = {
   },
   intervensi: async function (id) {
     try {
-      const response = await API.get(`api/v1/intervention/id=${id}`);
+      const response = await API.get(`api/v1/interventions/${id}/list`);
       return response;
     } catch (err) {
-      // console.log("intervention service error", err);
+      console.log("intervention service error", err);
       throw err;
     }
   },

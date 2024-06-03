@@ -5,7 +5,8 @@ import {
   KERENTANAN,
   INTERVENSI,
   GET_KERENTANAN,
-  GET_CASES_BY_ID
+  GET_CASES_BY_ID,
+  GET_KELURAHAN_ML
 } from "../types";
 
 export const realData = (id) =>
@@ -83,3 +84,16 @@ export const realData = (id) =>
       throw error;
     }
   };
+
+  export const getKelurahanMl = (id) =>
+    async function (dispatch) {
+      try {
+        const response = await predictService.getKelurahanMl(id);
+        dispatch({ type: GET_KELURAHAN_ML, payload: response.data });
+        console.log(response)
+        return response;
+      } catch (error) {
+        // console.log(error);
+        throw error;
+      }
+    };

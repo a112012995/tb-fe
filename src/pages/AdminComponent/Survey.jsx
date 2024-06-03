@@ -12,7 +12,7 @@ const Survey = () => {
   const dispatch = useDispatch();
   const { dataStat } = useSelector((state) => state.surveyReducers);
   const { dataKel } = useSelector((state) => state.locationReducers);
-  // console.log(dataKel);
+  console.log(dataStat);
 
   useEffect(() => {
     dispatch(getKelurahan())

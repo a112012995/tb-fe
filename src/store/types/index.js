@@ -1,6 +1,8 @@
 export const LOGIN = "LOGIN";
+export const LOGIN_SEMAR = "LOGIN_SEMAR";
 export const LOGIN_ADMIN = "LOGIN_ADMIN";
 export const LOGOUT = "LOGOUT";
+export const LOGOUT_SEMAR = "LOGOUT_SEMAR";
 
 export const GET_LOCATION = "GET_LOCATION";
 export const GET_LOCATION_FASKES = "GET_LOCATION_FASKES";
@@ -14,6 +16,7 @@ export const GET_PASIEN = "GET_PASIEN";
 export const GET_CASES_BY_ID = "GET_CASES_BY_ID";
 export const GET_PASIEN_BY_ID = "GET_PASIEN_BY_ID";
 export const GET_PASIEN_BY_ID_KEL = "GET_PASIEN_BY_ID_KEL";
+export const GET_PASIEN_SEMAR_BY_ID_KEL = "GET_PASIEN_SEMAR_BY_ID_KEL";
 export const FILTER_PASIEN = "FILTER_PASIEN";
 
 export const GET_TAHUN = "GET_TAHUN";
@@ -30,6 +33,7 @@ export const DELETE_USER = "DELETE_USER";
 export const REAL_DATA = "REAL_DATA";
 export const PREDICTED_DATA = "PREDICTED_DATA";
 export const GET_KERENTANAN = "GET_KERENTANAN";
+export const GET_KELURAHAN_ML = "GET_KELURAHAN_ML";
 export const KERENTANAN = "KERENTANAN";
 export const INTERVENSI = "INTERVENSI";
 

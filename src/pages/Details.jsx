@@ -7,10 +7,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getLocationById } from "../store/actions/location";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/actions/auth";
-import { getPasienByIdKel } from "../store/actions/pasien";
+import { getPasienByIdKel } from "../store/actions/pasienSemar";
 import Ews from "../components/Ews";
 import Predict from "../components/Predict";
-import { getIntervention } from "../store/actions/predict";
+import { getIntervention, getKelurahanMl } from "../store/actions/predict";
 
 const Details = () => {
   const { state } = useLocation();
@@ -18,15 +18,17 @@ const Details = () => {
   const [token, setToken] = useState(false);
   const dispatch = useDispatch();
   const history = useNavigate();
-  useEffect(() => {
-    dispatch(getLocationById(state.areaId));
-    dispatch(getPasienByIdKel(state.areaId));
-    dispatch(getIntervention(state.areaId));
-    setToken(jwtDecode(accessToken));
-  }, [dispatch, state, accessToken]);
   const { dataById, totalPas } = useSelector((state) => state.locationReducers);
   const { dataByIdKel } = useSelector((state) => state.pasienReducers);
-  // console.log(totalPas);
+  const {kodeKel} = useSelector((state) => state.predictReducers);
+  console.log(kodeKel)
+  useEffect(() => {
+    // dispatch(getLocationById(state.areaId)); KOMEN BARU
+    dispatch(getPasienByIdKel(kodeKel));
+    dispatch(getKelurahanMl(state.areaId));
+    // dispatch(getIntervention(state.areaId)); KOMEN BARU
+    setToken(jwtDecode(accessToken));
+  }, [dispatch, state, accessToken, kodeKel]);
   let sembuh = {};
   let gagal = {};
   let meninggal = {};
@@ -242,7 +244,7 @@ const Details = () => {
           </div>
         </div>
         <Ews />
-        <Predict />
+        {/* <Predict /> */}
         {token.role !== "stackholder" && <TableDet />}
         <OrderTerms />
         <Footer />

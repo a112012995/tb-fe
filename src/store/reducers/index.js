@@ -6,6 +6,7 @@ import adminReducers from './admin';
 import predictReducers from './predict';
 import penilaianReducers from './penilaian'
 import surveyReducers from './survey';
+import pasienSemarReducers from './pasienSemar';
 
 export default combineReducers({
 	locationReducers,
@@ -14,5 +15,6 @@ export default combineReducers({
 	adminReducers,
 	predictReducers,
 	penilaianReducers,
-	surveyReducers
+	surveyReducers,
+	pasienSemarReducers
 });

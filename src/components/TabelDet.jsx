@@ -1,40 +1,47 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getPasienById } from "../store/actions/pasien";
 
 const itemsPerPage = 10;
 
 const TableDet = () => {
-  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPatient, setSelectedPatient] = useState(null); // State to store selected patient
   const navigate = useNavigate();
-  const { dataByIdKel, dataById, fasyankes } = useSelector(
-    (state) => state.pasienReducers
-  );
-  // console.log(dataByIdKel);
+  //   const { dataByIdKel, dataById, fasyankes } = useSelector(
+  //     (state) => state.pasienReducers
+  //   );
+  const { pasienSemarKel } = useSelector((state) => state.pasienSemarReducers);
+  console.log(pasienSemarKel[0]);
 
-  const totalPages = Math.ceil(dataByIdKel.length / itemsPerPage);
+  const totalPages = Math.ceil(pasienSemarKel.length / itemsPerPage);
 
   const getCurrentData = () => {
     const startIndex = (currentPage - 1) * itemsPerPage + 1;
     const endIndex = startIndex + itemsPerPage - 1;
-    return dataByIdKel.slice(startIndex - 1, endIndex);
+    return pasienSemarKel.slice(startIndex - 1, endIndex);
   };
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  const showModal = (itemId) => {
-    dispatch(getPasienById(itemId));
-    setIsModalOpen(!isModalOpen);
+  const showModal = (index) => {
+    const selectedPatient = pasienSemarKel[index];
+    setSelectedPatient(selectedPatient); // Set the selected patient
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  //   useEffect(() => {
+  //     if (isModalOpen && selectedPatient) {
+  //       dispatch(getPasienById(selectedPatient.id)); // Dispatch action to fetch patient details
+  //     }
+  //   }, [isModalOpen, selectedPatient, dispatch]);
 
   const isPreviousDisabled = currentPage === 1;
   const isNextDisabled = currentPage === totalPages;
@@ -121,146 +128,144 @@ const TableDet = () => {
             <p>Tabel</p>
           </div>
           <div className="min-[240px]:w-screen md:w-fit overflow-auto">
-			<table className="border-collapse md:w-[1000px] min-[240px]:w-72">
-			  <thead>
-				<tr className="text-white bg-[#213555]">
-				  <th className="p-3 border-b-2 border-gray-700">No</th>
-				  <th className="p-3 border-b-2 border-gray-700">Kode Pasien</th>
-				  <th className="p-3 border-b-2 border-gray-700">Umur</th>
-				  <th className="p-3 border-b-2 border-gray-700">
-					Jenis Kelamin
-				  </th>
-				  <th className="p-3 border-b-2 border-gray-700">Alamat </th>
-				  <th className="p-3 border-b-2 border-gray-700">
-					Pengobatan Terakhir
-				  </th>
-				  <th className="p-3 border-b-2 border-gray-700">
-					Detail Pasien
-				  </th>
-				</tr>
-			  </thead>
-			  {dataByIdKel && (
-				<tbody className="text-black">
-				  {getCurrentData().map((item, index) => (
-					<tr key={item.id} className="bg-white">
-					  <td className="p-3 border-b-[1px] border-[#727d90] text-center">
-						{(currentPage - 1) * itemsPerPage + index + 1}
-					  </td>
-					  <td className="p-3 border-b-[1px] border-[#727d90] text-center">
-						{item.kode_pasien}
-					  </td>
-					  <td className="p-3 border-b-[1px] border-[#727d90] text-center">
-						{item.umur}
-					  </td>
-					  <td className="p-3 border-b-[1px] border-[#727d90] text-center">
-						{item.jenis_kelamin}
-					  </td>
-					  <td className="p-3 border-b-[1px] border-[#727d90] text-center">
-						{item.kelurahan.nama_kelurahan}
-					  </td>
-					  <td className="p-3 border-b-[1px] border-[#727d90] text-center">
-						{item.hasil_akhir}
-					  </td>
-					  <td className="p-3 border-b-[1px] border-[#727d90] text-center">
-						<button
-						  className="btn w-20 h-9 text-xs bg-[#5CB85F] text-white hover:bg-[#4F709C] hover:border-[#4F709C]"
-						  onClick={() => showModal(item.id)}
-						>
-						  Lihat Detail
-						</button>
-						<dialog
-						  open={isModalOpen}
-						  onClose={handleCloseModal}
-						  className="modal bg-transparent"
-						>
-						  <form
-							method="dialog"
-							className="modal-box bg-[#F6F6F6] text-[#213555] text-justify"
-						  >
-							<h2 className="p-2 pl-2 rounded-sm font-bold text-lg text-white bg-[#213555]">
-							  Detail Pasien
-							</h2>
-							<table className="w-full">
-							  <tbody>
-								<tr className="border-b-[1px] border-black">
-								  <td className="">Kode Pasien</td>
-								  <td className="pr-3">:</td>
-								  <td>{dataById.kode_pasien}</td>
-								</tr>
-								<tr className="border-b-[1px] border-black">
-								  <td className="">Kode Fasyankes</td>
-								  <td className="pr-3">:</td>
-								  <td>{fasyankes.kode_fasyankes}</td>
-								</tr>
-								<tr className="border-b-[1px] border-black">
-								  <td className="">Tahun</td>
-								  <td className="pr-3">:</td>
-								  <td>{dataById.tahun}</td>
-								</tr>
-								<tr className="border-b-[1px] border-black">
-								  <td className="">Bulan</td>
-								  <td className="pr-3">:</td>
-								  <td>{dataById.bulan}</td>
-								</tr>
-								<tr className="border-b-[1px] border-black">
-								  <td className="">Tipe Diagnosis</td>
-								  <td className="pr-3">:</td>
-								  <td>{dataById.tipe_diagnosis}</td>
-								</tr>
-								<tr className="border-b-[1px] border-black">
-								  <td className="">Anatomi TBC</td>
-								  <td className="pr-3">:</td>
-								  <td>{dataById.anatomi_tb}</td>
-								</tr>
-								<tr className="border-b-[1px] border-black">
-								  <td className="">Riwayat TBC</td>
-								  <td className="pr-3">:</td>
-								  <td>{dataById.riwayat_tb}</td>
-								</tr>
-								<tr className="border-b-[1px] border-black">
-								  <td className="">Riwayat Diabetes Melitus</td>
-								  <td className="pr-3">:</td>
-								  <td>{dataById.riwayat_dm}</td>
-								</tr>
-								<tr className="border-b-[1px] border-black">
-								  <td className="">Riwayat HIV</td>
-								  <td className="pr-3">:</td>
-								  <td>{dataById.riwayat_hiv}</td>
-								</tr>
-								<tr className="border-b-[1px] border-black">
-								  <td className="">Panduan Obat</td>
-								  <td className="pr-3">:</td>
-								  <td>{dataById.panduan_oat}</td>
-								</tr>
-								<tr className="border-b-[1px] border-black">
-								  <td className="">Sumber Obat</td>
-								  <td className="pr-3">:</td>
-								  <td>{dataById.sumber_obat}</td>
-								</tr>
-								<tr className="border-b-[1px] border-black">
-								  <td className="">Status Pengobatan</td>
-								  <td className="pr-3">:</td>
-								  <td>{dataById.status_pengobatan}</td>
-								</tr>
-								<tr className="border-b-[1px] border-black">
-								  <td className="">Pengobatan Terakhir</td>
-								  <td className="pr-3">:</td>
-								  <td>{dataById.hasil_akhir}</td>
-								</tr>
-							  </tbody>
-							</table>
-						  </form>
-						  <form method="dialog" className="modal-backdrop">
-							<button>close</button>
-						  </form>
-						</dialog>
-					  </td>
-					</tr>
-				  ))}
-				</tbody>
-			  )}
-			</table>
-		  </div>
+            <table className="border-collapse md:w-[1000px] min-[240px]:w-72">
+              <thead>
+                <tr className="text-white bg-[#213555]">
+                  <th className="p-3 border-b-2 border-gray-700">No</th>
+                  <th className="p-3 border-b-2 border-gray-700">
+                    Kode Fasyankes
+                  </th>
+                  <th className="p-3 border-b-2 border-gray-700">
+                    Panduan Obat
+                  </th>
+                  <th className="p-3 border-b-2 border-gray-700">
+                    Pengobatan Terakhir
+                  </th>
+                  <th className="p-3 border-b-2 border-gray-700">Riwayat DM</th>
+                  <th className="p-3 border-b-2 border-gray-700">
+                    Riwayat HIV
+                  </th>
+                  <th className="p-3 border-b-2 border-gray-700">
+                    Detail Pasien
+                  </th>
+                </tr>
+              </thead>
+              {pasienSemarKel && (
+                <tbody className="text-black">
+                  {getCurrentData().map((item, index) => (
+                    <tr key={item.id} className="bg-white">
+                      <td className="p-3 border-b-[1px] border-[#727d90] text-center">
+                        {(currentPage - 1) * itemsPerPage + index + 1}
+                      </td>
+                      <td className="p-3 border-b-[1px] border-[#727d90] text-center">
+                        {item.kode_fasyankes}
+                      </td>
+                      <td className="p-3 border-b-[1px] border-[#727d90] text-center">
+                        {item.panduan_obat}
+                      </td>
+                      <td className="p-3 border-b-[1px] border-[#727d90] text-center">
+                        {item.pengobatan_terakhir}
+                      </td>
+                      <td className="p-3 border-b-[1px] border-[#727d90] text-center">
+                        {item.riwayat_dm}
+                      </td>
+                      <td className="p-3 border-b-[1px] border-[#727d90] text-center">
+                        {item.riwayat_hiv}
+                      </td>
+                      <td className="p-3 border-b-[1px] border-[#727d90] text-center">
+                        <button
+                          className="btn w-20 h-9 text-xs bg-[#5CB85F] text-white hover:bg-[#4F709C] hover:border-[#4F709C]"
+                          onClick={() => showModal(index)}
+                        >
+                          Lihat Detail
+                        </button>
+                        <dialog
+                          open={isModalOpen}
+                          onClose={handleCloseModal}
+                          className="modal bg-transparent"
+                        >
+                          <form
+                            method="dialog"
+                            className="modal-box bg-[#F6F6F6] text-[#213555] text-justify"
+                          >
+                            <h2 className="p-2 pl-2 rounded-sm font-bold text-lg text-white bg-[#213555]">
+                              Detail Pasien
+                            </h2>
+                            {selectedPatient && (
+                              <table className="w-full">
+                                <tbody>
+                                  <tr className="border-b-[1px] border-black">
+                                    <td className="">Anatomi TB</td>
+                                    <td className="pr-3">:</td>
+                                    <td>{selectedPatient.anatomi_tb}</td>
+                                  </tr>
+                                  <tr className="border-b-[1px] border-black">
+                                    <td className="">Kode Fasyankes</td>
+                                    <td className="pr-3">:</td>
+                                    <td>{selectedPatient.kode_fasyankes}</td>
+                                  </tr>
+                                  <tr className="border-b-[1px] border-black">
+                                    <td className="">Tahun</td>
+                                    <td className="pr-3">:</td>
+                                    <td>{selectedPatient.tahun}</td>
+                                  </tr>
+                                  <tr className="border-b-[1px] border-black">
+                                    <td className="">Bulan</td>
+                                    <td className="pr-3">:</td>
+                                    <td>{selectedPatient.bulan}</td>
+                                  </tr>
+                                  <tr className="border-b-[1px] border-black">
+                                    <td className="">Tipe Diagnosis</td>
+                                    <td className="pr-3">:</td>
+                                    <td>{selectedPatient.tipe_diagnosis}</td>
+                                  </tr>
+                                  <tr className="border-b-[1px] border-black">
+                                    <td className="">Anatomi TBC</td>
+                                    <td className="pr-3">:</td>
+                                    <td>{selectedPatient.anatomi_tb}</td>
+                                  </tr>
+                                  <tr className="border-b-[1px] border-black">
+                                    <td className="">
+                                      Riwayat Diabetes Melitus
+                                    </td>
+                                    <td className="pr-3">:</td>
+                                    <td>{selectedPatient.riwayat_dm}</td>
+                                  </tr>
+                                  <tr className="border-b-[1px] border-black">
+                                    <td className="">Riwayat HIV</td>
+                                    <td className="pr-3">:</td>
+                                    <td>{selectedPatient.riwayat_hiv}</td>
+                                  </tr>
+                                  <tr className="border-b-[1px] border-black">
+                                    <td className="">Panduan Obat</td>
+                                    <td className="pr-3">:</td>
+                                    <td>{selectedPatient.panduan_obat}</td>
+                                  </tr>
+                                  <tr className="border-b-[1px] border-black">
+                                    <td className="">Sumber Obat</td>
+                                    <td className="pr-3">:</td>
+                                    <td>{selectedPatient.sumber_obat}</td>
+                                  </tr>
+                                  <tr className="border-b-[1px] border-black">
+                                    <td className="">Status Pengobatan</td>
+                                    <td className="pr-3">:</td>
+                                    <td>{selectedPatient.status_pengobatan}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            )}
+                          </form>
+                          <form method="dialog" className="modal-backdrop">
+                            <button>close</button>
+                          </form>
+                        </dialog>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              )}
+            </table>
+          </div>
           <div className="flex justify-end text-black mt-5">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
@@ -291,7 +296,6 @@ const TableDet = () => {
           Kembali ke Dashboard
         </div>
       </div>
-      
     </div>
   );
 };

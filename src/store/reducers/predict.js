@@ -5,9 +5,11 @@ import {
   INTERVENSI,
   GET_KERENTANAN,
   GET_CASES_BY_ID,
+  GET_KELURAHAN_ML,
 } from "../types";
 
 const initialState = {
+  kodeKel: false,
   dataKerentanan: false,
   dataReal: [],
   dataPredict: [],
@@ -49,6 +51,11 @@ const predictReducers = (state = initialState, action) => {
       return {
         ...state,
         jumlahKasus: payload.jumlah_kasus,
+      };
+    case GET_KELURAHAN_ML:
+      return {
+        ...state,
+        kodeKel: payload.kode_kd,
       };
 
     default:

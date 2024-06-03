@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import bgHero from "../assets/bg-hero.png";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login } from "../store/actions/auth";
+import { login, loginSemar } from "../store/actions/auth";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -32,6 +32,9 @@ const Login = () => {
       .catch((error) => ({ error }));
 
     // console.log(res);
+    if (!res.error) {
+      dispatch(loginSemar(history))
+    }
 
     if (res.error) {
       setError(res.error.response.data.message);

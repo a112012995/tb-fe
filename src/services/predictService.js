@@ -57,6 +57,15 @@ const PredictService = {
       throw err;
     }
   },
+  getKelurahanMl: async function (id) {
+    try {
+      const response = await API.get(`api/v1/kelurahan/ref?kelurahan_id=${id}`);
+      return response;
+    } catch (err) {
+      // console.log("intervention service error", err);
+      throw err;
+    }
+  },
 };
 
 export default PredictService;

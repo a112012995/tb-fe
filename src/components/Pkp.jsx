@@ -12,7 +12,7 @@ const Pkp = () => {
   const { dataFas } = useSelector((state) => state.locationReducers);
 
   const { nilaiPusk } = useSelector((state) => state.penilaianReducers);
-  console.log(nilaiPusk);
+  // console.log(nilaiPusk);
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState(false);
   const [throwId, setThrowId] = useState("");
@@ -43,7 +43,7 @@ const Pkp = () => {
 
   const today = new Date();
   const currentMonth = today.toLocaleString("default", { month: "long" });
-  console.log(throwId);
+  // console.log(throwId);
 
   return (
     <div className="mt-20" id="pkp">

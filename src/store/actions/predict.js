@@ -6,8 +6,37 @@ import {
   INTERVENSI,
   GET_KERENTANAN,
   GET_CASES_BY_ID,
-  GET_KELURAHAN_ML
+  GET_KELURAHAN_ML,
+  GET_PASIEN_ML,
+  GET_ALL_PASIEN_ML
 } from "../types";
+
+
+export const getPasienMl = (id) =>
+  async function (dispatch) {
+    try {
+      const response = await predictService.pasienMl(id);
+      dispatch({ type: GET_PASIEN_ML, payload: response.data });
+      // console.log(response.data)
+      return response;
+    } catch (error) {
+      // console.log(error);
+      throw error;
+    }
+  };
+
+  export const getAllPasienMl = () =>
+    async function (dispatch) {
+      try {
+        const response = await predictService.allPasienMl();
+        dispatch({ type: GET_ALL_PASIEN_ML, payload: response.data });
+        // console.log(response.data)
+        return response;
+      } catch (error) {
+        // console.log(error);
+        throw error;
+      }
+    };
 
 export const realData = (id) =>
   async function (dispatch) {
@@ -90,7 +119,7 @@ export const realData = (id) =>
       try {
         const response = await predictService.getKelurahanMl(id);
         dispatch({ type: GET_KELURAHAN_ML, payload: response.data });
-        console.log(response)
+        // console.log(response)
         return response;
       } catch (error) {
         // console.log(error);

@@ -13,6 +13,8 @@ export const GET_FASKES = "GET_FASKES";
 export const GET_FASKES_BY_ID = "GET_FASKES_BY_ID";
 
 export const GET_PASIEN = "GET_PASIEN";
+export const GET_PASIEN_ML = "GET_PASIEN_ML";
+export const GET_ALL_PASIEN_ML = "GET_ALL_PASIEN_ML";
 export const GET_CASES_BY_ID = "GET_CASES_BY_ID";
 export const GET_PASIEN_BY_ID = "GET_PASIEN_BY_ID";
 export const GET_PASIEN_BY_ID_KEL = "GET_PASIEN_BY_ID_KEL";

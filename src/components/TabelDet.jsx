@@ -13,7 +13,7 @@ const TableDet = () => {
   //     (state) => state.pasienReducers
   //   );
   const { pasienSemarKel } = useSelector((state) => state.pasienSemarReducers);
-  console.log(pasienSemarKel[0]);
+  // console.log(pasienSemarKel[0]);
 
   const totalPages = Math.ceil(pasienSemarKel.length / itemsPerPage);
 

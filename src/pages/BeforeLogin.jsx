@@ -9,7 +9,7 @@ import Footer from "../components/Footer";
 import Stats from "../components/Stats";
 import LoadPage from "../components/UI/LoadPage";
 import { logout } from "../store/actions/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getLocation } from "../store/actions/location";
 import { getPasien } from "../store/actions/pasien";
@@ -30,6 +30,7 @@ const BeforeLogin = () => {
     dispatch(getLocation());
     dispatch(getPasien())
     dispatch(getAllKerentanan());
+    // dispatch(allPasienMl())
     // dispatch(getFaskes());
     // dispatch(getLocationFaskes());
   }, [dispatch]);

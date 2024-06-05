@@ -10,7 +10,7 @@ import { logout } from "../store/actions/auth";
 import { getPasienByIdKel } from "../store/actions/pasienSemar";
 import Ews from "../components/Ews";
 import Predict from "../components/Predict";
-import { getIntervention, getKelurahanMl } from "../store/actions/predict";
+import {  getKelurahanMl, getPasienMl } from "../store/actions/predict";
 
 const Details = () => {
   const { state } = useLocation();
@@ -21,9 +21,11 @@ const Details = () => {
   const { dataById, totalPas } = useSelector((state) => state.locationReducers);
   const { dataByIdKel } = useSelector((state) => state.pasienReducers);
   const {kodeKel} = useSelector((state) => state.predictReducers);
-  console.log(kodeKel)
+  const {pasienMlKel} = useSelector((state) => state.pasienMlReducers)
+  // console.log(pasienMlKel)
   useEffect(() => {
     // dispatch(getLocationById(state.areaId)); KOMEN BARU
+    dispatch(getPasienMl(state.areaId));
     dispatch(getPasienByIdKel(kodeKel));
     dispatch(getKelurahanMl(state.areaId));
     // dispatch(getIntervention(state.areaId)); KOMEN BARU
@@ -131,7 +133,7 @@ const Details = () => {
                     <div className="flex justify-center">
                       <div className="flex-col text-center  pt-2">
                         <div className="stat-value text-black font-bold text-5xl">
-                          {totalPas}
+                          {pasienMlKel.jumlah_kasus}
                         </div>
                         <div className="stat-title text-black text-lg">
                           Jumlah Kasus
@@ -159,7 +161,7 @@ const Details = () => {
                     <div className="flex justify-center">
                       <div className="flex-col text-center  pt-2">
                         <div className="stat-value text-black font-bold text-5xl">
-                          {sembuh.length}
+                          {pasienMlKel.sembuh}
                         </div>
                         <div className="stat-title text-black text-lg">
                           Pasien Sembuh
@@ -187,7 +189,7 @@ const Details = () => {
                     <div className="flex justify-center">
                       <div className="flex-col text-center  pt-2">
                         <div className="stat-value text-black font-bold text-5xl">
-                          {gagal.length}
+                          {pasienMlKel.gagal}
                         </div>
                         <div className="stat-title text-black text-lg">
                           Pengobatan Gagal
@@ -215,7 +217,7 @@ const Details = () => {
                     <div className="flex justify-center">
                       <div className="flex-col text-center  pt-2">
                         <div className="stat-value text-black font-bold text-5xl">
-                          {meninggal.length}
+                          {pasienMlKel.meninggal}
                         </div>
                         <div className="stat-title text-black text-lg">
                           Pasien Meninggal

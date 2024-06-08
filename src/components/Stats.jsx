@@ -14,7 +14,7 @@ const Stats = () => {
     (state) => state.pasienReducers
   );
   const { pasienMlAll } = useSelector((state) => state.pasienMlReducers);
-  // console.log(pasienMlAll);
+  console.log(pasienMlAll);
   // const statData = (val) => {
   //   const newData = data.filter((data) => data.hasil_akhir === `${val}`);
   //   return newData.length;
@@ -61,7 +61,7 @@ const Stats = () => {
             <div className="flex justify-center">
               <div className="flex-col text-center pt-2">
                 <div className="stat-value text-white min-[240px]:text-3xl md:text-4xl">
-                  {pasienMlAll.jumlah_kasus}
+                  {pasienMlAll.kasus_aktif}
                 </div>
                 <div className="stat-title text-white text-md">Kasus Aktif</div>
               </div>
@@ -87,7 +87,7 @@ const Stats = () => {
             <div className="flex justify-center">
               <div className="flex-col text-center pt-2">
                 <div className="stat-value text-white min-[240px]:text-3xl md:text-4xl">
-                  1,520
+                  {pasienMlAll.kasus_baru}
                 </div>
                 <div className="stat-title text-white text-md">Kasus Baru</div>
               </div>

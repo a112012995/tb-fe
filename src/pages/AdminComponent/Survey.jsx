@@ -1,30 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSurveyStatus, getSurveyByIdKel } from "../../store/actions/survey";
-import * as XLSX from "xlsx";
-import { createSurvey } from "../../store/actions/survey";
+import { getAllSurveyStatus, createSurvey } from "../../store/actions/survey";
 import Swal from "sweetalert2";
 import { getKelurahan } from "../../store/actions/location";
-// import { useNavigate } from "react-router-dom";
 
 const itemsPerPage = 10;
+
 const Survey = () => {
   const dispatch = useDispatch();
   const { dataStat } = useSelector((state) => state.surveyReducers);
   const { dataKel } = useSelector((state) => state.locationReducers);
-  console.log(dataStat);
-
+  
   useEffect(() => {
-    dispatch(getKelurahan())
+    dispatch(getKelurahan());
     dispatch(getAllSurveyStatus());
   }, [dispatch]);
-
+    
   const [currentPage, setCurrentPage] = useState(1);
-  const [penilaian, setPenilaian] = useState("");
+  const [file, setFile] = useState(null);
   const [modal, setModal] = useState(false);
   const [error, setError] = useState(false);
-  const [popUp, setPopUp] = useState(false);
-  const [id, setId] = useState(false);
   const [clickedArrow, setClickedArrow] = useState(null);
 
   const handlePageChange = (pageNumber) => {
@@ -41,48 +36,32 @@ const Survey = () => {
     setClickedArrow("next");
   };
 
-  const readUploadFile = (e) => {
-    e.preventDefault();
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      if (file.name.endsWith(".xls") || file.name.endsWith(".xlsx")) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const data = e.target.result;
-          const workbook = XLSX.read(data, { type: "array" });
-          const sheetName = workbook.SheetNames[0];
-          const worksheet = workbook.Sheets[sheetName];
-          const json = XLSX.utils.sheet_to_json(worksheet);
-
-          const specificRows = json.slice(0, 185);
-          const updatedJsonData = specificRows.map((item) => {
-            // Tidak ada pemetaan nama kolom
-            return item;
-          });
-          setPenilaian(updatedJsonData);
-        };
-        reader.readAsArrayBuffer(file);
-      } else {
-        alert("Silakan unggah file Excel (.xls atau .xlsx) yang valid.");
-      }
-    }
-  };
-
   const formPenilaian = async () => {
-    const res = await dispatch(createSurvey(penilaian))
+    if (!file) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No file selected!",
+      });
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const res = await dispatch(createSurvey(formData))
       .then((response) => ({ response }))
       .catch((error) => ({ error }));
-    // console.log(res.error);
+
     if (res.error) {
       setModal(false);
-      setError(false);
+      setError(true);
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Something went wrong!",
       });
-    }
-    if (!res.error) {
+    } else {
       setModal(false);
       setError(false);
       Swal.fire({
@@ -92,12 +71,12 @@ const Survey = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      setPenilaian();
+      setFile(null);
+      dispatch(getAllSurveyStatus());
     }
-    dispatch(getAllSurveyStatus())
   };
 
-  const modalHandler = async (id) => {
+  const modalHandler = () => {
     setModal(true);
   };
 
@@ -105,10 +84,7 @@ const Survey = () => {
   const endIndex = startIndex + itemsPerPage;
   const currentData = dataStat?.slice(startIndex, endIndex);
   const totalPages = Math.ceil((dataStat?.length || 0) / itemsPerPage);
-  const pageNumbers = Array.from(
-    { length: totalPages },
-    (_, index) => index + 1
-  );
+  const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
     <div className="flex flex-col">
@@ -141,7 +117,7 @@ const Survey = () => {
                       Kelurahan {item.kelurahan_name}
                     </p>
                   </td>
-                  <td className="">{item.bulan}</td>
+                  <td>{item.bulan}</td>
                 </tr>
               ))
             ) : (
@@ -202,8 +178,8 @@ const Survey = () => {
       </div>
       {modal && (
         <div className="fixed inset-0 flex items-center justify-center z-[2000]">
-          <div className="p-6 rounded-md bg-white  h-fit relative">
-            <div className=" rounded-lg w-fit p-4 text-center bg-[#CFE2FF] border-[#9EC5FE] border-2">
+          <div className="p-6 rounded-md bg-white h-fit relative">
+            <div className="rounded-lg w-fit p-4 text-center bg-[#CFE2FF] border-[#9EC5FE] border-2">
               <div className="flex flex-col self-center text-center justify-center">
                 <h2 className="font-bold text-2xl">Upload Survey Baru</h2>
                 <h2 className="font-bold">
@@ -218,15 +194,15 @@ const Survey = () => {
                         accept=".xls, .xlsx"
                         id="upload"
                         required
-                        onChange={readUploadFile}
+                        onChange={(e) => setFile(e.target.files[0])}
                         className="file-input w-full max-w-xs"
                       />
                     </label>
                   </form>
                   <button
-                    onClick={() => formPenilaian()}
+                    onClick={formPenilaian}
                     className="px-4 py-2 bg-[#5CB85F] text-white font-semibold text-md rounded-md"
-                    type="submit"
+                    type="button"
                   >
                     Upload Penilaian baru
                   </button>

@@ -2,6 +2,26 @@ import API from "./predictApi";
 
 const PredictService = {
 
+  pasienMl: async function (id) {
+    try {
+      const response = await API.get(`/api/v1/patients/kelurahan?kelurahan_id=${id}`);
+      return response;
+    } catch (err) {
+      // console.log("predict service error", err);
+      throw err;
+    }
+  },
+
+  allPasienMl: async function () {
+    try {
+      const response = await API.get(`/api/v1/patients/all`);
+      return response;
+    } catch (err) {
+      // console.log("predict service error", err);
+      throw err;
+    }
+  },
+
   realData: async function (id) {
     try {
       const response = await API.get(`api/v1/real-data/id=${id}`);
@@ -51,6 +71,15 @@ const PredictService = {
   jumlahKasus: async function (id) {
     try {
       const response = await API.get(`api/v1/cases/id=${id}`);
+      return response;
+    } catch (err) {
+      // console.log("intervention service error", err);
+      throw err;
+    }
+  },
+  getKelurahanMl: async function (id) {
+    try {
+      const response = await API.get(`api/v1/kelurahan/ref?kelurahan_id=${id}`);
       return response;
     } catch (err) {
       // console.log("intervention service error", err);

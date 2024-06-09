@@ -7,10 +7,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getLocationById } from "../store/actions/location";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/actions/auth";
-import { getPasienByIdKel } from "../store/actions/pasien";
+import { getPasienByIdKel } from "../store/actions/pasienSemar";
 import Ews from "../components/Ews";
 import Predict from "../components/Predict";
-import { getIntervention } from "../store/actions/predict";
+import {  getKelurahanMl, getPasienMl } from "../store/actions/predict";
+import { getChartSurvey } from "../store/actions/survey";
 
 const Details = () => {
   const { state } = useLocation();
@@ -18,15 +19,20 @@ const Details = () => {
   const [token, setToken] = useState(false);
   const dispatch = useDispatch();
   const history = useNavigate();
-  useEffect(() => {
-    dispatch(getLocationById(state.areaId));
-    dispatch(getPasienByIdKel(state.areaId));
-    dispatch(getIntervention(state.areaId));
-    setToken(jwtDecode(accessToken));
-  }, [dispatch, state, accessToken]);
   const { dataById, totalPas } = useSelector((state) => state.locationReducers);
   const { dataByIdKel } = useSelector((state) => state.pasienReducers);
-  // console.log(totalPas);
+  const {kodeKel} = useSelector((state) => state.predictReducers);
+  const {pasienMlKel} = useSelector((state) => state.pasienMlReducers)
+  // console.log(pasienMlKel)
+  useEffect(() => {
+    // dispatch(getLocationById(state.areaId)); KOMEN BARU
+    dispatch(getPasienMl(state.areaId));
+    dispatch(getPasienByIdKel(kodeKel));
+    dispatch(getKelurahanMl(state.areaId));
+    dispatch(getChartSurvey(state.areaId))
+    // dispatch(getIntervention(state.areaId)); KOMEN BARU
+    setToken(jwtDecode(accessToken));
+  }, [dispatch, state, accessToken, kodeKel]);
   let sembuh = {};
   let gagal = {};
   let meninggal = {};
@@ -129,7 +135,7 @@ const Details = () => {
                     <div className="flex justify-center">
                       <div className="flex-col text-center  pt-2">
                         <div className="stat-value text-black font-bold text-5xl">
-                          {totalPas}
+                          {pasienMlKel.jumlah_kasus}
                         </div>
                         <div className="stat-title text-black text-lg">
                           Jumlah Kasus
@@ -157,7 +163,7 @@ const Details = () => {
                     <div className="flex justify-center">
                       <div className="flex-col text-center  pt-2">
                         <div className="stat-value text-black font-bold text-5xl">
-                          {sembuh.length}
+                          {pasienMlKel.sembuh}
                         </div>
                         <div className="stat-title text-black text-lg">
                           Pasien Sembuh
@@ -185,7 +191,7 @@ const Details = () => {
                     <div className="flex justify-center">
                       <div className="flex-col text-center  pt-2">
                         <div className="stat-value text-black font-bold text-5xl">
-                          {gagal.length}
+                          {pasienMlKel.gagal}
                         </div>
                         <div className="stat-title text-black text-lg">
                           Pengobatan Gagal
@@ -213,7 +219,7 @@ const Details = () => {
                     <div className="flex justify-center">
                       <div className="flex-col text-center  pt-2">
                         <div className="stat-value text-black font-bold text-5xl">
-                          {meninggal.length}
+                          {pasienMlKel.meninggal}
                         </div>
                         <div className="stat-title text-black text-lg">
                           Pasien Meninggal
@@ -242,7 +248,7 @@ const Details = () => {
           </div>
         </div>
         <Ews />
-        <Predict />
+        {/* <Predict /> */}
         {token.role !== "stackholder" && <TableDet />}
         <OrderTerms />
         <Footer />

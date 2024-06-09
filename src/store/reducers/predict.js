@@ -1,3 +1,4 @@
+import { pasienMl } from "../actions/predict";
 import {
   REAL_DATA,
   PREDICTED_DATA,
@@ -5,9 +6,11 @@ import {
   INTERVENSI,
   GET_KERENTANAN,
   GET_CASES_BY_ID,
+  GET_KELURAHAN_ML,
 } from "../types";
 
 const initialState = {
+  kodeKel: false,
   dataKerentanan: false,
   dataReal: [],
   dataPredict: [],
@@ -45,6 +48,12 @@ const predictReducers = (state = initialState, action) => {
         ...state,
         intervensi: payload,
       };
+    case GET_KELURAHAN_ML:
+      return {
+        ...state,
+        kodeKel: payload.kode_kd,
+      };
+
     case GET_CASES_BY_ID:
       return {
         ...state,

@@ -22,7 +22,7 @@ const Map = () => {
   const { kerentanan, intervensi, dataKerentanan, jumlahKasus } = useSelector(
     (state) => state.predictReducers
   );
-  console.log(intervensi);
+  // console.log(intervensi);
 
   //   get response from api get location by id
   const getById = async (id) => {

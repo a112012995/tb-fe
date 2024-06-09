@@ -10,7 +10,7 @@ import { logout } from "../store/actions/auth";
 import { getPasienByIdKel } from "../store/actions/pasienSemar";
 import Ews from "../components/Ews";
 import Predict from "../components/Predict";
-import {  getKelurahanMl, getPasienMl } from "../store/actions/predict";
+import {  getIntervention, getKelurahanMl, getPasienMl } from "../store/actions/predict";
 import { getChartSurvey } from "../store/actions/survey";
 
 const Details = () => {
@@ -30,7 +30,7 @@ const Details = () => {
     dispatch(getPasienByIdKel(kodeKel));
     dispatch(getKelurahanMl(state.areaId));
     dispatch(getChartSurvey(state.areaId))
-    // dispatch(getIntervention(state.areaId)); KOMEN BARU
+    dispatch(getIntervention(state.areaId));
     setToken(jwtDecode(accessToken));
   }, [dispatch, state, accessToken, kodeKel]);
   let sembuh = {};

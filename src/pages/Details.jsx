@@ -11,6 +11,7 @@ import { getPasienByIdKel } from "../store/actions/pasienSemar";
 import Ews from "../components/Ews";
 import Predict from "../components/Predict";
 import {  getKelurahanMl, getPasienMl } from "../store/actions/predict";
+import { getChartSurvey } from "../store/actions/survey";
 
 const Details = () => {
   const { state } = useLocation();
@@ -28,6 +29,7 @@ const Details = () => {
     dispatch(getPasienMl(state.areaId));
     dispatch(getPasienByIdKel(kodeKel));
     dispatch(getKelurahanMl(state.areaId));
+    dispatch(getChartSurvey(state.areaId))
     // dispatch(getIntervention(state.areaId)); KOMEN BARU
     setToken(jwtDecode(accessToken));
   }, [dispatch, state, accessToken, kodeKel]);

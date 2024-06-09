@@ -1,10 +1,11 @@
-import { CREATE_SURVEY, GET_ALL_SURVEY, GET_ALL_SURVEY_STAT, GET_SURVEY_BY_ID_KEL } from "../types";
+import { CREATE_SURVEY, GET_ALL_SURVEY, GET_ALL_SURVEY_STAT, GET_CHART_SURVEY, GET_SURVEY_BY_ID_KEL } from "../types";
 
 const initialState = {
   data: false,
   dataAll: [],
   dataStat:[],
   dataKel: false,
+  survey: false,
 };
 
 const surveyReducers = (state = initialState, action) => {
@@ -30,6 +31,12 @@ const surveyReducers = (state = initialState, action) => {
       return {
         ...state,
         dataKel: payload,
+      };
+
+      case GET_CHART_SURVEY:
+      return {
+        ...state,
+        survey: payload,
       };
 
     default:

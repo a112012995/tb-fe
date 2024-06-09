@@ -51,6 +51,16 @@ const SurveyService = {
       throw err;
     }
   },
+
+  getChartSurvey: async function (id) {
+    try {
+      const response = await API.get(`api/v1/surveys/kelurahan/latest?kelurahan_id=${id}`);
+      return response;
+    } catch (err) {
+      // console.log("predict service error", err);
+      throw err;
+    }
+  },
 };
 
 export default SurveyService;

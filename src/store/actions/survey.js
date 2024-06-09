@@ -2,6 +2,7 @@ import SurveyService from "../../services/surveyServices";
 import {
   CREATE_SURVEY, GET_ALL_SURVEY,
   GET_ALL_SURVEY_STAT,
+  GET_CHART_SURVEY,
   GET_SURVEY_BY_ID_KEL
 } from "../types";
 
@@ -56,3 +57,16 @@ export const createSurvey = (data) =>
       throw error;
     }
   };
+
+  export const getChartSurvey = (id) =>
+    async function (dispatch) {
+      try {
+        const response = await SurveyService.getChartSurvey(id);
+        dispatch({ type: GET_CHART_SURVEY, payload: response.data });
+        // console.log(response)
+        return response;
+      } catch (error) {
+        // console.log(error);
+        throw error;
+      }
+    };

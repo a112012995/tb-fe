@@ -5,6 +5,7 @@ const OrderTerms = () => {
   // const { state } = useLocation();
   // const dispatch = useDispatch()
   const { intervensi } = useSelector((state) => state.predictReducers);
+  console.log(intervensi)
   return (
     <div className="min-[240px]:px-4 md:px-52 text-black">
       <div className="card card-large bg-[#F6F6F6] ">

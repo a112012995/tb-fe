@@ -248,7 +248,7 @@ const Details = () => {
           </div>
         </div>
         <Ews />
-        {/* <Predict /> */}
+        <Predict />
         {token.role !== "stackholder" && <TableDet />}
         <OrderTerms />
         <Footer />

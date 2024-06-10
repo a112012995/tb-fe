@@ -2,7 +2,7 @@ import axios from "axios";
 // import store from "../store";
 
 const API = axios.create({
-  baseURL: "http://localhost:8000/",
+  baseURL: process.env.REACT_APP_ML_URL,
   headers: {
     Accept: "application/json",
     Authorization: `Bearer ${localStorage.getItem("accessToken") || ""}`,

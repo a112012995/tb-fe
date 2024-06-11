@@ -25,7 +25,7 @@ const Details = () => {
   const {pasienMlKel} = useSelector((state) => state.pasienMlReducers)
   // console.log(pasienMlKel)
   useEffect(() => {
-    // dispatch(getLocationById(state.areaId)); KOMEN BARU
+    dispatch(getLocationById(state.areaId)); // KOMEN BARU
     dispatch(getPasienMl(state.areaId));
     dispatch(getPasienByIdKel(kodeKel));
     dispatch(getKelurahanMl(state.areaId));

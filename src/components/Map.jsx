@@ -162,7 +162,7 @@ const Map = () => {
                     {accessToken && (
                       <p className="text-sm">Jumlah Kasus: {jumlahKasus}</p>
                     )}
-                    <div className="mt-3">
+                    {/* <div className="mt-3">
                       <div className="flex justify-between">
                         <span>Tingkat Literasi</span>
                         <p>{Math.round(hit.persentase_literasi * 100)}%</p>
@@ -190,7 +190,7 @@ const Map = () => {
                         value={Math.round(hit.persentase_pengetahuan * 100)}
                         max="100"
                       ></progress>
-                    </div>
+                    </div> */}
                     {kerentanan === "tidak rentan"}
                     {/* <p className="text-sm">Kerentanan: {totalPas}</p> */}
                     <p

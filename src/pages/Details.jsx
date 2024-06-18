@@ -25,14 +25,14 @@ const Details = () => {
   const {pasienMlKel} = useSelector((state) => state.pasienMlReducers)
   // console.log(pasienMlKel)
   useEffect(() => {
-    dispatch(getLocationById(state.areaId)); // KOMEN BARU
+    // dispatch(getLocationById(state.areaId)); KOMEN BARU
     dispatch(getPasienMl(state.areaId));
     dispatch(getPasienByIdKel(kodeKel));
     dispatch(getKelurahanMl(state.areaId));
     dispatch(getChartSurvey(state.areaId))
     dispatch(getIntervention(state.areaId));
     setToken(jwtDecode(accessToken));
-  }, [dispatch, state, accessToken, kodeKel]);
+  }, [dispatch, state.areaId, accessToken, kodeKel]);
   let sembuh = {};
   let gagal = {};
   let meninggal = {};

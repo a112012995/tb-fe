@@ -32,6 +32,7 @@ const AuthService = {
   logout: () => {
     API.defaults.headers["Authorization"] = "";
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("semarToken");
   },
 };
 
